@@ -9,5 +9,5 @@
 // | (_ | / _ \ '_ \/ _` | |  \ V / _` | '_| / _` | '_ \ / -_|_-<
 //  \___|_\___/_.__/\__,_|_|   \_/\__,_|_| |_\__,_|_.__/_\___/__/
 
-// Store important info about the store
-var theStore = null;
+// Gets the Store Information from the sessionStorage
+var theStore = JSON.parse(sessionStorage.getItem('theStore'));

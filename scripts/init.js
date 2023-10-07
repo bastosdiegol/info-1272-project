@@ -5,7 +5,7 @@ import Store from './classes/store.js';
 // If null, then grabs the store.json ans instantiate it
 if(window.theStore == null){
   // Fetch the JSON file with the Store Info
-  await fetch('../data/store.json') // Use await to make sure its synchronous
+  fetch('../data/store.json')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network error.');

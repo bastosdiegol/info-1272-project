@@ -2,7 +2,11 @@
 
 <em>(info-1272-project)</em>
 
-<h2>Project Requirements</h2> 
+<h2>Description<h2>
+This project is intended to create a web page simulating an Online Store with any theme.
+Following are listed the requirements that must be fullfiled for this project.
+
+<h3>Project Requirements</h3> 
 1. Objects
 <ul>
     <li>Store Item: ./scripts/classes/store-item.js</li>
@@ -21,9 +25,9 @@
     <li>Call your function that will display the store items (4.): <em></em></li>
     <li>Call your function that will display the cart items (5.): <em></em></li>
 </ul>
-4. Display Store Items
-5. Display Cart Items
-6. Create Cart Totals
+4. Display Store Items<br>
+5. Display Cart Items<br>
+6. Create Cart Totals<br>
 7. Currency Selection
 <ul>
     <li><em></em></li>

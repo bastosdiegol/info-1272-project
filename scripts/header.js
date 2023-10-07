@@ -9,6 +9,44 @@ const headerElements = document.getElementsByTagName("header");
 if (headerElements.length > 0) {
   // Get the first <header> element (at the moment I only have one)
   const headerElement = headerElements[0];  
-  // Adds the company name to the website
-  headerElement.innerHTML = "<h1>Online Store - <em>" + window.theStore.name + "</em></h1><hr />";
+
+  // Creates figure Tag
+  let figureElementLogo = document.createElement('figure');
+  figureElementLogo.id = "figureElementLogo";
+
+  // Creates img Tag
+  let imgElementLogo = document.createElement('img');
+  imgElementLogo.id = "imgElementLogo";
+  imgElementLogo.src = "../images/" + window.theStore.logo;
+  imgElementLogo.alt = window.theStore.name;
+
+  // Creates em Tag
+  let strongElementStoreName = document.createElement('strong');
+  strongElementStoreName.id = "strongElementStoreName";
+  strongElementStoreName.textContent = window.theStore.name;
+
+  // Creates p Tag
+  let emElementDateTime = document.createElement('em');
+  emElementDateTime.id = "emElementDateTime";
+  // Creates a Date object
+  var currentDate = new Date();
+  // Format Options
+  let dateTimeOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false
+  };
+  // Formats the current Date using locale
+  emElementDateTime.textContent = currentDate.toLocaleString("en-US", dateTimeOptions);
+
+  // Tag Relations
+  figureElementLogo.appendChild(imgElementLogo); // Adds img to figure
+  headerElement.appendChild(figureElementLogo); // Adds figure to header
+  headerElement.appendChild(strongElementStoreName) // Adds strong to header
+  headerElement.appendChild(emElementDateTime); // Adds em to header
+
 }

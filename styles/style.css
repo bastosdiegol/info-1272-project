@@ -1,0 +1,33 @@
+/* Applies styles to the header element */
+header {
+    position: relative;
+  }
+  
+  /* Applies styles to the Logo figure element */
+  #figureElementLogo {
+    display: inline;
+    vertical-align: middle;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  /* Applies styles to the Logo img element within the figure */
+  #imgElementLogo {
+    width: 5%;
+    height: auto;
+  }
+  
+  /* Appliies styles to the strong element (Store Name) */
+  #strongElementStoreName {
+    display: inline;
+    vertical-align: middle;
+  }
+  
+  /* Apply styles to the  element (Date/Time) */
+  #emElementDateTime {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 0;
+  }
+  

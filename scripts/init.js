@@ -1,5 +1,5 @@
 // Import Store class
-import Store from './store.js';
+import Store from './classes/store.js';
 
 // Checks if the theStore was instantiated previously
 // If null, then grabs the store.json ans instantiate it
@@ -19,7 +19,8 @@ if(window.theStore == null){
                                   jsonObject.store.address, 
                                   jsonObject.store.postal, 
                                   jsonObject.store.phone, 
-                                  jsonObject.store.email);
+                                  jsonObject.store.email, 
+                                  jsonObject.store.logo);
       // Sets theStore into the session
       sessionStorage.setItem('theStore', JSON.stringify(window.theStore));
     })

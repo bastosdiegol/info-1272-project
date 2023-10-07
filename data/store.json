@@ -4,6 +4,7 @@
         "address" : "123 Street",
         "postal" : "A1B 2C3",
         "phone" : "(555) 444-6666",
-        "email" : "email@company.ca"
+        "email" : "email@company.ca",
+        "logo" : "logo-no-background.png"
     }
 }

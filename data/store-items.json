@@ -1,0 +1,26 @@
+{
+    "1":{
+        "id" : 1,
+        "name" : "Item 1",
+        "price" : 10,
+        "stockQuantity" : 5,
+        "category" : "Category A",
+        "costOfShipping" : 5.99,
+        "reviews" : {},
+        "reviewScore" : 4.5,
+        "description" : "Desc Item 1",
+        "imageURL" : ""
+    },
+    "2":{
+        "id" : 2,
+        "name" : "Item 2",
+        "price" : 9,
+        "stockQuantity" : 1,
+        "category" : "Category B",
+        "costOfShipping" : 5.99,
+        "reviews" : {},
+        "reviewScore" : 4,
+        "description" : "Desc Item 2",
+        "imageURL" : ""
+    }
+}

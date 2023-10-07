@@ -14,14 +14,14 @@ window.addEventListener('load', async () => {
     const footerElement = footerElements[0];  
 
     // Creates p Tag
-    let pElementCopyright = document.createElement("p");
-    pElementCopyright.id = "pElementCopyright";
-    pElementCopyright.textContent = "Copyright © 2023. " + window.theStore.name;
+    let divElementCopyright = document.createElement("div");
+    divElementCopyright.id = "divElementCopyright";
+    divElementCopyright.textContent = "Copyright © 2023. " + window.theStore.name;
 
     // Creates div Tag for each Socials
     let divElementSocials = document.createElement("div");
     divElementSocials.id = "divElementSocials";
-    // Loop for each social network
+    // Loop to dynamicly create each social network link
     for (const key in window.theStore.socials) {
       const social = window.theStore.socials[key];
       // Creates hyperlink Tag
@@ -34,7 +34,7 @@ window.addEventListener('load', async () => {
       // Creates img Tag
       let imgFooterSocial = document.createElement('img');
       imgFooterSocial.id = "imgFooter" + social.name;
-      imgFooterSocial.src = "../images/"+social.name+".png";
+      imgFooterSocial.src = "../images/socials/"+social.name+".png";
       imgFooterSocial.alt = "Company " + social.name;
       // Tags Relations
       figureFooterSocial.appendChild(imgFooterSocial); // Appends img to figure
@@ -44,7 +44,7 @@ window.addEventListener('load', async () => {
 
     // Tags Relations
     footerElement.appendChild(document.createElement("hr")); // Adds hr
-    footerElement.appendChild(pElementCopyright); // Adds p to footer
+    footerElement.appendChild(divElementCopyright); // Adds p to footer
     footerElement.appendChild(divElementSocials); // Adds div to the footer
   }
 });

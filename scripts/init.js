@@ -3,7 +3,9 @@ import Store from './classes/store.js';
 
 // Checks if the theStore was instantiated previously
 // If null, then grabs the store.json ans instantiate it
-if(window.theStore == null){
+// TODO: Conditional bellow is creating an issue when the json is updated
+//       No new information is displayed after the window.theStore != null
+// if(window.theStore == null){
   // Fetch the JSON file with the Store Info
   fetch('../data/store.json')
     .then(response => {
@@ -28,4 +30,4 @@ if(window.theStore == null){
     .catch(error => {
       console.error('Fetch error:', error);
     });
-}
+// }

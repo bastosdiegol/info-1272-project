@@ -5,6 +5,12 @@
         "postal" : "A1B 2C3",
         "phone" : "(555) 444-6666",
         "email" : "email@company.ca",
-        "logo" : "logo-no-background.png"
+        "logo" : "logo-no-background.png",
+        "socials" : [
+            {"name" : "linkedin", "url" : "https://www.linkedin.com/company/0000000/"},
+            {"name" : "instagram", "url" : "https://www.instagram.com/MyOnlineStore"},
+            {"name" : "x", "url" : "https://x.com/MyOnlineStore"},
+            {"name" : "whatsapp", "url" : "https://wa.me/00000000000"}
+        ]
     }
 }

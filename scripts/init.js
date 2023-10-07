@@ -20,7 +20,8 @@ if(window.theStore == null){
                                   jsonObject.store.postal, 
                                   jsonObject.store.phone, 
                                   jsonObject.store.email, 
-                                  jsonObject.store.logo);
+                                  jsonObject.store.logo,
+                                  jsonObject.store.socials);
       // Sets theStore into the session
       sessionStorage.setItem('theStore', JSON.stringify(window.theStore));
     })

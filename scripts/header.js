@@ -30,18 +30,17 @@ if (headerElements.length > 0) {
   emElementDateTime.id = "emElementDateTime";
   // Creates a Date object
   var currentDate = new Date();
-  // Format Options
+  // DateTime Format Options
   let dateTimeOptions = {
     year: "numeric",
     month: "long",
     day: "numeric",
     hour: '2-digit',
     minute: '2-digit',
-    second: '2-digit',
     hour12: false
   };
   // Formats the current Date using locale
-  emElementDateTime.textContent = currentDate.toLocaleString("en-US", dateTimeOptions);
+  emElementDateTime.textContent = currentDate.toLocaleString("en-CA", dateTimeOptions);
 
   // Tag Relations
   figureElementLogo.appendChild(imgElementLogo); // Adds img to figure

@@ -1,3 +1,4 @@
+/* H E A D E R */
 /* Applies styles to the header element */
 header {
   position: relative;
@@ -17,7 +18,7 @@ header {
   height: auto;
 }
 
-/* Appliies styles to the strong element (Store Name) */
+/* Applies styles to the strong element (Store Name) */
 #strongElementStoreName {
   display: inline;
   vertical-align: middle;
@@ -31,6 +32,33 @@ header {
   margin-top: 0;
 }
 
+/* M A I N  B O D Y */
+/* Applies styles to the nav element */
+nav {
+  display: flex;
+  align-items: center;
+  border: 1px;
+  background-color: rgb(30, 187, 215);
+  color: white;
+  padding: 6px;
+}
+
+/* Applies styles to all link elements within the nav */
+nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  margin: 0 20px;
+}
+
+/* Applies styles to the div element within the nav */
+#divElementCategories {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+
+/* F O O T E R */
 /* Appplies styles to the footer element */
 footer {
   text-align: left;
@@ -43,29 +71,4 @@ footer img {
   float: right;
   margin-left: 10px;
   display: inline;
-}
-
-/* Applies styles to the nav element */
-nav {
-  display: flex;
-  align-items: center;
-  border: 1px;
-  background-color: rgb(30, 187, 215);
-  color: white;
-  padding: 6px;
-}
-
-/* Applies styles to the div element within the nav */
-#divElementCategories {
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
-}
-
-/* Applies styles to all link elements within the nav */
-nav a {
-  text-decoration: none;
-  color: white;
-  font-size: 20px;
-  margin: 0 10px;
 }

@@ -5,7 +5,7 @@
 
 // Window Load Event to make sure it will only runs after the init.js
 window.addEventListener('load', async () => {
-    // Gets <footer> element
+    // Gets <nav> element
     const NAV_ELEMENTS = document.getElementsByTagName("nav");
     // Checks if any <nav> elements were found
     if (NAV_ELEMENTS.length > 0) {
@@ -26,6 +26,11 @@ window.addEventListener('load', async () => {
                 // Adds the Home Category to the div
                 divElementCategories.appendChild(aCategory);
             }
+            // Creates a simple separator for each category
+            let divSeparator = document.createElement("div");
+            divSeparator.classList = "separator";
+            divSeparator.textContent = "|";
+            divElementCategories.appendChild(divSeparator);
             // Creates hyperlink Tag
             let aCategory = document.createElement("a");
             aCategory.href = "../category.html?id="+i;

@@ -2,9 +2,9 @@
 
 <em>(info-1272-project)</em>
 
-<h2>Description<h2>
-This project is intended to create a web page simulating an Online Store with any theme.
-Following are listed the requirements that must be fullfiled for this project.
+<h2>Description</h2>
+<p>This project is intended to create a web page simulating an Online Store with any theme.<br>
+Following are listed the requirements that must be fullfiled for this project.</p>
 
 <h3>Project Requirements</h3> 
 1. Objects
@@ -16,12 +16,12 @@ Following are listed the requirements that must be fullfiled for this project.
 2. Global Variables
 <ul>
     <li>array for the store items: <em>./scripts/global.js, ln 17</em></li>
-    <li>array for the cart items: <em>./scripts/global.js, ln</em></li>
+    <li>array for the cart items: <em>./scripts/classes/store.js, ln 14</em></li>
 </ul>
 3. Initialize Function
 <ul>
     <li>Display the current Day/Time: <em>./scripts/header.js, ln 32 to 46</em></li>
-    <li>Populate the store items array with at least 15 item objects: </li>
+    <li>Populate the store items array with at least 15 item objects: <em>./scripts/init.js, ln 37 to 62</em></li>
     <li>Call your function that will display the store items (4.): <em></em></li>
     <li>Call your function that will display the cart items (5.): <em></em></li>
 </ul>

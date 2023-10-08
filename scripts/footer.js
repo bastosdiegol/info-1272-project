@@ -6,14 +6,13 @@
 // Window Load Event to make sure it will only runs after the init.js
 window.addEventListener('load', async () => {
   // Gets <footer> element
-  const footerElements = document.getElementsByTagName("footer");
-
+  const FOOTER_ELEMENTS = document.getElementsByTagName("footer");
   // Checks if any <footer> elements were found
-  if (footerElements.length > 0) {
+  if (FOOTER_ELEMENTS.length > 0) {
     // Gets the first <footer> element (at the moment I only have one)
-    const footerElement = footerElements[0];  
+    const FOOTER_ELEMENT = FOOTER_ELEMENTS[0];  
 
-    // Creates p Tag
+    // Creates div Tag
     let divElementCopyright = document.createElement("div");
     divElementCopyright.id = "divElementCopyright";
     divElementCopyright.textContent = "Copyright © 2023. " + window.theStore.name;
@@ -21,21 +20,21 @@ window.addEventListener('load', async () => {
     // Creates div Tag for each Socials
     let divElementSocials = document.createElement("div");
     divElementSocials.id = "divElementSocials";
-    // Loop to dynamicly create each social network link
-    for (const key in window.theStore.socials) {
-      const social = window.theStore.socials[key];
+    // Loop to dynamically create each social network link
+    for (const KEY in window.theStore.socials) {
+      const SOCIAL = window.theStore.socials[KEY];
       // Creates hyperlink Tag
       let aFooterSocial = document.createElement("a");
-      aFooterSocial.href = social.url;
+      aFooterSocial.href = SOCIAL.url;
       aFooterSocial.target = "_blank";
       // Creates figure Tag
       let figureFooterSocial = document.createElement('figure');
-      figureFooterSocial.id = "figureFooter" + social.name;
+      figureFooterSocial.id = "figureFooter" + SOCIAL.name;
       // Creates img Tag
       let imgFooterSocial = document.createElement('img');
-      imgFooterSocial.id = "imgFooter" + social.name;
-      imgFooterSocial.src = "../images/socials/"+social.name+".png";
-      imgFooterSocial.alt = "Company " + social.name;
+      imgFooterSocial.id = "imgFooter" + SOCIAL.name;
+      imgFooterSocial.src = "../images/socials/"+SOCIAL.name+".png";
+      imgFooterSocial.alt = "Company " + SOCIAL.name;
       // Tags Relations
       figureFooterSocial.appendChild(imgFooterSocial); // Appends img to figure
       aFooterSocial.appendChild(figureFooterSocial); // Appends figure to a
@@ -43,8 +42,8 @@ window.addEventListener('load', async () => {
     }
 
     // Tags Relations
-    footerElement.appendChild(document.createElement("hr")); // Adds hr
-    footerElement.appendChild(divElementCopyright); // Adds p to footer
-    footerElement.appendChild(divElementSocials); // Adds div to the footer
+    FOOTER_ELEMENT.appendChild(document.createElement("hr")); // Adds hr
+    FOOTER_ELEMENT.appendChild(divElementCopyright); // Adds p to footer
+    FOOTER_ELEMENT.appendChild(divElementSocials); // Adds div to the footer
   }
 });

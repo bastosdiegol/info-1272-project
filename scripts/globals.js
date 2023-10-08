@@ -13,5 +13,3 @@ const CURRENCY_RATES = [{name: "USD", rate: 0.73}
 
 // Gets the Store Information from the sessionStorage
 var theStore = JSON.parse(sessionStorage.getItem('theStore'));
-// Gets the Store products from the sessionStorage
-var theStoreItems = JSON.parse(sessionStorage.getItem('theStoreItems'));

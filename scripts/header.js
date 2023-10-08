@@ -7,7 +7,6 @@
 window.addEventListener('load', async () => {
   // Gets <header> element
   const headerElements = document.getElementsByTagName("header");
-    
   // Checks if any <header> elements were found
   if (headerElements.length > 0) {
     // Gets the first <header> element (at the moment I only have one)

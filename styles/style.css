@@ -36,11 +36,36 @@ footer {
   text-align: left;
 }
 
-/* Apply styles to all img elements within the footer */
+/* Applies styles to all img elements within the footer */
 footer img {
   width: 2%;
   height: auto;
   float: right;
   margin-left: 10px;
   display: inline;
+}
+
+/* Applies styles to the nav element */
+nav {
+  display: flex;
+  align-items: center;
+  border: 1px;
+  background-color: rgb(30, 187, 215);
+  color: white;
+  padding: 6px;
+}
+
+/* Applies styles to the div element within the nav */
+#divElementCategories {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+
+/* Applies styles to all link elements within the nav */
+nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  margin: 0 10px;
 }

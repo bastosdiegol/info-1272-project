@@ -22,10 +22,15 @@ Following are listed the requirements that must be fullfiled for this project.</
 <ul>
     <li>Display the current Day/Time: <em>./scripts/header.js, ln 32 to 46</em></li>
     <li>Populate the store items array with at least 15 item objects: <em>./scripts/init.js, ln 37 to 62</em></li>
-    <li>Call your function that will display the store items (4.): <em></em></li>
+    <li>Call your function that will display the store items (4.): <em>./scripts/index-main.js, ln 25</em></li>
     <li>Call your function that will display the cart items (5.): <em></em></li>
 </ul>
-4. Display Store Items<br>
+4. Display Store Items 
+<ul>
+    <li>Frontpage call: <em>./scripts/index-main.js, ln 25</em></li>
+    <li>Store Class Method: <em>./scripts/classes/store.js, ln 76 to 101</em></li>
+    <li>StoreItem Class Method: <em>./scripts/classes/store-item.js, ln 23 to 111</em></li>
+</ul>
 5. Display Cart Items<br>
 6. Create Cart Totals<br>
 7. Currency Selection

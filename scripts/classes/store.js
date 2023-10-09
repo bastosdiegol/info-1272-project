@@ -86,11 +86,13 @@ class Store{
             if(category == null){
                 // Checks if the item should be displayed at frontpage
                 if (theItem.frontpageDisplay) {
+                    // Gets the current item card information
                     divElementStoreItemGrid.appendChild(theItem.getStoreItemGrid());
                 }
             }else{ // Category Items request
                 // Checks if the item category matches the category requested
                 if(theItem.category == this.categories[category]){
+                    // Gets the current item card information
                     divElementStoreItemGrid.appendChild(theItem.getStoreItemGrid());
                 }
             }

@@ -14,7 +14,9 @@ class Store{
         this.storeItems = [];
     }
 
-    // Dynamically generate theStory categories based on the storeItems categories
+    /* Method that dynamically generate theStory categories based on the storeItems categories
+     * Returns nothing, but fills the Store.categories array with values
+     */
     defineCategories(){
         // Clears the array
         this.categories = [];
@@ -28,9 +30,84 @@ class Store{
         }
     }
 
-    getFrontpageItemsDivElement(){
-
+    /* Method that dynamically creates a div element containing all necessary links for navigation
+     * Returns: a div document element
+     */
+    getNavBarDivElement(){
+        // Creates div Tag
+        let divElementCategories = document.createElement("div");
+        divElementCategories.id = "divElementCategories";
+        // Appends an empty div at the beginning for aesthetic purpose
+        divElementCategories.appendChild(document.createElement("div"));
+        // Loop to dynamically create nav bar with categories
+        for (let i = 0; i < this.categories.length; i++) {
+            // Checks if the first category
+            if(i == 0){ // If first, then adds Home category
+                // Creates hyperlink Tag
+                let aCategory = document.createElement("a");
+                aCategory.href = "../index.html";
+                aCategory.target = "_self";
+                aCategory.textContent = "Home";
+                // Adds the Home Category to the div
+                divElementCategories.appendChild(aCategory);
+            }
+            // Creates a simple separator for each category
+            let divSeparator = document.createElement("div");
+            divSeparator.classList = "separator";
+            divSeparator.textContent = "|";
+            divElementCategories.appendChild(divSeparator);
+            // Creates hyperlink Tag
+            let aCategory = document.createElement("a");
+            aCategory.href = "../category.html?id="+i;
+            aCategory.target = "_self";
+            aCategory.textContent = this.categories[i];
+            // Adds the Home Category to the div
+            divElementCategories.appendChild(aCategory);
+        }
+        // Appends an empty div at the end for aesthetic purpose
+        divElementCategories.appendChild(document.createElement("div"));
+        return divElementCategories;
     }
+
+    /* Method that dynamically creates a div element contaning all necessary store items that should appear at specified page
+     * Receives: id for a specified story category, empty (or null) for frontpage
+     * Returns: a div document element
+     */
+    getStoreItemsGridDivElement(category = null){
+        // Creates div Tag
+        let divElementStoreItemGrid = document.createElement("div");
+        divElementStoreItemGrid.id = "divElementStoreItemGrid";
+        divElementStoreItemGrid.innerHTML = "<strong>Store Items:</strong>";
+        // Loop to dynamically insert store items into grid div
+        for (let i = 0; i < this.storeItems.length; i++) {
+            // Temp variable to handle the item
+            let theItem = this.storeItems[i];
+            // Checks if the grid is request for frontpage
+            if(category == null){
+                // Checks if the item should be displayed at frontpage
+                if (theItem.frontpageDisplay) {
+                    divElementStoreItemGrid.appendChild(theItem.getStoreItemGrid());
+                }
+            }else{ // Category Items request
+                // Checks if the item category matches the category requested
+                if(theItem.category == this.categories[category]){
+                    divElementStoreItemGrid.appendChild(theItem.getStoreItemGrid());
+                }
+            }
+        }
+        return divElementStoreItemGrid;
+    }
+
+    /* Method that finds the current symbol used on the store
+     * Returns: a string with the symbol
+     */
+    //getCurrentCurrencySymbol(){
+    //    for (const key in CURRENCY_RATES) {
+    //        if(CURRENCY_RATES.name == window.currentCurrency){
+    //            return CURRENCY_RATES.symbol;
+    //        }
+    //    }
+    //}
 }
 
 // My class now is visible to other files

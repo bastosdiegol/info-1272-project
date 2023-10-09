@@ -51,6 +51,7 @@ fetch('../data/store-items.json')
                                     STORE_ITEM.name,
                                     STORE_ITEM.price,
                                     STORE_ITEM.stockQuantity, 
+                                    STORE_ITEM.maxPerCustomer,
                                     STORE_ITEM.category, 
                                     STORE_ITEM.costOfShipping, 
                                     STORE_ITEM.reviews, 

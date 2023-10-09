@@ -48,7 +48,26 @@ nav a {
   text-decoration: none;
   color: white;
   font-size: 20px;
-  margin: 0 20px;
+}
+
+#divElementStoreItemGrid{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#divElementStoreItemGrid div{
+  margin: 0px;
+}
+
+#divElementStoreItemGrid figure{
+  margin: 0%;
+  display: inline;
+}
+
+#divElementStoreItemGrid img{
+  width: 1%;
+  height: auto;
+  margin: 0%;
 }
 
 /* Applies styles to the div element within the nav */

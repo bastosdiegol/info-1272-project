@@ -10,7 +10,7 @@
         "reviews" : {},
         "reviewScore" : 3.25,
         "description" : "Desc Item 1",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     },
     "2":{
@@ -24,7 +24,7 @@
         "reviews" : {},
         "reviewScore" : 2.1,
         "description" : "Desc Item 2",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     },
     "3":{
@@ -38,7 +38,7 @@
         "reviews" : {},
         "reviewScore" : 1.9,
         "description" : "Desc Item 3",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     },
     "4":{
@@ -52,7 +52,7 @@
         "reviews" : {},
         "reviewScore" : 4,
         "description" : "Desc Item 4",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     },
     "5":{
@@ -66,7 +66,7 @@
         "reviews" : {},
         "reviewScore" : 4,
         "description" : "Desc Item 5",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     },
     "6":{
@@ -80,7 +80,7 @@
         "reviews" : {},
         "reviewScore" : 4,
         "description" : "Desc Item 6",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     },
     "7":{
@@ -94,7 +94,7 @@
         "reviews" : {},
         "reviewScore" : 4,
         "description" : "Desc Item 7",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     },
     "8":{
@@ -108,7 +108,7 @@
         "reviews" : {},
         "reviewScore" : 4,
         "description" : "Desc Item 8",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     },
     "9":{
@@ -122,7 +122,7 @@
         "reviews" : {},
         "reviewScore" : 4,
         "description" : "Desc Item 9",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     },
     "10":{
@@ -136,7 +136,7 @@
         "reviews" : {},
         "reviewScore" : 4,
         "description" : "Desc Item 10",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     },
     "11":{
@@ -150,7 +150,7 @@
         "reviews" : {},
         "reviewScore" : 4,
         "description" : "Desc Item 11",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     },
     "12":{
@@ -164,7 +164,7 @@
         "reviews" : {},
         "reviewScore" : 4,
         "description" : "Desc Item 12",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     },
     "13":{
@@ -178,7 +178,7 @@
         "reviews" : {},
         "reviewScore" : 4,
         "description" : "Desc Item 13",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     },
     "14":{
@@ -192,7 +192,7 @@
         "reviews" : {},
         "reviewScore" : 4,
         "description" : "Desc Item 14",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     },
     "15":{
@@ -206,7 +206,7 @@
         "reviews" : {},
         "reviewScore" : 4,
         "description" : "Desc Item 15",
-        "imageURL" : "",
+        "imageURL" : "./images/products/box-package-icon.png",
         "frontpageDisplay" : true
     }
 }

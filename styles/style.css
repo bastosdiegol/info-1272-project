@@ -50,24 +50,59 @@ nav a {
   font-size: 20px;
 }
 
-#divElementStoreItemGrid{
+.divElementStoreItemGrid{
+  display: inline-block;
   margin-top: 10px;
   margin-bottom: 10px;
 }
 
-#divElementStoreItemGrid div{
-  margin: 0px;
+.divElementStoreItem {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 5px;
+    width: 16%;
+    box-sizing: border-box;
 }
 
 #divElementStoreItemGrid figure{
-  margin: 0%;
+  margin: 0.5%;
   display: inline;
 }
 
-#divElementStoreItemGrid img{
-  width: 1%;
+.divElementItemHeader{
+  display: inline-flex;
+  font-size: small;
+  margin: 5px;
+}
+
+.divElementItemStock{
+  width: 50%;
+}
+
+.divElementItemReviewsStars{
+  text-align-last: right;
+  width: 55%;
+  margin: 0px 2%;
+}
+
+.divElementItemReviewsStars img{
+  width: 8%;
   height: auto;
   margin: 0%;
+}
+
+.divElementItemBody{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 1%;
+}
+
+.imgElementItem{
+  width: 50%;
+  height: auto;
+  margin: 5%;
 }
 
 /* Applies styles to the div element within the nav */

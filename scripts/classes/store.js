@@ -78,6 +78,7 @@ class Store{
         let divElementStoreItemGrid = document.createElement("div");
         divElementStoreItemGrid.id = "divElementStoreItemGrid";
         divElementStoreItemGrid.innerHTML = "<strong>Store Items:</strong>";
+        divElementStoreItemGrid.appendChild(document.createElement("br"));
         // Loop to dynamically insert store items into grid div
         for (let i = 0; i < this.storeItems.length; i++) {
             // Temp variable to handle the item

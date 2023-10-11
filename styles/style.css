@@ -50,9 +50,8 @@ nav a {
   font-size: 20px;
 }
 
-.divElementStoreItemGrid{
-  margin-top: 10px;
-  margin-bottom: 10px;
+#divElementStoreItemGrid{
+  margin: 10px;
 }
 
 .divElementStoreItem {

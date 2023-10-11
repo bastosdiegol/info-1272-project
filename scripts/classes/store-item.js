@@ -138,15 +138,15 @@ class StoreItem{
         imgReviewStar.classList = "imgReviewStar";
         switch (starType) {
             case "filled":
-                imgReviewStar.src = "../images/review/star-icon.png";
+                imgReviewStar.src = "./images/review/star-icon.png";
                 imgReviewStar.alt = "Review Filled Star";
                 break;
             case "half":
-                imgReviewStar.src = "../images/review/star-half-yellow-icon.png";
+                imgReviewStar.src = "./images/review/star-half-yellow-icon.png";
                 imgReviewStar.alt = "Review Half-Filled Star";
                 break;
             case "empty":
-                imgReviewStar.src = "../images/review/star-line-yellow-icon.png";
+                imgReviewStar.src = "./images/review/star-line-yellow-icon.png";
                 imgReviewStar.alt = "Review Empty Star";
                 break;
             default:
@@ -157,6 +157,3 @@ class StoreItem{
         documentElement.appendChild(figureReviewStar);
     }
 }
-
-// My class now is visible to other files
-export default StoreItem;

@@ -112,6 +112,3 @@ class Store{
     //    }
     //}
 }
-
-// My class now is visible to other files
-export default Store;

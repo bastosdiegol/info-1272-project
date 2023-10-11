@@ -54,6 +54,11 @@ nav a {
   margin: 10px;
 }
 
+#divElementStoreItemGrid figure{
+  margin: 0.5%;
+  display: inline;
+}
+
 .divElementStoreItem {
     border: 1px solid #ccc;
     padding: 10px;
@@ -61,11 +66,6 @@ nav a {
     width: 20%;
     display: inline-block;
     box-sizing: border-box;
-}
-
-#divElementStoreItemGrid figure{
-  margin: 0.5%;
-  display: inline;
 }
 
 .divElementItemHeader{

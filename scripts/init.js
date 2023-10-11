@@ -1,8 +1,3 @@
-// Import Store class
-import Store from './classes/store.js';
-// Import StoreItem class
-import StoreItem from './classes/store-item.js';
-
 // *****************
 // STORE INFORMATION
 // *****************

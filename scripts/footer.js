@@ -1,14 +1,14 @@
-//  ___         _           
-// | __|__  ___| |_ ___ _ _ 
+//  ___         _
+// | __|__  ___| |_ ___ _ _
 // | _/ _ \/ _ \  _/ -_) '_|
-// |_|\___/\___/\__\___|_|  
+// |_|\___/\___/\__\___|_|
 
 // Gets <footer> element
 const FOOTER_ELEMENTS = document.getElementsByTagName("footer");
 // Checks if any <footer> elements were found
 if (FOOTER_ELEMENTS.length > 0) {
   // Gets the first <footer> element (at the moment I only have one)
-  const FOOTER_ELEMENT = FOOTER_ELEMENTS[0];  
+  const FOOTER_ELEMENT = FOOTER_ELEMENTS[0];
 
   // Creates div Tag
   let divElementCopyright = document.createElement("div");
@@ -26,12 +26,12 @@ if (FOOTER_ELEMENTS.length > 0) {
     aFooterSocial.href = SOCIAL.url;
     aFooterSocial.target = "_blank";
     // Creates figure Tag
-    let figureFooterSocial = document.createElement('figure');
+    let figureFooterSocial = document.createElement("figure");
     figureFooterSocial.id = "figureFooter" + SOCIAL.name;
     // Creates img Tag
-    let imgFooterSocial = document.createElement('img');
+    let imgFooterSocial = document.createElement("img");
     imgFooterSocial.id = "imgFooter" + SOCIAL.name;
-    imgFooterSocial.src = "./images/socials/"+SOCIAL.name+".png";
+    imgFooterSocial.src = "./images/socials/" + SOCIAL.name + ".png";
     imgFooterSocial.alt = "Company " + SOCIAL.name;
     // Tags Relations
     figureFooterSocial.appendChild(imgFooterSocial); // Appends img to figure

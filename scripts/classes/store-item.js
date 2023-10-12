@@ -89,7 +89,7 @@ class StoreItem {
     divElementItemBody.classList = "divElementItemBody";
     // Creates a link to the item
     let aElementItemName = document.createElement("a");
-    aElementItemName.href = "../product.html?id=" + this.id;
+    aElementItemName.href = "./product.html?id=" + this.id;
     aElementItemName.target = "_self";
     // aElementItemName.textContent = this.name;
     // Creates figure tag for the Item
@@ -115,17 +115,21 @@ class StoreItem {
     divElementAddCart.classList = "divElementAddCart";
     // Creates a link to the cart
     let aElementAddCart = document.createElement("a");
-    aElementAddCart.href = "../cart.html?add=" + this.id;
+    aElementAddCart.href = "./cart.html?add=" + this.id;
     aElementAddCart.target = "_self";
     // Creates figure tag for the Cart
     let figureElementCart = document.createElement("figure");
     figureElementCart.classList = "figureElementCart";
-    figureElementCart.textContent = "Add to the Cart";
+    //figureElementCart.textContent = "Add to the Cart";
     // Creates img Tag for the Cart
     let imgElementCart = document.createElement("img");
     imgElementCart.classList = "imgElementCart";
     imgElementCart.src = "./images/cart-plus-icon-white.png";
     imgElementCart.alt = "Add to the Cart";
+    // Create div for cart text
+    let divElementAddCartText = document.createElement("div");
+    divElementAddCartText.classList = "divElementAddCartText";
+    divElementAddCartText.textContent = "Add to the Cart";
 
     // Tags relations
     divElementStoreItem.appendChild(divElementItemHeader); // Appends the item header to the card div
@@ -144,6 +148,7 @@ class StoreItem {
     divElementAddCart.appendChild(aElementAddCart); // Appends cart link to the cart element
     figureElementCart.appendChild(imgElementCart); // Appends img Cart to figure Cart
     aElementAddCart.appendChild(figureElementCart); // Appends cart figure to cart link
+    aElementAddCart.appendChild(divElementAddCartText); // Appends cart text to the cart element
     divElementItemBody.appendChild(divElementAddCart); // Appends cart element to the item body
     // TODO: remove Temporary
     divElementStoreItem.appendChild(document.createElement("br"));

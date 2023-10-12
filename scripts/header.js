@@ -10,6 +10,12 @@ if (headerElements.length > 0) {
   // Gets the first <header> element (at the moment I only have one)
   const headerElement = headerElements[0];
 
+  // Creates a link tag
+  let homeElementLink = document.createElement("a");
+  homeElementLink.id = "homeElementLink";
+  homeElementLink.href = "./index.html";
+  homeElementLink.target = "_self";
+
   // Creates figure Tag
   let figureElementLogo = document.createElement("figure");
   figureElementLogo.id = "figureElementLogo";
@@ -46,8 +52,9 @@ if (headerElements.length > 0) {
   );
 
   // Tag Relations
+  homeElementLink.appendChild(figureElementLogo); // Adds figure to the link
   figureElementLogo.appendChild(imgElementLogo); // Adds img to figure
-  headerElement.appendChild(figureElementLogo); // Adds figure to header
+  headerElement.appendChild(homeElementLink); // Adds link to header
   headerElement.appendChild(strongElementStoreName); // Adds strong to header
   headerElement.appendChild(emElementDateTime); // Adds em to header
 }

@@ -98,7 +98,7 @@ class StoreItem {
     // Creates figure caption tag for the Item
     let figureCaptionElementItem = document.createElement("figcaption");
     figureCaptionElementItem.classList = "figureCaptionElementItem";
-    figureElementItem.textContent = this.name;
+    figureCaptionElementItem.textContent = this.name;
     // Creates img Tag for the item
     let imgElementItem = document.createElement("img");
     imgElementItem.classList = "imgElementItem";
@@ -108,7 +108,8 @@ class StoreItem {
     let divElementItemPrice = document.createElement("div");
     divElementItemPrice.classList = "divElementItemPrice";
     // TODO: Calculate the correct price accordingly to the current currency
-    divElementItemPrice.textContent = window.currentCurrencySymbol + this.price;
+    divElementItemPrice.textContent =
+      "Price: " + window.currentCurrencySymbol + this.price;
     // Creates a div for cart
     let divElementAddCart = document.createElement("div");
     divElementAddCart.classList = "divElementAddCart";
@@ -116,7 +117,15 @@ class StoreItem {
     let aElementAddCart = document.createElement("a");
     aElementAddCart.href = "../cart.html?add=" + this.id;
     aElementAddCart.target = "_self";
-    aElementAddCart.textContent = "Add to the cart";
+    // Creates figure tag for the Cart
+    let figureElementCart = document.createElement("figure");
+    figureElementCart.classList = "figureElementCart";
+    figureElementCart.textContent = "Add to the Cart";
+    // Creates img Tag for the Cart
+    let imgElementCart = document.createElement("img");
+    imgElementCart.classList = "imgElementCart";
+    imgElementCart.src = "./images/cart-plus-icon-white.png";
+    imgElementCart.alt = "Add to the Cart";
 
     // Tags relations
     divElementStoreItem.appendChild(divElementItemHeader); // Appends the item header to the card div
@@ -133,7 +142,9 @@ class StoreItem {
     divElementItemBody.appendChild(aElementItemName); // Appends the link to the item div body
     divElementItemBody.appendChild(divElementItemPrice); // Appends the price to the item div body
     divElementAddCart.appendChild(aElementAddCart); // Appends cart link to the cart element
-    divElementItemBody.appendChild(divElementAddCart); // Appends car element to the item body
+    figureElementCart.appendChild(imgElementCart); // Appends img Cart to figure Cart
+    aElementAddCart.appendChild(figureElementCart); // Appends cart figure to cart link
+    divElementItemBody.appendChild(divElementAddCart); // Appends cart element to the item body
     // TODO: remove Temporary
     divElementStoreItem.appendChild(document.createElement("br"));
 

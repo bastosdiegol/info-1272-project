@@ -35,125 +35,133 @@ class StoreItem {
    */
   getStoreItemGrid() {
     // Creates the item div card
-    let divElementStoreItem = document.createElement("div");
-    divElementStoreItem.classList = "divElementStoreItem";
+    let divStoreItem = document.createElement("div");
+    divStoreItem.classList = "divStoreItem";
+    /**********
+     * ITEM   *
+     * HEADER *
+     **********/
     // Creates a div header for item card
-    let divElementItemHeader = document.createElement("div");
-    divElementItemHeader.classList = "divElementItemHeader";
+    let divItemHeader = document.createElement("div");
+    divItemHeader.classList = "divItemHeader";
     // Creates a div to contain item stock and max purchase
-    let divElementItemStock = document.createElement("div");
-    divElementItemStock.classList = "divElementItemStock";
+    let divItemStock = document.createElement("div");
+    divItemStock.classList = "divItemStock";
     // Creates a em container for item stock and max purchase
-    let emlementItemStock = document.createElement("em");
-    emlementItemStock.classList = "emlementItemStock";
+    let emItemStock = document.createElement("em");
+    emItemStock.classList = "emItemStock";
     // Creates a div to contain the item stock Quantity
-    let divElementItemStockQuantity = document.createElement("div");
-    divElementItemStockQuantity.classList = "divElementItemStockQuantity";
-    divElementItemStockQuantity.textContent = "In Stock: " + this.stockQuantity;
+    let divItemStockQuantity = document.createElement("div");
+    divItemStockQuantity.classList = "divItemStockQuantity";
+    divItemStockQuantity.textContent = "In Stock: " + this.stockQuantity;
     // Creates a div to contain the item max purchase per customer
-    let divElementItemMaxPerCustomer = document.createElement("div");
-    divElementItemMaxPerCustomer.classList = "divElementItemMaxPerCustomer";
-    divElementItemMaxPerCustomer.textContent =
-      "Per customer: " + this.maxPerCustomer;
+    let divItemMaxPerCustomer = document.createElement("div");
+    divItemMaxPerCustomer.classList = "divItemMaxPerCustomer";
+    divItemMaxPerCustomer.textContent = "Per customer: " + this.maxPerCustomer;
     // Creates a div to contain the reviews stars
-    let divElementItemReviewsStars = document.createElement("div");
-    divElementItemReviewsStars.classList = "divElementItemReviewsStars";
-    // Lets calculate how many stars should we display per reviewscore
+    let divItemReviewsStars = document.createElement("div");
+    divItemReviewsStars.classList = "divItemReviewsStars";
+    // Calculates how many stars should we display per reviewscore
     let integerPart = Math.floor(this.reviewScore); // Integer part = filled stars
     let fractionalPart = this.reviewScore - integerPart; // Fractional part = half filled star
     let countStars = 0; // Counter for how many start was created
     // For each Integer part creates a filled star
     for (countStars; countStars < integerPart; countStars++) {
-      this.addReviewStarImage(divElementItemReviewsStars, "filled");
+      this.addReviewStarImage(divItemReviewsStars, "filled");
     }
     // Adds a half-filled star if the fractional part is higher than 0.25
     if (fractionalPart >= 0.25 && fractionalPart < 1) {
-      this.addReviewStarImage(divElementItemReviewsStars, "half");
+      this.addReviewStarImage(divItemReviewsStars, "half");
       countStars++;
     }
     // Adds the remaining starts to reach 5 as empty
     while (countStars < 5) {
-      this.addReviewStarImage(divElementItemReviewsStars, "empty");
+      this.addReviewStarImage(divItemReviewsStars, "empty");
       countStars++;
     }
     // Creates a div to contain the reviews quantity
-    let divElementItemReviewsQuantity = document.createElement("div");
-    divElementItemReviewsQuantity.classList = "divElementItemReviewsQuantity";
+    let divItemReviewsQuantity = document.createElement("div");
+    divItemReviewsQuantity.classList = "divItemReviewsQuantity";
     // TODO: Fix the quantity of reviews
     // Quick conditional so I don't show (undefined)
-    divElementItemReviewsQuantity.textContent =
+    divItemReviewsQuantity.textContent =
       "(" + (this.reviews.length == undefined ? 0 : this.reviews.length) + ")";
-
+    /********
+     * ITEM *
+     * BODY *
+     ********/
     // Creates a div body to the item card
-    let divElementItemBody = document.createElement("div");
-    divElementItemBody.classList = "divElementItemBody";
+    let divItemBody = document.createElement("div");
+    divItemBody.classList = "divItemBody";
     // Creates a link to the item
-    let aElementItemName = document.createElement("a");
-    aElementItemName.href = "./product.html?id=" + this.id;
-    aElementItemName.target = "_self";
-    // aElementItemName.textContent = this.name;
+    let aItemName = document.createElement("a");
+    aItemName.href = "./product.html?id=" + this.id;
+    aItemName.target = "_self";
+    // aItemName.textContent = this.name;
     // Creates figure tag for the Item
-    let figureElementItem = document.createElement("figure");
-    figureElementItem.classList = "figureElementItem";
+    let figureItem = document.createElement("figure");
+    figureItem.classList = "figureItem";
     // Creates figure caption tag for the Item
-    let figureCaptionElementItem = document.createElement("figcaption");
-    figureCaptionElementItem.classList = "figureCaptionElementItem";
-    figureCaptionElementItem.textContent = this.name;
+    let figureCaptionItem = document.createElement("figcaption");
+    figureCaptionItem.classList = "figureCaptionItem";
+    figureCaptionItem.textContent = this.name;
     // Creates img Tag for the item
-    let imgElementItem = document.createElement("img");
-    imgElementItem.classList = "imgElementItem";
-    imgElementItem.src = this.imageURL;
-    imgElementItem.alt = this.name;
+    let imgItem = document.createElement("img");
+    imgItem.classList = "imgItem";
+    imgItem.src = this.imageURL;
+    imgItem.alt = this.name;
     // Creates a div for the price
-    let divElementItemPrice = document.createElement("div");
-    divElementItemPrice.classList = "divElementItemPrice";
+    let divItemPrice = document.createElement("div");
+    divItemPrice.classList = "divItemPrice";
     // TODO: Calculate the correct price accordingly to the current currency
-    divElementItemPrice.textContent =
+    divItemPrice.textContent =
       "Price: " + window.currentCurrencySymbol + this.price;
     // Creates a div for cart
-    let divElementAddCart = document.createElement("div");
-    divElementAddCart.classList = "divElementAddCart";
+    let divAddCart = document.createElement("div");
+    divAddCart.classList = "divAddCart";
     // Creates a link to the cart
-    let aElementAddCart = document.createElement("a");
-    aElementAddCart.href = "./cart.html?add=" + this.id;
-    aElementAddCart.target = "_self";
+    let aAddCart = document.createElement("a");
+    aAddCart.href = "./cart.html?add=" + this.id;
+    aAddCart.target = "_self";
     // Creates figure tag for the Cart
-    let figureElementCart = document.createElement("figure");
-    figureElementCart.classList = "figureElementCart";
-    //figureElementCart.textContent = "Add to the Cart";
+    let figureCart = document.createElement("figure");
+    figureCart.classList = "figureCart";
+    //figureCart.textContent = "Add to the Cart";
     // Creates img Tag for the Cart
-    let imgElementCart = document.createElement("img");
-    imgElementCart.classList = "imgElementCart";
-    imgElementCart.src = "./images/cart-plus-icon-white.png";
-    imgElementCart.alt = "Add to the Cart";
+    let imgCart = document.createElement("img");
+    imgCart.classList = "imgCart";
+    imgCart.src = "./images/cart-plus-icon-white.png";
+    imgCart.alt = "Add to the Cart";
     // Create div for cart text
-    let divElementAddCartText = document.createElement("div");
-    divElementAddCartText.classList = "divElementAddCartText";
-    divElementAddCartText.textContent = "Add to the Cart";
+    let divAddCartText = document.createElement("div");
+    divAddCartText.classList = "divAddCartText";
+    divAddCartText.textContent = "Add to the Cart";
 
-    // Tags relations
-    divElementStoreItem.appendChild(divElementItemHeader); // Appends the item header to the card div
-    divElementItemHeader.appendChild(divElementItemStock); // Appends the stock div to the item header
-    divElementItemStock.appendChild(emlementItemStock); // Appends the em container to the div stock
-    emlementItemStock.appendChild(divElementItemStockQuantity); // Appends the stock quantity to the stock div
-    emlementItemStock.appendChild(divElementItemMaxPerCustomer); // Appends the max per customer to the stock div
-    divElementItemHeader.appendChild(divElementItemReviewsStars); // Appends reviews stars to the item header
-    divElementItemHeader.appendChild(divElementItemReviewsQuantity); // Appends reviews quantity to the item header
-    divElementStoreItem.appendChild(divElementItemBody); // Appends the item header to the card div
-    figureElementItem.appendChild(figureCaptionElementItem); // Appends the figcaption to the figure
-    figureElementItem.appendChild(imgElementItem); // Appends the item img to the figure
-    aElementItemName.appendChild(figureElementItem); // Appends the item figure to the link
-    divElementItemBody.appendChild(aElementItemName); // Appends the link to the item div body
-    divElementItemBody.appendChild(divElementItemPrice); // Appends the price to the item div body
-    divElementAddCart.appendChild(aElementAddCart); // Appends cart link to the cart element
-    figureElementCart.appendChild(imgElementCart); // Appends img Cart to figure Cart
-    aElementAddCart.appendChild(figureElementCart); // Appends cart figure to cart link
-    aElementAddCart.appendChild(divElementAddCartText); // Appends cart text to the cart element
-    divElementItemBody.appendChild(divElementAddCart); // Appends cart element to the item body
+    // Item Tags relationship
+    divStoreItem.appendChild(divItemHeader); // <div "StoreItem"> <div "ItemHeader">
+    divStoreItem.appendChild(divItemBody); //   <div "StoreItem"> <div "ItemBody">
+    // Header
+    divItemHeader.appendChild(divItemStock); // <div "ItemHeader"> <div "ItemStock">
+    divItemStock.appendChild(emItemStock); //                      <div "ItemStock"> <em "ItemStock">
+    emItemStock.appendChild(divItemStockQuantity); //                                <em "ItemStock"> <div "ItemStockQuantity">
+    emItemStock.appendChild(divItemMaxPerCustomer); //                               <em "ItemStock"> <div "ItemMaxPerCustomer">
+    divItemHeader.appendChild(divItemReviewsStars); //    <div "ItemHeader"> <div "ItemReviewsStars">
+    divItemHeader.appendChild(divItemReviewsQuantity); // <div "ItemHeader"> <div "temReviewsQuantity">
+    // Body
+    divItemBody.appendChild(aItemName); //    <div "ItemBody"> <a "ItemName">
+    aItemName.appendChild(figureItem); //                      <a "ItemName"> <figure "Item">
+    figureItem.appendChild(figureCaptionItem); //                             <figure "Item"> <figure "CaptionItem">
+    figureItem.appendChild(imgItem); //                                       <figure "Item"> <img "Item">
+    divItemBody.appendChild(divItemPrice); // <div "ItemBody"> <div "ItemPrice">
+    divItemBody.appendChild(divAddCart); //   <div "ItemBody"> <div "AddCart">
+    divAddCart.appendChild(aAddCart); //                       <div "AddCart"> <a "AddCart">
+    aAddCart.appendChild(figureCart); //                                       <a "AddCart"> <figure "Cart">
+    figureCart.appendChild(imgCart); //                                                      <figure "Cart"> <img "Cart">
+    aAddCart.appendChild(divAddCartText); //                                   <a "AddCart"> <div "AddCartText">
     // TODO: remove Temporary
-    divElementStoreItem.appendChild(document.createElement("br"));
+    divStoreItem.appendChild(document.createElement("br")); // <br>
 
-    return divElementStoreItem;
+    return divStoreItem;
   }
 
   /* Method that creates a start review image on a document element
@@ -183,7 +191,7 @@ class StoreItem {
       default:
         break;
     }
-    // Tag relations
+    // Tags relationship
     figureReviewStar.appendChild(imgReviewStar);
     documentElement.appendChild(figureReviewStar);
   }

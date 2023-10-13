@@ -1,10 +1,10 @@
 /* H E A D E R */
-/* Applies styles to the header element */
+/* Store Header */
 header {
   position: relative;
 }
 
-/* Applies styles to the Logo figure element */
+/* Logo Figure */
 #figureElementLogo {
   display: inline;
   vertical-align: middle;
@@ -12,19 +12,19 @@ header {
   margin-right: 10px;
 }
 
-/* Applies styles to the Logo img element within the figure */
+/* Logo Img */
 #imgElementLogo {
   width: 5%;
   height: auto;
 }
 
-/* Applies styles to the strong element (Store Name) */
+/* Store Name */
 #strongElementStoreName {
   display: inline;
   vertical-align: middle;
 }
 
-/* Applies styles to the  element (Date/Time) */
+/* Date/Time */
 #emElementDateTime {
   position: absolute;
   top: 0;
@@ -33,7 +33,7 @@ header {
 }
 
 /* M A I N  B O D Y */
-/* Applies styles to the nav element */
+/* Nav Bar */
 nav {
   display: flex;
   align-items: center;
@@ -43,23 +43,33 @@ nav {
   padding: 6px;
 }
 
-/* Applies styles to all link elements within the nav */
+/* Nav Bar Container */
+#divElementCategories {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+
+/* Nav Bar Link */
 nav a {
   text-decoration: none;
   color: white;
   font-size: 20px;
 }
 
+/* Items Grid */
 #divElementStoreItemGrid {
   margin: 10px;
 }
 
+/* Items Grid - Figure */
 #divElementStoreItemGrid figure {
   margin: 0.5%;
   display: inline;
 }
 
-.divElementStoreItem {
+/* Single Item */
+.divStoreItem {
   border: 1px solid #ccc;
   padding: 10px;
   margin: 5px;
@@ -68,29 +78,34 @@ nav a {
   box-sizing: border-box;
 }
 
-.divElementItemHeader {
+/* Item Header */
+.divItemHeader {
   display: inline-flex;
   font-size: small;
   margin: 5px;
 }
 
-.divElementItemStock {
+/* Item Stock */
+.divItemStock {
   width: 50%;
 }
 
-.divElementItemReviewsStars {
+/* Item Review Stars */
+.divItemReviewsStars {
   text-align-last: right;
   width: 55%;
   margin: 0px 2%;
 }
 
-.divElementItemReviewsStars img {
+/* Item Review Stars - img */
+.divItemReviewsStars img {
   width: 8%;
   height: auto;
   margin: 0%;
 }
 
-.divElementItemBody {
+/* Item Body */
+.divItemBody {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -98,19 +113,22 @@ nav a {
   margin: 1%;
 }
 
-.divElementItemBody a {
+/* Item Body - Link */
+.divItemBody a {
   text-decoration: solid;
   color: black;
   font-weight: bold;
 }
 
-.imgElementItem {
+/* Item Image */
+.imgItem {
   width: 50%;
   height: auto;
   margin: 5%;
 }
 
-.divElementAddCart {
+/* Item Add to Cart */
+.divAddCart {
   margin: 2%;
   background-color: rgb(30, 187, 215);
   padding: 5px;
@@ -119,38 +137,34 @@ nav a {
   transition: background-color 0.3s;
 }
 
-.divElementAddCart:hover {
+/* Item Add to Cart - Hover */
+.divAddCart:hover {
   background-color: rgb(0, 86, 179);
 }
 
-.imgElementCart {
+/* Add to Cart Image */
+.imgCart {
   color: #ffffff;
   width: 10%;
   height: auto;
   margin: 1%;
 }
 
-.divElementAddCartText {
+/* Item Add to Cart Text */
+.divAddCartText {
   display: inline;
   color: #ffffff;
   vertical-align: super;
   margin-left: 2%;
 }
 
-/* Applies styles to the div element within the nav */
-#divElementCategories {
-  display: flex;
-  flex: 1;
-  justify-content: space-between;
-}
-
 /* F O O T E R */
-/* Appplies styles to the footer element */
+/* Store Footer */
 footer {
   text-align: left;
 }
 
-/* Applies styles to all img elements within the footer */
+/* Store Footer - img */
 footer img {
   width: 2%;
   height: auto;

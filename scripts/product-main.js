@@ -12,3 +12,12 @@ if (NAV_ELEMENTS.length > 0) {
   // Calls the store method to return the div with values to the nav
   NAV_ELEMENT.appendChild(window.theStore.getNavBarDivElement());
 }
+
+const URL_Params = new URLSearchParams(window.location.search);
+
+let productId = URL_Params.get("id");
+if (productId) {
+  console.log(productId);
+  console.log(window.theStore.storeItems[productId]);
+  window.theStore.storeItems[productId].getStoreItemGrid();
+}

@@ -78,7 +78,13 @@ class Store {
     // Creates div Tag
     let divElementStoreItemGrid = document.createElement("div");
     divElementStoreItemGrid.id = "divElementStoreItemGrid";
-    divElementStoreItemGrid.innerHTML = "<strong>Store Items:</strong>";
+    // Checks if specific category of frontpage
+    if (category == null) {
+      divElementStoreItemGrid.innerHTML = "<strong>Store Items:</strong>";
+    } else {
+      divElementStoreItemGrid.innerHTML =
+        "<strong>" + this.categories[category] + ":</strong>";
+    }
     divElementStoreItemGrid.appendChild(document.createElement("br"));
     // Loop to dynamically insert store items into grid div
     for (let i = 0; i < this.storeItems.length; i++) {

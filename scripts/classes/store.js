@@ -46,7 +46,7 @@ class Store {
         // If first, then adds Home category
         // Creates hyperlink Tag
         let aCategory = document.createElement("a");
-        aCategory.href = "../index.html";
+        aCategory.href = "./index.html";
         aCategory.target = "_self";
         aCategory.textContent = "Home";
         // Adds the Home Category to the div
@@ -59,7 +59,7 @@ class Store {
       divElementCategories.appendChild(divSeparator);
       // Creates hyperlink Tag
       let aCategory = document.createElement("a");
-      aCategory.href = "../category.html?id=" + i;
+      aCategory.href = "./category.html?id=" + i;
       aCategory.target = "_self";
       aCategory.textContent = this.categories[i];
       // Adds the Home Category to the div

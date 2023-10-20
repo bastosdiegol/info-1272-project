@@ -1,0 +1,56 @@
+/* Store Header */
+header {
+  position: relative;
+}
+
+/* Logo Figure */
+#figureElementLogo {
+  display: inline;
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/* Logo Img */
+#imgElementLogo {
+  width: 5%;
+  height: auto;
+}
+
+/* Store Name */
+#strongElementStoreName {
+  display: inline;
+  vertical-align: middle;
+}
+
+/* Date/Time */
+#emElementDateTime {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 0;
+}
+
+/* Nav Bar */
+nav {
+  display: flex;
+  align-items: center;
+  border: 1px;
+  background-color: rgb(30, 187, 215);
+  color: white;
+  padding: 6px;
+}
+
+/* Nav Bar Container */
+#divElementCategories {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+}
+
+/* Nav Bar Link */
+nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+}

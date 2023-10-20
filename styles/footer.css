@@ -1,0 +1,13 @@
+/* Store Footer */
+footer {
+  text-align: left;
+}
+
+/* Store Footer - img */
+footer img {
+  width: 2%;
+  height: auto;
+  float: right;
+  margin-left: 10px;
+  display: inline;
+}

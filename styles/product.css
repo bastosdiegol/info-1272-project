@@ -1,0 +1,13 @@
+/* Item Review Stars - img */
+.divItemReviewsStars img {
+  width: 1%;
+  height: auto;
+  margin: 0%;
+}
+
+/* Item Image */
+.imgItem {
+  width: 15%;
+  height: auto;
+  margin: 5%;
+}

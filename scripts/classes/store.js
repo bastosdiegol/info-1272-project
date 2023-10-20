@@ -109,6 +109,19 @@ class Store {
     return divElementStoreItemGrid;
   }
 
+  /* Method that finds a store item and return it
+   * Receives: a storeItem id
+   * Returns: a storeItem object or null if not found
+   */
+  getStoreItem(storeItemId) {
+    for (let i = 0; i < this.storeItems.length; i++) {
+      if (this.storeItems[i].id == storeItemId) {
+        return this.storeItems[i];
+      }
+    }
+    return null;
+  }
+
   /* Method that finds the current symbol used on the store
    * Returns: a string with the symbol
    */

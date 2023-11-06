@@ -23,13 +23,13 @@ if (headerElements.length > 0) {
   // Creates img Tag
   let imgElementLogo = document.createElement("img");
   imgElementLogo.id = "imgElementLogo";
-  imgElementLogo.src = "./images/" + window.theStore.logo;
-  imgElementLogo.alt = window.theStore.name;
+  imgElementLogo.src = "./images/" + theStore.logo;
+  imgElementLogo.alt = theStore.name;
 
   // Creates em Tag
   let strongElementStoreName = document.createElement("strong");
   strongElementStoreName.id = "strongElementStoreName";
-  strongElementStoreName.textContent = window.theStore.name;
+  strongElementStoreName.textContent = theStore.name;
 
   // Creates p Tag
   let emElementDateTime = document.createElement("em");
@@ -66,5 +66,5 @@ if (NAV_ELEMENTS.length > 0) {
   // Gets the first <nav> element (at the moment I only have one)
   const NAV_ELEMENT = NAV_ELEMENTS[0];
   // Calls the store method to return the div with values to the nav
-  NAV_ELEMENT.appendChild(window.theStore.getNavBarDivElement());
+  NAV_ELEMENT.appendChild(theStore.getNavBarDivElement());
 }

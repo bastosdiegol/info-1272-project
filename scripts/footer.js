@@ -13,14 +13,14 @@ if (FOOTER_ELEMENTS.length > 0) {
   // Creates div Tag
   let divElementCopyright = document.createElement("div");
   divElementCopyright.id = "divElementCopyright";
-  divElementCopyright.textContent = "Copyright © 2023. " + window.theStore.name;
+  divElementCopyright.textContent = "Copyright © 2023. " + theStore.name;
 
   // Creates div Tag for each Socials
   let divElementSocials = document.createElement("div");
   divElementSocials.id = "divElementSocials";
   // Loop to dynamically create each social network link
-  for (const KEY in window.theStore.socials) {
-    const SOCIAL = window.theStore.socials[KEY];
+  for (const KEY in theStore.socials) {
+    const SOCIAL = theStore.socials[KEY];
     // Creates hyperlink Tag
     let aFooterSocial = document.createElement("a");
     aFooterSocial.href = SOCIAL.url;

@@ -13,7 +13,7 @@ if (productId) {
   let titleElements = document.getElementsByTagName("title");
 
   // Gets the current store item
-  let tempStoreItem = window.theStore.getStoreItem(productId);
+  let tempStoreItem = theStore.getStoreItem(productId);
 
   // Checks if any <title> elements were found
   if (titleElements.length > 0) {

@@ -6,7 +6,7 @@ let socials = [
   { name: "whatsapp", url: "https://wa.me/00000000000" },
 ];
 // Now we instanciate theStore
-window.theStore = new Store(
+theStore = new Store(
   "My Online Store",
   "123 Street",
   "A1B 2C3",
@@ -16,7 +16,7 @@ window.theStore = new Store(
   socials
 );
 // Sets theStore into the session
-sessionStorage.setItem("theStore", JSON.stringify(window.theStore));
+sessionStorage.setItem("theStore", JSON.stringify(theStore));
 
 // Create Store items
 // 1
@@ -34,7 +34,7 @@ let aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 2
 aStoreItem = new StoreItem(
   2,
@@ -50,7 +50,7 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 3
 aStoreItem = new StoreItem(
   3,
@@ -66,7 +66,7 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 4
 aStoreItem = new StoreItem(
   4,
@@ -82,7 +82,7 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 5
 aStoreItem = new StoreItem(
   5,
@@ -98,7 +98,7 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 6
 aStoreItem = new StoreItem(
   6,
@@ -114,7 +114,7 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 7
 aStoreItem = new StoreItem(
   7,
@@ -130,7 +130,7 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 8
 aStoreItem = new StoreItem(
   9,
@@ -146,7 +146,7 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 9
 aStoreItem = new StoreItem(
   9,
@@ -162,7 +162,7 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 10
 aStoreItem = new StoreItem(
   10,
@@ -178,7 +178,7 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 11
 aStoreItem = new StoreItem(
   11,
@@ -194,7 +194,7 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 12
 aStoreItem = new StoreItem(
   12,
@@ -210,7 +210,7 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 13
 aStoreItem = new StoreItem(
   13,
@@ -226,7 +226,7 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 14
 aStoreItem = new StoreItem(
   14,
@@ -242,7 +242,7 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 15
 aStoreItem = new StoreItem(
   15,
@@ -258,7 +258,7 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 // 16
 aStoreItem = new StoreItem(
   16,
@@ -274,10 +274,10 @@ aStoreItem = new StoreItem(
   "./images/products/box-package-icon.png",
   true
 );
-window.theStore.storeItems.push(aStoreItem);
+theStore.storeItems.push(aStoreItem);
 
 // Define Store Categories
-window.theStore.defineCategories();
+theStore.defineCategories();
 
 // Create the currencies for the store
 var aNewCurrency = new Currency(

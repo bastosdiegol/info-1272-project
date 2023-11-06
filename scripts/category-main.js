@@ -4,7 +4,7 @@
 // |_|  |_\__,_|_|_||_|
 
 // Gets current URL parameters
-const URL_Params = new URLSearchParams(window.location.search);
+const URL_Params = new URLSearchParams(location.search);
 // Tries to get any named id
 let categoryId = URL_Params.get("id");
 // Checks if it exists
@@ -27,8 +27,6 @@ if (categoryId) {
     // Gets the first <main> element
     let mainElement = mainElements[0];
     // Calls the store method to return the div with values to the nav
-    mainElement.appendChild(
-      window.theStore.getStoreItemsGridDivElement(categoryId)
-    );
+    mainElement.appendChild(theStore.getStoreItemsGridDivElement(categoryId));
   }
 }

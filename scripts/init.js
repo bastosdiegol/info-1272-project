@@ -1,7 +1,7 @@
 // *****************
 // STORE INFORMATION
 // *****************
-// Reads the store.json and sets its values on the window.theStore
+// Reads the store.json and sets its values on the theStore
 fetch("../data/store.json")
   .then((response) => {
     // Network Check
@@ -14,7 +14,7 @@ fetch("../data/store.json")
     // Network Response Ok
     console.log(jsonObject);
     // Now we instanciate theStore
-    window.theStore = new Store(
+    theStore = new Store(
       jsonObject.store.name,
       jsonObject.store.address,
       jsonObject.store.postal,
@@ -24,7 +24,7 @@ fetch("../data/store.json")
       jsonObject.store.socials
     );
     // Sets theStore into the session
-    sessionStorage.setItem("theStore", JSON.stringify(window.theStore));
+    sessionStorage.setItem("theStore", JSON.stringify(theStore));
   })
   .catch((error) => {
     // Error found
@@ -64,10 +64,10 @@ fetch("../data/store-items.json")
         STORE_ITEM.frontpageDisplay
       );
       // Pushes the new item to the storeItems array
-      window.theStore.storeItems.push(aStoreItem);
+      theStore.storeItems.push(aStoreItem);
     }
-    window.theStore.defineCategories();
-    console.log(window.theStore);
+    theStore.defineCategories();
+    console.log(theStore);
   })
   .catch((error) => {
     // Error found

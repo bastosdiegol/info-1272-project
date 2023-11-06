@@ -122,15 +122,4 @@ class Store {
     }
     return null;
   }
-
-  /* Method that finds the current symbol used on the store
-   * Returns: a string with the symbol
-   */
-  //getCurrentCurrencySymbol(){
-  //    for (const key in CURRENCY_RATES) {
-  //        if(CURRENCY_RATES.name == window.currentCurrency){
-  //            return CURRENCY_RATES.symbol;
-  //        }
-  //    }
-  //}
 }

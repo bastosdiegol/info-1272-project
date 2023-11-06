@@ -278,3 +278,44 @@ window.theStore.storeItems.push(aStoreItem);
 
 // Define Store Categories
 window.theStore.defineCategories();
+
+// Create the currencies for the store
+var aNewCurrency = new Currency(
+  "CAD",
+  1,
+  "$",
+  "./images/flags/canada-flag-icon-16.png"
+);
+let currencyCount = theStore.currencies.push(aNewCurrency);
+// Checks if there's a default currency already
+let currencyIndex = sessionStorage.getItem("currentCurrencyIndex");
+// If not, adds Canada to the session as default currency
+if (currencyIndex == null) {
+  // currentCurrencyIndex = currencyCount - 1;
+  currentCurrencyIndex = 2;
+  sessionStorage.setItem("currentCurrencyIndex", currentCurrencyIndex);
+}
+
+aNewCurrency = new Currency(
+  "USD",
+  0.73,
+  "U$",
+  "./images/flags/united-states-of-america-flag-icon-16.png"
+);
+theStore.currencies.push(aNewCurrency);
+
+aNewCurrency = new Currency(
+  "BRL",
+  3.76,
+  "R$",
+  "./images/flags/brazil-flag-icon-16.png"
+);
+theStore.currencies.push(aNewCurrency);
+
+aNewCurrency = new Currency(
+  "EUR",
+  3.76,
+  "€",
+  "./images/flags/europe-flag-icon-16.png"
+);
+theStore.currencies.push(aNewCurrency);

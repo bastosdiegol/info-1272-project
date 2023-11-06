@@ -12,6 +12,7 @@ class Store {
     this.socials = socials;
     this.categories = [];
     this.storeItems = [];
+    this.currencies = [];
   }
 
   /* Method that dynamically generate theStory categories based on the storeItems categories

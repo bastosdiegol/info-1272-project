@@ -115,7 +115,9 @@ class StoreItem {
     divItemPrice.classList = "divItemPrice";
     // TODO: Calculate the correct price accordingly to the current currency
     divItemPrice.textContent =
-      "Price: " + window.currentCurrencySymbol + this.price;
+      "Price: " +
+      theStore.currencies[currentCurrencyIndex].symbol +
+      (this.price * theStore.currencies[currentCurrencyIndex].rate).toFixed(2);
     // Creates a div for cart
     let divAddCart = document.createElement("div");
     divAddCart.classList = "divAddCart";

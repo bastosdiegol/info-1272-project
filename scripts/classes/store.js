@@ -109,6 +109,7 @@ class Store {
   getStoreItemsGridDivElement(category = null) {
     // Creates div Tag
     let sectionElementStoreItemGrid = document.createElement("section");
+    sectionElementStoreItemGrid.id = "store-items-section";
     sectionElementStoreItemGrid.classList.add("store-items-section");
 
     // Loop to dynamically insert store items into grid div
@@ -143,6 +144,77 @@ class Store {
     for (let i = 0; i < this.storeItems.length; i++) {
       if (this.storeItems[i].id == storeItemId) {
         return this.storeItems[i];
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Method that dynamically creates a select option with all currencies available.
+   * @method
+   * @returns {HTMLUListElement} DOM Div element containing the Select Input element.
+   */
+  getCurrenciesSelect() {
+    // Creates a div wrapper
+    let currenciesDiv = document.createElement("div");
+    currenciesDiv.classList.add("currency-select-div");
+    // Creates the select label
+    let currenciesLabel = document.createElement("label");
+    currenciesLabel.classList.add("currency-select-label");
+    currenciesLabel.htmlFor = "currency-select";
+    currenciesLabel.textContent = "Currency:";
+    currenciesDiv.appendChild(currenciesLabel);
+    // Creates the select element
+    let currenciesSelect = document.createElement("select");
+    currenciesSelect.title = "Currency Select";
+    currenciesSelect.name = "currency-select";
+    currenciesSelect.classList.add("currency-select");
+    currenciesSelect.setAttribute(
+      "onchange",
+      "theStore.setNewDefaultCurrency(this.value)"
+    );
+    currenciesDiv.appendChild(currenciesSelect);
+    // Iterate through all currencies
+    for (let i = 0; i < this.currencies.length; i++) {
+      // Creates each option
+      let currencyOption = document.createElement("option");
+      currencyOption.classList.add("currency-option");
+      currencyOption.classList.add(
+        "currency-option-" + this.currencies[i].name
+      );
+      currencyOption.value = this.currencies[i].name;
+      currencyOption.text = this.currencies[i].name;
+      if (currentCurrencyIndex == i) {
+        currencyOption.selected = true;
+      }
+      currenciesSelect.appendChild(currencyOption);
+    }
+    // Return the div wrapper containing the select
+    return currenciesDiv;
+  }
+
+  /**
+   * Method that sets a new currency as a default currency for the store.
+   * @param {String} currency Name of the selected currency.
+   */
+  setNewDefaultCurrency(currency) {
+    console.log("setNewDefaultCurrency(" + currency + ")");
+    // Iterate through all the currencies
+    for (let i = 0; i < this.currencies.length; i++) {
+      // Checks if the currency is matching
+      if (this.currencies[i].name === currency) {
+        // Update the currency index
+        currentCurrencyIndex = i;
+        // Set the value on the session
+        sessionStorage.setItem("currentCurrencyIndex", i);
+        // Clean the Store Item Section
+        let sectionElement = document.getElementById("store-items-section");
+        // Remove all Section element children
+        while (sectionElement.firstChild) {
+          sectionElement.removeChild(sectionElement.lastChild);
+        }
+        // TODO: GRAB THE URL AND ACT PROPERLY to the current page
+        sectionElement.replaceWith(this.getStoreItemsGridDivElement());
       }
     }
     return null;

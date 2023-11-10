@@ -57,6 +57,7 @@ if (headerElements.length > 0) {
   headerElement.appendChild(homeElementLink); // Adds link to header
   headerElement.appendChild(h1ElementStoreName); // Adds strong to header
   headerElement.appendChild(emElementDateTime); // Adds em to header
+  headerElement.appendChild(theStore.getCurrenciesSelect()); // Adds currency select to the header
 }
 
 // Gets <nav> element

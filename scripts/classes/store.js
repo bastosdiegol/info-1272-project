@@ -35,40 +35,40 @@ class Store {
    * Returns: a div document element
    */
   getNavBarDivElement() {
-    // Creates div Tag
-    let divElementCategories = document.createElement("div");
-    divElementCategories.id = "divElementCategories";
-    // Appends an empty div at the beginning for aesthetic purpose
-    divElementCategories.appendChild(document.createElement("div"));
+    // Creates ul Tag
+    let ulElementCategories = document.createElement("ul");
+    ulElementCategories.classList.add("nav-list-ul");
     // Loop to dynamically create nav bar with categories
     for (let i = 0; i < this.categories.length; i++) {
       // Checks if the first category
       if (i == 0) {
         // If first, then adds Home category
+        // Creates a li tag
+        let liElementCategory = document.createElement("li");
+        liElementCategory.classList.add("nav-list-item-li");
+        ulElementCategories.appendChild(liElementCategory);
         // Creates hyperlink Tag
         let aCategory = document.createElement("a");
+        aCategory.classList.add("nav-list-item-link-a");
         aCategory.href = "./index.html";
         aCategory.target = "_self";
         aCategory.textContent = "Home";
         // Adds the Home Category to the div
-        divElementCategories.appendChild(aCategory);
+        liElementCategory.appendChild(aCategory);
       }
-      // Creates a simple separator for each category
-      let divSeparator = document.createElement("div");
-      divSeparator.classList = "separator";
-      divSeparator.textContent = "|";
-      divElementCategories.appendChild(divSeparator);
+      // Creates a li tag
+      let liElementCategory = document.createElement("li");
+      liElementCategory.classList.add("nav-list-item-li");
+      ulElementCategories.appendChild(liElementCategory);
       // Creates hyperlink Tag
       let aCategory = document.createElement("a");
+      aCategory.classList.add("nav-list-item-link-a");
       aCategory.href = "./category.html?id=" + i;
       aCategory.target = "_self";
       aCategory.textContent = this.categories[i];
-      // Adds the Home Category to the div
-      divElementCategories.appendChild(aCategory);
+      liElementCategory.appendChild(aCategory);
     }
-    // Appends an empty div at the end for aesthetic purpose
-    divElementCategories.appendChild(document.createElement("div"));
-    return divElementCategories;
+    return ulElementCategories;
   }
 
   /* Method that dynamically creates a div element contaning all necessary store items that should appear at specified page
@@ -77,16 +77,9 @@ class Store {
    */
   getStoreItemsGridDivElement(category = null) {
     // Creates div Tag
-    let divElementStoreItemGrid = document.createElement("div");
-    divElementStoreItemGrid.id = "divElementStoreItemGrid";
-    // Checks if specific category of frontpage
-    if (category == null) {
-      divElementStoreItemGrid.innerHTML = "<strong>Store Items:</strong>";
-    } else {
-      divElementStoreItemGrid.innerHTML =
-        "<strong>" + this.categories[category] + ":</strong>";
-    }
-    divElementStoreItemGrid.appendChild(document.createElement("br"));
+    let sectionElementStoreItemGrid = document.createElement("section");
+    sectionElementStoreItemGrid.classList.add("store-items-section");
+
     // Loop to dynamically insert store items into grid div
     for (let i = 0; i < this.storeItems.length; i++) {
       // Temp variable to handle the item
@@ -96,18 +89,18 @@ class Store {
         // Checks if the item should be displayed at frontpage
         if (theItem.frontpageDisplay) {
           // Gets the current item card information
-          divElementStoreItemGrid.appendChild(theItem.getStoreItemGrid());
+          sectionElementStoreItemGrid.appendChild(theItem.getStoreItemGrid());
         }
       } else {
         // Category Items request
         // Checks if the item category matches the category requested
         if (theItem.category == this.categories[category]) {
           // Gets the current item card information
-          divElementStoreItemGrid.appendChild(theItem.getStoreItemGrid());
+          sectionElementStoreItemGrid.appendChild(theItem.getStoreItemGrid());
         }
       }
     }
-    return divElementStoreItemGrid;
+    return sectionElementStoreItemGrid;
   }
 
   /* Method that finds a store item and return it

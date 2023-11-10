@@ -1,100 +1,144 @@
-/* Items Grid */
-#divElementStoreItemGrid {
-  margin: 10px;
+/* Page Description */
+.page-content-desc {
+  margin: 5px 0 0 5px;
+  font-weight: bold;
 }
 
-/* Items Grid - Figure */
-#divElementStoreItemGrid figure {
-  margin: 0.5%;
-  display: inline;
+/* Items Section Wrapper */
+.store-items-section {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 5px;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 /* Single Item */
-.divStoreItem {
+.store-item-article {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: 5px;
   margin: 5px;
-  width: 20%;
-  display: inline-block;
-  box-sizing: border-box;
+  width: 275px;
+  height: 300px;
 }
 
 /* Item Header */
-.divItemHeader {
-  display: inline-flex;
-  font-size: small;
+.store-item-article-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.8rem;
   margin: 5px;
 }
 
 /* Item Stock */
-.divItemStock {
-  width: 50%;
+.store-item-stock-em {
+  font-size: 1.4rem;
+}
+
+/* Store Item Review Div Wrapper */
+.item-review-wrapper {
+  display: flex;
+  align-items: baseline;
 }
 
 /* Item Review Stars */
-.divItemReviewsStars {
+.store-item-review-stars {
+  display: flex;
   text-align-last: right;
-  width: 55%;
-  margin: 0px 2%;
 }
 
 /* Item Review Stars - img */
-.divItemReviewsStars img {
-  width: 8%;
-  height: auto;
-  margin: 0%;
+.store-item-review-stars img {
+  width: 10px;
+}
+
+/* Store Item Review Quantity */
+.store-item-reviews-quantity {
+  font-size: 1.2rem;
+  margin-left: 5px;
 }
 
 /* Item Body */
-.divItemBody {
+.store-item-article-body {
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   align-items: center;
   text-align: center;
-  margin: 1%;
+  margin: 5px;
 }
 
 /* Item Body - Link */
-.divItemBody a {
+.store-item-article-body a {
   text-decoration: solid;
   color: black;
   font-weight: bold;
+  flex-grow: 1;
+  margin-top: 10px;
+}
+
+/* Store Item Figure Caption */
+.store-item-figure-caption {
+  margin-top: 5px;
+  font-size: 1.8rem;
 }
 
 /* Item Image */
-.imgItem {
-  width: 50%;
-  height: auto;
-  margin: 5%;
+.store-item-img {
+  margin-top: 10px;
+  width: 100px;
+}
+
+/* Store Item Price */
+.store-item-price {
+  margin: 10px 0;
+  font-size: 1.4rem;
 }
 
 /* Item Add to Cart */
-.divAddCart {
-  margin: 2%;
+.store-item-add-to-cart {
   background-color: rgb(30, 187, 215);
   padding: 5px;
   cursor: pointer;
   border-radius: 15px;
-  transition: background-color 0.3s;
+  transition: background-color 0.5s;
 }
 
 /* Item Add to Cart - Hover */
-.divAddCart:hover {
+.store-item-add-to-cart:hover {
   background-color: rgb(0, 86, 179);
 }
 
+/* Add to Cart Link */
+.store-item-add-to-cart a {
+  display: inline-block;
+  margin-top: 0;
+  width: 180px;
+}
+
+/* Add to Cart Figure */
+.store-item-cart-figure {
+  display: inline-block;
+  padding: 2px;
+}
+
 /* Add to Cart Image */
-.imgCart {
+.store-item-cart-image {
+  display: inline-block;
   color: #ffffff;
-  width: 10%;
+  width: 20px;
   height: auto;
   margin: 1%;
 }
 
 /* Item Add to Cart Text */
-.divAddCartText {
-  display: inline;
+.store-item-add-to-cart-text {
+  font-size: 1.2rem;
+  display: inline-block;
   color: #ffffff;
   vertical-align: super;
-  margin-left: 2%;
+  margin-left: 5px;
 }

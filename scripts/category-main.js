@@ -18,15 +18,24 @@ if (categoryId) {
     // Calls the store method to return the div with values to the nav
     titleElement.textContent =
       theStore.name + " - " + theStore.categories[categoryId];
-  }
 
-  // Gets <main> element
-  let mainElements = document.getElementsByTagName("main");
-  // Checks if any <main> elements were found
-  if (mainElements.length > 0) {
-    // Gets the first <main> element
-    let mainElement = mainElements[0];
-    // Calls the store method to return the div with values to the nav
-    mainElement.appendChild(theStore.getStoreItemsGridDivElement(categoryId));
+    // Gets <main> elements
+    const MAIN_ELEMENTS = document.getElementsByTagName("main");
+    // Checks if any <main> elements were found
+    if (MAIN_ELEMENTS.length > 0) {
+      // Gets the first <main> element
+      const MAIN_ELEMENT = MAIN_ELEMENTS[0];
+
+      // Adds content description to the page
+      let pPageContentDesc = document.createElement("p");
+      pPageContentDesc.classList.add("page-content-desc");
+      pPageContentDesc.textContent = theStore.categories[categoryId] + ":";
+      MAIN_ELEMENT.appendChild(pPageContentDesc);
+
+      // Calls the store method to return the div with values to the nav
+      MAIN_ELEMENT.appendChild(
+        theStore.getStoreItemsGridDivElement(categoryId)
+      );
+    }
   }
 }

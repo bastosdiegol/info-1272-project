@@ -12,12 +12,12 @@ if (FOOTER_ELEMENTS.length > 0) {
 
   // Creates div Tag
   let divElementCopyright = document.createElement("div");
-  divElementCopyright.id = "divElementCopyright";
+  divElementCopyright.classList.add("copyright-div");
   divElementCopyright.textContent = "Copyright © 2023. " + theStore.name;
 
   // Creates div Tag for each Socials
   let divElementSocials = document.createElement("div");
-  divElementSocials.id = "divElementSocials";
+  divElementSocials.classList.add("socials-div");
   // Loop to dynamically create each social network link
   for (const KEY in theStore.socials) {
     const SOCIAL = theStore.socials[KEY];

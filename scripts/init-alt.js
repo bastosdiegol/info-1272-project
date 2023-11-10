@@ -275,6 +275,70 @@ aStoreItem = new StoreItem(
   true
 );
 theStore.storeItems.push(aStoreItem);
+// 17
+aStoreItem = new StoreItem(
+  17,
+  "Item 17",
+  9,
+  1,
+  1,
+  "Category A",
+  5.99,
+  [],
+  2.1,
+  "Desc Item 17",
+  "./images/products/box-package-icon.png",
+  true
+);
+theStore.storeItems.push(aStoreItem);
+// 18
+aStoreItem = new StoreItem(
+  18,
+  "Item 18",
+  9,
+  1,
+  1,
+  "Category B",
+  5.99,
+  [],
+  2.1,
+  "Desc Item 18",
+  "./images/products/box-package-icon.png",
+  true
+);
+theStore.storeItems.push(aStoreItem);
+// 19
+aStoreItem = new StoreItem(
+  19,
+  "Item 19",
+  9,
+  1,
+  1,
+  "Category C",
+  5.99,
+  [],
+  2.1,
+  "Desc Item 19",
+  "./images/products/box-package-icon.png",
+  true
+);
+theStore.storeItems.push(aStoreItem);
+// 20
+aStoreItem = new StoreItem(
+  20,
+  "Item 20",
+  9,
+  1,
+  1,
+  "Category D",
+  5.99,
+  [],
+  2.1,
+  "Desc Item 20",
+  "./images/products/box-package-icon.png",
+  true
+);
+theStore.storeItems.push(aStoreItem);
 
 // Define Store Categories
 theStore.defineCategories();
@@ -291,8 +355,7 @@ let currencyCount = theStore.currencies.push(aNewCurrency);
 let currencyIndex = sessionStorage.getItem("currentCurrencyIndex");
 // If not, adds Canada to the session as default currency
 if (currencyIndex == null) {
-  // currentCurrencyIndex = currencyCount - 1;
-  currentCurrencyIndex = 2;
+  currentCurrencyIndex = currencyCount - 1;
   sessionStorage.setItem("currentCurrencyIndex", currentCurrencyIndex);
 }
 

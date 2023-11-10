@@ -1,0 +1,28 @@
+/* Global Settings */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-size: 62.5%;
+  line-height: 1.6;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  /* background: url(../images/squares_bg.png); */
+  color: #686868;
+}
+
+h1 {
+  font-size: 3.6rem;
+}
+
+p,
+strong {
+  font-size: 1.8rem;
+}
+
+/* utility */
+.clear {
+  clear: both;
+}

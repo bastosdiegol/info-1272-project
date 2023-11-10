@@ -1,34 +1,32 @@
 /* Store Header */
 header {
-  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 /* Logo Figure */
-#figureElementLogo {
+.logo-figure {
   display: inline;
-  vertical-align: middle;
-  margin-left: 10px;
-  margin-right: 10px;
 }
 
 /* Logo Img */
-#imgElementLogo {
-  width: 5%;
+.logo-img {
+  width: 100px;
   height: auto;
+  margin: 10px;
 }
 
 /* Store Name */
-#strongElementStoreName {
-  display: inline;
-  vertical-align: middle;
+.store-name-h1 {
+  display: inline-block;
 }
 
 /* Date/Time */
-#emElementDateTime {
+.date-time-em {
   position: absolute;
   top: 0;
   right: 0;
-  margin-top: 0;
+  font-size: 1.4rem;
 }
 
 /* Nav Bar */
@@ -42,15 +40,25 @@ nav {
 }
 
 /* Nav Bar Container */
-#divElementCategories {
+.nav-list-ul {
   display: flex;
   flex: 1;
-  justify-content: space-between;
+  justify-content: space-evenly;
+}
+
+.nav-list-item-li {
+  list-style: none;
+}
+
+/* Item Add to Cart - Hover */
+.nav-list-item-li:hover {
+  font-weight: bold;
+  transition: font-weight 0.3s;
 }
 
 /* Nav Bar Link */
 nav a {
   text-decoration: none;
   color: white;
-  font-size: 20px;
+  font-size: 1.8rem;
 }

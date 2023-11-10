@@ -12,28 +12,28 @@ if (headerElements.length > 0) {
 
   // Creates a link tag
   let homeElementLink = document.createElement("a");
-  homeElementLink.id = "homeElementLink";
+  homeElementLink.classList.add("home-link");
   homeElementLink.href = "./index.html";
   homeElementLink.target = "_self";
 
   // Creates figure Tag
   let figureElementLogo = document.createElement("figure");
-  figureElementLogo.id = "figureElementLogo";
+  figureElementLogo.classList.add("logo-figure");
 
   // Creates img Tag
   let imgElementLogo = document.createElement("img");
-  imgElementLogo.id = "imgElementLogo";
+  imgElementLogo.classList.add("logo-img");
   imgElementLogo.src = "./images/" + theStore.logo;
   imgElementLogo.alt = theStore.name;
 
   // Creates em Tag
-  let strongElementStoreName = document.createElement("strong");
-  strongElementStoreName.id = "strongElementStoreName";
-  strongElementStoreName.textContent = theStore.name;
+  let h1ElementStoreName = document.createElement("h1");
+  h1ElementStoreName.classList.add("store-name-h1");
+  h1ElementStoreName.textContent = theStore.name;
 
   // Creates p Tag
   let emElementDateTime = document.createElement("em");
-  emElementDateTime.id = "emElementDateTime";
+  emElementDateTime.classList.add("date-time-em");
   // Creates a Date object
   var currentDate = new Date();
   // DateTime Format Options
@@ -55,7 +55,7 @@ if (headerElements.length > 0) {
   homeElementLink.appendChild(figureElementLogo); // Adds figure to the link
   figureElementLogo.appendChild(imgElementLogo); // Adds img to figure
   headerElement.appendChild(homeElementLink); // Adds link to header
-  headerElement.appendChild(strongElementStoreName); // Adds strong to header
+  headerElement.appendChild(h1ElementStoreName); // Adds strong to header
   headerElement.appendChild(emElementDateTime); // Adds em to header
 }
 

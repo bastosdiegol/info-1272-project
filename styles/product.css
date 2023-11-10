@@ -1,13 +1,10 @@
 /* Item Review Stars - img */
-.divItemReviewsStars img {
-  width: 1%;
-  height: auto;
-  margin: 0%;
+.store-item-review-stars img {
+  width: 10px;
 }
 
 /* Item Image */
-.imgItem {
-  width: 15%;
-  height: auto;
-  margin: 5%;
+.store-item-img {
+  margin-top: 10px;
+  width: 100px;
 }

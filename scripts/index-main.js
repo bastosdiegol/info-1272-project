@@ -9,6 +9,11 @@ const MAIN_ELEMENTS = document.getElementsByTagName("main");
 if (MAIN_ELEMENTS.length > 0) {
   // Gets the first <main> element
   const MAIN_ELEMENT = MAIN_ELEMENTS[0];
-  // Calls the store method to return the div with values to the nav
+  // Adds description to the page content
+  let pPageContentDesc = document.createElement("p");
+  pPageContentDesc.classList.add("page-content-desc");
+  pPageContentDesc.textContent = "Store Items:";
+  MAIN_ELEMENT.appendChild(pPageContentDesc);
+  // Calls the store method to return the section with items
   MAIN_ELEMENT.appendChild(theStore.getStoreItemsGridDivElement());
 }

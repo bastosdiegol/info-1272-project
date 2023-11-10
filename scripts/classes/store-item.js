@@ -1,7 +1,24 @@
-/*
+/**
  * Class that holds information about a Store Item
+ * @class
  */
 class StoreItem {
+  /**
+   * StoreItem Default Constructor.
+   * @constructor
+   * @param {Number} id StoreItem internal id.
+   * @param {String} name StoreItem Name.
+   * @param {Number} price StoreItem Price.
+   * @param {Number} stockQuantity StoreItem Quantity Available in Stock.
+   * @param {Number} maxPerCustomer StoreItem Maximum Quantity permited to sell to a user.
+   * @param {Number} category StoreItem Category ID.
+   * @param {Number} costOfShipping StoreItem Shipping Cost.
+   * @param {Object[]} reviews Array of Review Objects.
+   * @param {Number} reviewScore Current review average score.
+   * @param {String} description StoreItem description.
+   * @param {String} imageURL StoreItem image URL.
+   * @param {boolean} frontpageDisplay Switch to allow an item to be displayed on the frontpage or not.
+   */
   constructor(
     id,
     name,
@@ -30,8 +47,9 @@ class StoreItem {
     this.frontpageDisplay = frontpageDisplay;
   }
 
-  /* Method that dynamically creates a div element contaning all info about a store item
-   * Returns: a div document element
+  /**
+   * Method that dynamically creates a div element contaning all info about a store item
+   * @returns {HTMLUListElement} A DOM div element containing all information of the store item
    */
   getStoreItemGrid() {
     // Creates the item div card
@@ -168,9 +186,10 @@ class StoreItem {
     return articleStoreItem;
   }
 
-  /* Method that creates a start review image on a document element
-   * Receives: a document element which will contain the image
-   *           a type of star (filled, half or empty)
+  /**
+   * Method that creates a start review image on a document element
+   * @param {HTMLUListElement} documentElement a document element which will contain the image
+   * @param {String} starType a type of star (filled, half or empty)
    */
   addReviewStarImage(documentElement, starType) {
     // Creates figure Tag

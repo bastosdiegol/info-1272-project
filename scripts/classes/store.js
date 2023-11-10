@@ -1,8 +1,36 @@
-/*
+/**
  * Class that holds information about the Store
+ * @class
  */
 class Store {
-  constructor(name, address, postal, phone, email, logo, socials) {
+  /**
+   * Default Constructor for Store Class.
+   * @constructor
+   * @param {String} name Store Name.
+   * @param {String} address Store Physical Address.
+   * @param {String} postal Store Postal Code.
+   * @param {String} phone Store Phone Number.
+   * @param {String} email Store E-mail.
+   * @param {String} logo URL for the Store Picture.
+   * @param {Object[]} socials Object Array containing the Store Socials.
+   * @param {String} socials.name Social Media Name.
+   * @param {String} socials.url Store Social Media URL.
+   * @param {Array<string>} Store Categories.
+   * @param {StoreItem[]} storeItems Object Array containing all store items.
+   * @param {Currency[]} currencies Object Array containing all currencies used.
+   */
+  constructor(
+    name,
+    address,
+    postal,
+    phone,
+    email,
+    logo,
+    socials,
+    categories = [],
+    storeItems = [],
+    currencies = []
+  ) {
     this.name = name;
     this.address = address;
     this.postal = postal;
@@ -10,13 +38,14 @@ class Store {
     this.email = email;
     this.logo = logo;
     this.socials = socials;
-    this.categories = [];
-    this.storeItems = [];
-    this.currencies = [];
+    this.categories = categories;
+    this.storeItems = storeItems;
+    this.currencies = currencies;
   }
 
-  /* Method that dynamically generate theStory categories based on the storeItems categories
-   * Returns nothing, but fills the Store.categories array with values
+  /**
+   * Method that dynamically generate theStory categories based on the current storeItems
+   * @method
    */
   defineCategories() {
     // Clears the array
@@ -31,8 +60,9 @@ class Store {
     }
   }
 
-  /* Method that dynamically creates a div element containing all necessary links for navigation
-   * Returns: a div document element
+  /**
+   * Method that dynamically creates a div element containing all necessary links for navigation
+   * @returns {HTMLUListElement} A DOM ul Element containing all categories and its links
    */
   getNavBarDivElement() {
     // Creates ul Tag
@@ -71,9 +101,10 @@ class Store {
     return ulElementCategories;
   }
 
-  /* Method that dynamically creates a div element contaning all necessary store items that should appear at specified page
-   * Receives: id for a specified story category, empty (or null) for frontpage
-   * Returns: a div document element
+  /**
+   * Method that dynamically creates a div element contaning all necessary store items that should appear at specified page
+   * @param {Number} category ID for a specified story category, empty (or null) for frontpage
+   * @returns {HTMLUListElement} A DOM Section Element containing a grid of store items
    */
   getStoreItemsGridDivElement(category = null) {
     // Creates div Tag
@@ -103,9 +134,10 @@ class Store {
     return sectionElementStoreItemGrid;
   }
 
-  /* Method that finds a store item and return it
-   * Receives: a storeItem id
-   * Returns: a storeItem object or null if not found
+  /**
+   * Method that finds a store item and return it
+   * @param {Number} storeItemId A storeItem id
+   * @returns {StoreItem} A storeItem object or null if not found
    */
   getStoreItem(storeItemId) {
     for (let i = 0; i < this.storeItems.length; i++) {

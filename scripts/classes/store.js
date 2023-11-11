@@ -62,6 +62,7 @@ class Store {
 
   /**
    * Method that dynamically creates a div element containing all necessary links for navigation
+   * @method
    * @returns {HTMLUListElement} A DOM ul Element containing all categories and its links
    */
   getNavBarDivElement() {
@@ -107,6 +108,7 @@ class Store {
 
   /**
    * Method that dynamically creates a div element contaning all necessary store items that should appear at specified page
+   * @method
    * @param {Number} category ID for a specified story category, empty (or null) for frontpage
    * @returns {HTMLUListElement} A DOM Section Element containing a grid of store items
    */
@@ -202,6 +204,7 @@ class Store {
 
   /**
    * Method that sets a new currency as a default currency for the store.
+   * @method
    * @param {String} currency Name of the selected currency.
    */
   setNewDefaultCurrency(currency) {
@@ -220,7 +223,7 @@ class Store {
         while (sectionElement.firstChild) {
           sectionElement.removeChild(sectionElement.lastChild);
         }
-        // TODO: GRAB THE URL AND ACT PROPERLY to the current page
+        // Updates the store items section with new currencies
         sectionElement.replaceWith(this.getStoreItemsGridDivElement());
       }
     }
@@ -228,9 +231,10 @@ class Store {
   }
 
   /**
-   * Description.
-   * @param {type} parameter - Description.
-   * @returns {type} Description.
+   * Method that prepares the page for a new set of Store Items.
+   * Updates the page title and page description and replace the main section with a new one
+   * @method
+   * @param {Number} category Category Id or null for Home Page.
    */
   loadStoreItems(category = null) {
     // Gets the Store Item Section
@@ -265,5 +269,19 @@ class Store {
         pageDescription.textContent = "Store Items:";
       }
     }
+  }
+
+  /**
+   * Method that changes a store item article and display additional information.
+   * @param {Number} storeItemId Store Item Id.
+   */
+  loadStoreItemDetails(storeItemId) {
+    // Gets the Store Item Article
+    let article = document.getElementById(storeItemId);
+    // Clear the article
+    while (article.firstChild) {
+      article.removeChild(article.lastChild);
+    }
+    // TODO: Create a method on StoreItem getDetailsArticle and call it here
   }
 }

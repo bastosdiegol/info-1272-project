@@ -55,6 +55,8 @@ class StoreItem {
     // Creates the item div card
     let articleStoreItem = document.createElement("article");
     articleStoreItem.classList.add("store-item-article");
+    articleStoreItem.classList.add(this.id);
+    articleStoreItem.id = this.id;
     /**********
      * ITEM   *
      * HEADER *
@@ -116,8 +118,11 @@ class StoreItem {
     divItemBody.classList.add("store-item-article-body");
     // Creates a link to the item
     let aItemName = document.createElement("a");
-    aItemName.href = "./product.html?id=" + this.id;
-    aItemName.target = "_self";
+    aItemName.href = "javascript:void(0);";
+    aItemName.setAttribute(
+      "onclick",
+      "theStore.loadStoreItemDetails(" + this.id + ")"
+    );
     // aItemName.textContent = this.name;
     // Creates figure tag for the Item
     let figureItem = document.createElement("figure");
@@ -131,10 +136,14 @@ class StoreItem {
     imgItem.classList.add("store-item-img");
     imgItem.src = this.imageURL;
     imgItem.alt = this.name;
+    // Creates em for +Details
+    let emDetails = document.createElement("em");
+    emDetails.classList.add("store-item-details");
+    emDetails.textContent = "+Details";
     // Creates a div for the price
     let divItemPrice = document.createElement("div");
     divItemPrice.classList.add("store-item-price");
-    // TODO: Calculate the correct price accordingly to the current currency
+    // Display the current price taking in consideration the current selected currenty
     divItemPrice.textContent =
       "Price: " +
       theStore.currencies[currentCurrencyIndex].symbol +
@@ -176,6 +185,7 @@ class StoreItem {
     aItemName.appendChild(figureItem); //                      <a "ItemName"> <figure "Item">
     figureItem.appendChild(figureCaptionItem); //                             <figure "Item"> <figure "CaptionItem">
     figureItem.appendChild(imgItem); //                                       <figure "Item"> <img "Item">
+    aItemName.appendChild(emDetails); //                       <a "ItemName"> <em "+Details">
     divItemBody.appendChild(divItemPrice); // <div "ItemBody"> <div "ItemPrice">
     divItemBody.appendChild(divAddCart); //   <div "ItemBody"> <div "AddCart">
     divAddCart.appendChild(aAddCart); //                       <div "AddCart"> <a "AddCart">

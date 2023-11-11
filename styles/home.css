@@ -11,6 +11,7 @@
   margin-top: 5px;
   flex-wrap: wrap;
   gap: 5px;
+  margin-left: 10px;
 }
 
 /* Single Item */
@@ -88,7 +89,6 @@
   color: black;
   font-weight: bold;
   flex-grow: 1;
-  margin-top: 10px;
 }
 
 /* Store Item Figure Caption */
@@ -99,8 +99,15 @@
 
 /* Item Image */
 .store-item-img {
-  margin-top: 10px;
+  margin-top: 5px;
   width: 100px;
+}
+
+.store-item-details {
+  font-size: 1.2rem;
+  font-weight: normal;
+  color: gray;
+  margin-top: 5px;
 }
 
 /* Store Item Price */

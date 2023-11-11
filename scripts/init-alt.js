@@ -135,7 +135,7 @@ aStoreItem = new StoreItem(
 theStore.storeItems.push(aStoreItem);
 // 8
 aStoreItem = new StoreItem(
-  9,
+  8,
   "Item 8",
   9,
   1,

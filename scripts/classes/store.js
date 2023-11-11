@@ -80,8 +80,10 @@ class Store {
         // Creates hyperlink Tag
         let aCategory = document.createElement("a");
         aCategory.classList.add("nav-list-item-link-a");
-        aCategory.href = "./index.html";
-        aCategory.target = "_self";
+        aCategory.href = "#";
+        aCategory.setAttribute("onclick", "theStore.loadStoreItems()");
+        // aCategory.href = "./index.html";
+        // aCategory.target = "_self";
         aCategory.textContent = "Home";
         // Adds the Home Category to the div
         liElementCategory.appendChild(aCategory);
@@ -93,8 +95,10 @@ class Store {
       // Creates hyperlink Tag
       let aCategory = document.createElement("a");
       aCategory.classList.add("nav-list-item-link-a");
-      aCategory.href = "./category.html?id=" + i;
-      aCategory.target = "_self";
+      aCategory.href = "#";
+      aCategory.setAttribute("onclick", "theStore.loadStoreItems(" + i + ")");
+      // aCategory.href = "./category.html?id=" + i;
+      // aCategory.target = "_self";
       aCategory.textContent = this.categories[i];
       liElementCategory.appendChild(aCategory);
     }
@@ -221,5 +225,45 @@ class Store {
       }
     }
     return null;
+  }
+
+  /**
+   * Description.
+   * @param {type} parameter - Description.
+   * @returns {type} Description.
+   */
+  loadStoreItems(category = null) {
+    // Gets the Store Item Section
+    let section = document.getElementById("store-items-section");
+    // Clear the section
+    while (section.firstChild) {
+      section.removeChild(section.lastChild);
+    }
+    // Appends the new section
+    section.replaceWith(this.getStoreItemsGridDivElement(category));
+
+    // Now to Update the Store Title and Page Description
+    // Gets <title> element
+    let titleElements = document.getElementsByTagName("title");
+    // Gets the page Description
+    let pageDescription = document.getElementById("page-content-desc");
+    // Checks if any <title> elements were found
+    if (titleElements.length > 0) {
+      // Gets the first <title> element
+      let titleElement = titleElements[0];
+      // Checks if its Home Page of Category Page
+      if (category != null) {
+        // Updates the title - With Category
+        titleElement.textContent =
+          this.name + " - " + this.categories[category];
+        // Updates the page description
+        pageDescription.textContent = this.categories[category] + ":";
+      } else {
+        // Updates the title
+        titleElement.textContent = this.name;
+        // Updates the page description
+        pageDescription.textContent = "Store Items:";
+      }
+    }
   }
 }

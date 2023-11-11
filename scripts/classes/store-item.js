@@ -161,8 +161,8 @@ class StoreItem {
     divAddCartText.textContent = "Add to the Cart";
 
     // Item Tags relationship
-    articleStoreItem.appendChild(divItemHeader); // <article "StoreItem"> <article "ItemHeader">
-    articleStoreItem.appendChild(divItemBody); //   <article "StoreItem"> <article "ItemBody">
+    articleStoreItem.appendChild(divItemHeader); // <article "StoreItem"> <div "ItemHeader">
+    articleStoreItem.appendChild(divItemBody); //   <article "StoreItem"> <div "ItemBody">
     // Header
     divItemHeader.appendChild(divItemStock); // <div "ItemHeader"> <div "ItemStock">
     divItemStock.appendChild(emItemStock); //                      <div "ItemStock"> <em "ItemStock">

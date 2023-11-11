@@ -7,7 +7,7 @@
 /* Items Section Wrapper */
 .store-items-section {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: left;
   margin-top: 5px;
   flex-wrap: wrap;
   gap: 5px;
@@ -19,11 +19,22 @@
   flex-direction: column;
   justify-content: space-between;
   border: 1px solid #ccc;
+  background-color: white;
   padding: 5px;
   margin: 5px;
   width: 275px;
   height: 300px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
 }
+
+/* Blur Tests
+.store-item-article {
+  filter: blur(5px);
+}
+
+.store-items-section > :nth-child(4) {
+  filter: none !important;
+} */
 
 /* Item Header */
 .store-item-article-header {
@@ -100,7 +111,7 @@
 
 /* Item Add to Cart */
 .store-item-add-to-cart {
-  background-color: rgb(30, 187, 215);
+  background-color: #1ebbd7;
   padding: 5px;
   cursor: pointer;
   border-radius: 15px;

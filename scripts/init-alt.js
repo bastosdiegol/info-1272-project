@@ -4,6 +4,8 @@ let socials = [
   { name: "instagram", url: "https://www.instagram.com/MyOnlineStore" },
   { name: "x", url: "https://x.com/MyOnlineStore" },
   { name: "whatsapp", url: "https://wa.me/00000000000" },
+  { name: "tiktok", url: "https://www.tiktok.com/@MyOnlineStore/" },
+  // { name: "youtube", url: "https://www.youtube.com/MyOnlineStore/" },
 ];
 // Now we instanciate theStore
 theStore = new Store(
@@ -361,7 +363,7 @@ if (currencyIndex == null) {
 
 aNewCurrency = new Currency(
   "USD",
-  0.73,
+  0.72,
   "U$",
   "./images/flags/united-states-of-america-flag-icon-16.png"
 );
@@ -369,7 +371,7 @@ theStore.currencies.push(aNewCurrency);
 
 aNewCurrency = new Currency(
   "BRL",
-  3.76,
+  3.55,
   "R$",
   "./images/flags/brazil-flag-icon-16.png"
 );
@@ -377,7 +379,7 @@ theStore.currencies.push(aNewCurrency);
 
 aNewCurrency = new Currency(
   "EUR",
-  3.76,
+  0.68,
   "€",
   "./images/flags/europe-flag-icon-16.png"
 );

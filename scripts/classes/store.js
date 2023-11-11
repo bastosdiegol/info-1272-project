@@ -4,7 +4,7 @@
  */
 class Store {
   /**
-   * Default Constructor for Store Class.
+   * Default Constructor for Store Class
    * @constructor
    * @param {String} name Store Name.
    * @param {String} address Store Physical Address.
@@ -169,6 +169,9 @@ class Store {
     currenciesSelect.title = "Currency Select";
     currenciesSelect.name = "currency-select";
     currenciesSelect.classList.add("currency-select");
+    // currenciesSelect.onchange = function () {
+    //   this.setNewDefaultCurrency();
+    // };
     currenciesSelect.setAttribute(
       "onchange",
       "theStore.setNewDefaultCurrency(this.value)"

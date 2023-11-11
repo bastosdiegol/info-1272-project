@@ -1,7 +1,8 @@
 /* Store Header */
-header {
+.home-link {
   display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 /* Logo Figure */
@@ -19,6 +20,8 @@ header {
 /* Store Name */
 .store-name-h1 {
   display: inline-block;
+  color: rgb(30, 187, 215);
+  vertical-align: middle;
 }
 
 /* Date/Time */
@@ -31,12 +34,9 @@ header {
 
 /* Nav Bar */
 nav {
-  display: flex;
-  align-items: center;
-  border: 1px;
   background-color: rgb(30, 187, 215);
   color: white;
-  padding: 6px;
+  padding: 5px;
 }
 
 /* Nav Bar Container */
@@ -44,6 +44,8 @@ nav {
   display: flex;
   flex: 1;
   justify-content: space-evenly;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .nav-list-item-li {

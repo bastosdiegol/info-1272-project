@@ -1,0 +1,41 @@
+/* Queries for Phones */
+@media only screen and (max-width: 37.5rem) {
+  /* Nav Bar Container */
+  .nav-list-ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .store-slogan {
+    display: none;
+  }
+
+  .store-items-section {
+    justify-content: space-evenly;
+  }
+
+  h1 {
+    font-size: 7.2rem;
+  }
+
+  /* Nav Bar Link */
+  .page-content-desc,
+  nav a {
+    font-size: 2.4rem;
+  }
+
+  .store-item-stock-em,
+  .store-item-figure-caption,
+  .store-item-price {
+    font-size: 1.8rem;
+  }
+
+  .store-item-details,
+  .store-item-add-to-cart-text {
+    font-size: 1.4rem;
+  }
+
+  .store-item-price {
+    margin-bottom: 0;
+  }
+}

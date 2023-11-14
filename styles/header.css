@@ -18,10 +18,16 @@
 }
 
 /* Store Name */
-.store-name-h1 {
+.store-name-h1,
+.store-slogan {
   display: inline-block;
   color: rgb(30, 187, 215);
   vertical-align: middle;
+  margin-left: 20px;
+}
+
+.store-slogan {
+  font-weight: lighter;
 }
 
 /* Date/Time */
@@ -67,7 +73,7 @@ nav a {
 
 .currency-select-div {
   position: absolute;
-  top: 110px;
+  top: 100px;
   right: 0px;
   margin-right: 10px;
   float: right;

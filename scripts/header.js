@@ -3,6 +3,16 @@
 // | __ / -_) _` / _` / -_) '_|
 // |_||_\___\__,_\__,_\___|_|
 
+// Gets <title> element
+const titleElements = document.getElementsByTagName("title");
+// Checks if any <title> elements were found
+if (titleElements.length > 0) {
+  // Gets the first <title> element
+  const titleElement = titleElements[0];
+  // Sets the title
+  titleElement.textContent = theStore.name + " - " + theStore.slogan;
+}
+
 // Gets <header> element
 const headerElements = document.getElementsByTagName("header");
 // Checks if any <header> elements were found
@@ -15,6 +25,7 @@ if (headerElements.length > 0) {
   headerWrapper.classList.add("header-wrapper");
 
   // Creates a link tag
+  // TODO: Change the link to JS Function instead.
   let homeElementLink = document.createElement("a");
   homeElementLink.classList.add("home-link");
   homeElementLink.href = "./index.html";
@@ -34,6 +45,14 @@ if (headerElements.length > 0) {
   let h1ElementStoreName = document.createElement("h1");
   h1ElementStoreName.classList.add("store-name-h1");
   h1ElementStoreName.textContent = theStore.name;
+
+  // Creates H2 Tag for slogan
+  let h2ElementStoreSlogan = document.createElement("h2");
+  // Check if its needed and set values
+  if (theStore.slogan != null) {
+    h2ElementStoreSlogan.classList.add("store-slogan");
+    h2ElementStoreSlogan.textContent = theStore.slogan;
+  }
 
   // Creates p Tag
   let emElementDateTime = document.createElement("em");
@@ -61,7 +80,9 @@ if (headerElements.length > 0) {
   // Tag Relations
   homeElementLink.appendChild(figureElementLogo); // Adds figure to the link
   figureElementLogo.appendChild(imgElementLogo); // Adds img to figure
-  homeElementLink.appendChild(h1ElementStoreName);
+  homeElementLink.appendChild(h1ElementStoreName); // Adds Store Name
+  if (theStore.slogan != null)
+    homeElementLink.appendChild(h2ElementStoreSlogan); // Adds Slogan if needed
 
   headerWrapper.appendChild(homeElementLink); // Adds the Home link to the wrapper
   headerWrapper.appendChild(emElementDateTime); // Adds em to the wrapper

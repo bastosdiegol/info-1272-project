@@ -13,7 +13,8 @@ if (FOOTER_ELEMENTS.length > 0) {
   // Creates div Tag
   let divElementCopyright = document.createElement("div");
   divElementCopyright.classList.add("copyright-div");
-  divElementCopyright.textContent = "Copyright © 2023. " + theStore.name;
+  divElementCopyright.textContent =
+    "Copyright © 2023. " + theStore.name + " - " + theStore.slogan;
 
   // Creates div Tag for each Socials
   let divElementSocials = document.createElement("div");

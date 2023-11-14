@@ -11,11 +11,11 @@ class StoreItem {
    * @param {Number} price StoreItem Price.
    * @param {Number} stockQuantity StoreItem Quantity Available in Stock.
    * @param {Number} maxPerCustomer StoreItem Maximum Quantity permited to sell to a user.
-   * @param {Number} category StoreItem Category ID.
+   * @param {String} category StoreItem Category.
    * @param {Number} costOfShipping StoreItem Shipping Cost.
    * @param {Object[]} reviews Array of Review Objects.
    * @param {Number} reviewScore Current review average score.
-   * @param {String} description StoreItem description.
+   * @param {Object} description StoreItem object containing descriptions.
    * @param {String} imageURL StoreItem image URL.
    * @param {boolean} frontpageDisplay Switch to allow an item to be displayed on the frontpage or not.
    */
@@ -145,9 +145,13 @@ class StoreItem {
     divItemPrice.classList.add("store-item-price");
     // Display the current price taking in consideration the current selected currenty
     divItemPrice.textContent =
-      "Price: " +
-      theStore.currencies[currentCurrencyIndex].symbol +
-      (this.price * theStore.currencies[currentCurrencyIndex].rate).toFixed(2);
+      // "Price: " +
+      // theStore.currencies[currentCurrencyIndex].symbol +
+      // (this.price * theStore.currencies[currentCurrencyIndex].rate).toFixed(2);
+      new Intl.NumberFormat("en-CA", {
+        style: "currency",
+        currency: theStore.currencies[currentCurrencyIndex].name,
+      }).format(this.price * theStore.currencies[currentCurrencyIndex].rate);
     // Creates a div for cart
     let divAddCart = document.createElement("div");
     divAddCart.classList.add("store-item-add-to-cart");

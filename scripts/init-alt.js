@@ -9,12 +9,13 @@ let socials = [
 ];
 // Now we instanciate theStore
 theStore = new Store(
-  "My Online Store",
+  "Lenz",
+  "An Online Store for Photographers",
   "123 Street",
   "A1B 2C3",
   "(555) 444-6666",
   "email@company.ca",
-  "logo-no-background.png",
+  "logo-no-background-2.png",
   socials
 );
 // Sets theStore into the session
@@ -24,320 +25,375 @@ sessionStorage.setItem("theStore", JSON.stringify(theStore));
 // 1
 let aStoreItem = new StoreItem(
   1,
-  "Item 1",
-  10,
-  5,
+  "Nikon D750",
+  1779.95,
+  9,
   1,
-  "Category A",
+  "Nikon",
   5.99,
   [],
-  3.25,
-  "Desc Item 1",
-  "./images/products/box-package-icon.png",
+  4.7,
+  {
+    Brand: "Nikon",
+    Year: 2014,
+    Colour: "Black",
+    Resolution: "24.93 MP",
+    Weight: 748.43,
+  },
+  "./images/products/nikon-d750.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 2
 aStoreItem = new StoreItem(
   2,
-  "Item 2",
-  9,
-  1,
-  1,
-  "Category B",
+  "Polaroid One Step 2",
+  266.32,
+  11,
+  2,
+  "Polaroid",
   5.99,
   [],
   2.1,
-  "Desc Item 2",
-  "./images/products/box-package-icon.png",
+  {
+    Brand: "Polaroid",
+    Year: 2017,
+    Colour: "Black and White",
+    Weight: 408.24,
+  },
+  "./images/products/polaroid-onestep2.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 3
 aStoreItem = new StoreItem(
   3,
-  "Item 3",
-  9,
-  1,
-  1,
-  "Category C",
+  "Polaroid Pronto 600",
+  56.42,
+  15,
+  3,
+  "Polaroid",
   5.99,
   [],
   2.1,
-  "Desc Item 3",
-  "./images/products/box-package-icon.png",
+  {
+    Brand: "Polaroid",
+    Year: 1981,
+    Colour: "Black",
+    Weight: 544,
+  },
+  "./images/products/polaroid-pronto600.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 4
 aStoreItem = new StoreItem(
   4,
-  "Item 4",
-  9,
-  1,
-  1,
-  "Category D",
+  "Canon EOS Rebel T3i",
+  402.55,
+  14,
+  2,
+  "Canon",
   5.99,
   [],
   2.1,
-  "Desc Item 4",
-  "./images/products/box-package-icon.png",
+  {
+    Brand: "Canon",
+    Year: 2011,
+    Colour: "Black",
+    Resolution: "18 MP",
+    Weight: 712.14,
+  },
+  "./images/products/canon-eos-t3i.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 5
 aStoreItem = new StoreItem(
   5,
-  "Item 5",
-  9,
+  "Lumix GH5",
+  1173.94,
+  10,
   1,
-  1,
-  "Category E",
+  "Lumix",
   5.99,
   [],
   2.1,
-  "Desc Item 5",
-  "./images/products/box-package-icon.png",
+  {
+    Brand: "Lumix",
+    Year: 2017,
+    Colour: "Black",
+    Resolution: "20.3 MP",
+    Weight: 725,
+  },
+  "./images/products/lumix-gh5.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 6
 aStoreItem = new StoreItem(
   6,
-  "Item 6",
-  9,
-  1,
-  1,
-  "Category F",
+  "Canon AE-1",
+  328,
+  16,
+  2,
+  "Canon",
   5.99,
   [],
   2.1,
-  "Desc Item 6",
-  "./images/products/box-package-icon.png",
+  {
+    Brand: "Canon",
+    Year: 2014,
+    Colour: "Silver",
+    Weight: 952.54,
+  },
+  "./images/products/canon-ae1.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 7
 aStoreItem = new StoreItem(
   7,
-  "Item 7",
-  9,
+  "Canon AT-1",
+  310.78,
+  3,
   1,
-  1,
-  "Category G",
+  "Canon",
   5.99,
   [],
   2.1,
-  "Desc Item 7",
-  "./images/products/box-package-icon.png",
+  {
+    Brand: "Canon",
+    Year: 1977,
+    Colour: "Black and Silver",
+    Weight: 590,
+  },
+  "./images/products/canon-at1.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 8
 aStoreItem = new StoreItem(
   8,
-  "Item 8",
-  9,
-  1,
-  1,
-  "Category H",
+  "Nikon D7200",
+  1534.95,
+  17,
+  2,
+  "Nikon",
   5.99,
   [],
   2.1,
-  "Desc Item 8",
-  "./images/products/box-package-icon.png",
+  {
+    Brand: "Nikon",
+    Year: 2015,
+    Colour: "Black",
+    Resolution: "24.2 MP",
+    Weight: 675.85,
+  },
+  "./images/products/nikon-d7200.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 9
 aStoreItem = new StoreItem(
   9,
-  "Item 9",
-  9,
+  "Nikon F2A",
+  148.12,
+  6,
   1,
-  1,
-  "Category I",
+  "Nikon",
   5.99,
   [],
   2.1,
-  "Desc Item 9",
-  "./images/products/box-package-icon.png",
+  {
+    Brand: "Nikon",
+    Year: 1977,
+    Colour: "Black and Silver",
+    Weight: 760,
+  },
+  "./images/products/nikon-f2a.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 10
 aStoreItem = new StoreItem(
   10,
-  "Item 10",
-  9,
-  1,
-  1,
-  "Category J",
+  "Canon EOS 80D",
+  1289.95,
+  14,
+  2,
+  "Canon",
   5.99,
   [],
   2.1,
-  "Desc Item 10",
-  "./images/products/box-package-icon.png",
+  {
+    Brand: "Canon",
+    Year: 2016,
+    Colour: "Black",
+    Resolution: "25.8 MP",
+    Weight: 1500,
+  },
+  "./images/products/canon-eos-80d.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 11
 aStoreItem = new StoreItem(
   11,
-  "Item 11",
-  9,
-  1,
-  1,
-  "Category A",
+  "Minolta MD 85mm",
+  345.95,
+  18,
+  2,
+  "Lenses",
   5.99,
   [],
   2.1,
-  "Desc Item 11",
-  "./images/products/box-package-icon.png",
+  { Brand: "Minolta", Year: 1981, Colour: "Black", Weight: 285 },
+  "./images/products/minolta-md-85mm.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 12
 aStoreItem = new StoreItem(
   12,
-  "Item 12",
-  9,
-  1,
-  1,
-  "Category B",
+  "Canon EF 135mm",
+  1649.95,
+  19,
+  3,
+  "Lenses",
   5.99,
   [],
   2.1,
-  "Desc Item 12",
-  "./images/products/box-package-icon.png",
+  { Brand: "Canon", Year: 2010, Colour: "Black", Weight: 750 },
+  "./images/products/canon-ef-135.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 13
 aStoreItem = new StoreItem(
   13,
-  "Item 13",
-  9,
-  1,
-  1,
-  "Category C",
+  "Ronin DJI RS 3 Pro",
+  1068.65,
+  17,
+  3,
+  "Accessories",
   5.99,
   [],
   2.1,
-  "Desc Item 13",
-  "./images/products/box-package-icon.png",
+  { Brand: "Ronin", Year: 2022, Colour: "Black", Weight: 2000 },
+  "./images/products/ronin-dji-rs3pro.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 14
 aStoreItem = new StoreItem(
   14,
-  "Item 14",
-  9,
-  1,
-  1,
-  "Category D",
+  "Lowepro Flipside 500 AW II",
+  329.95,
+  25,
+  4,
+  "Accessories",
   5.99,
   [],
   2.1,
-  "Desc Item 14",
-  "./images/products/box-package-icon.png",
+  { Brand: "Lowepro", Year: 2017, Colour: "Black and Gray", Weight: 2005 },
+  "./images/products/lowepro-flipside-500ii.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 15
 aStoreItem = new StoreItem(
   15,
-  "Item 15",
-  9,
-  1,
-  1,
-  "Category E",
+  "Ronin DJI RSC 2 Pro Combo",
+  744.22,
+  22,
+  3,
+  "Accessories",
   5.99,
   [],
   2.1,
-  "Desc Item 15",
-  "./images/products/box-package-icon.png",
+  { Brand: "Ronin", Year: 2020, Colour: "Black", Weight: 1200 },
+  "./images/products/ronin-dji-2pro.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 16
 aStoreItem = new StoreItem(
   16,
-  "Item 16",
-  9,
-  1,
-  1,
-  "Category F",
+  "Vinta Type II",
+  392.1,
+  32,
+  5,
+  "Accessories",
   5.99,
   [],
   2.1,
-  "Desc Item 16",
-  "./images/products/box-package-icon.png",
+  { Brand: "Vinta", Year: 2019, Colour: "Charcoal and Natural", Weight: 1400 },
+  "./images/products/vinta-type-ii.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 17
 aStoreItem = new StoreItem(
   17,
-  "Item 17",
-  9,
+  "Sony FE 70-200mm GM OSS",
+  2426.73,
+  12,
   1,
-  1,
-  "Category A",
+  "Lenses",
   5.99,
   [],
   2.1,
-  "Desc Item 17",
-  "./images/products/box-package-icon.png",
+  { Brand: "Sony", Year: 2016, Colour: "Black and White", Weight: 2230 },
+  "./images/products/sony-fe-70-200.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 18
 aStoreItem = new StoreItem(
   18,
-  "Item 18",
-  9,
-  1,
-  1,
-  "Category B",
+  "Sony FE 24-70mm GM",
+  1722.68,
+  15,
+  2,
+  "Lenses",
   5.99,
   [],
   2.1,
-  "Desc Item 18",
-  "./images/products/box-package-icon.png",
+  { Brand: "Sony", Year: 2016, Colour: "Black", Weight: 1036 },
+  "./images/products/sony-fe-24-70.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 19
 aStoreItem = new StoreItem(
   19,
-  "Item 19",
-  9,
-  1,
-  1,
-  "Category C",
+  "Sony Fe 24-105mm G OSS",
+  1325.02,
+  19,
+  3,
+  "Lenses",
   5.99,
   [],
   2.1,
-  "Desc Item 19",
-  "./images/products/box-package-icon.png",
+  { Brand: "Sony", Year: 2017, Colour: "Black", Weight: 662 },
+  "./images/products/sony-fe-24-105.png",
   true
 );
 theStore.storeItems.push(aStoreItem);
 // 20
 aStoreItem = new StoreItem(
   20,
-  "Item 20",
-  9,
-  1,
-  1,
-  "Category D",
+  "Sony Fe 35mm",
+  894.3,
+  29,
+  4,
+  "Lenses",
   5.99,
   [],
   2.1,
-  "Desc Item 20",
-  "./images/products/box-package-icon.png",
+  { Brand: "Sony", Year: 2019, Colour: "Black", Weight: 280 },
+  "./images/products/sony-fe-35.png",
   true
 );
 theStore.storeItems.push(aStoreItem);

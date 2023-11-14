@@ -7,6 +7,7 @@ class Store {
    * Default Constructor for Store Class
    * @constructor
    * @param {String} name Store Name.
+   * @param {String} slogan Store Slogan - Sub-title.
    * @param {String} address Store Physical Address.
    * @param {String} postal Store Postal Code.
    * @param {String} phone Store Phone Number.
@@ -21,6 +22,7 @@ class Store {
    */
   constructor(
     name,
+    slogan = null,
     address,
     postal,
     phone,
@@ -32,6 +34,7 @@ class Store {
     currencies = []
   ) {
     this.name = name;
+    this.slogan = slogan;
     this.address = address;
     this.postal = postal;
     this.phone = phone;
@@ -264,7 +267,7 @@ class Store {
         pageDescription.textContent = this.categories[category] + ":";
       } else {
         // Updates the title
-        titleElement.textContent = this.name;
+        titleElement.textContent = this.name + " - " + this.slogan;
         // Updates the page description
         pageDescription.textContent = "Store Items:";
       }

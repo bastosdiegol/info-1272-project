@@ -15,7 +15,7 @@ class StoreItem {
    * @param {Number} costOfShipping StoreItem Shipping Cost.
    * @param {Object[]} reviews Array of Review Objects.
    * @param {Number} reviewScore Current review average score.
-   * @param {Object} description StoreItem object containing descriptions.
+   * @param {Object} details StoreItem object containing additional details.
    * @param {String} imageURL StoreItem image URL.
    * @param {boolean} frontpageDisplay Switch to allow an item to be displayed on the frontpage or not.
    */
@@ -29,7 +29,7 @@ class StoreItem {
     costOfShipping,
     reviews,
     reviewScore,
-    description,
+    details,
     imageURL,
     frontpageDisplay
   ) {
@@ -42,7 +42,7 @@ class StoreItem {
     this.costOfShipping = costOfShipping;
     this.reviews = reviews;
     this.reviewScore = reviewScore;
-    this.description = description;
+    this.details = details;
     this.imageURL = imageURL;
     this.frontpageDisplay = frontpageDisplay;
   }
@@ -121,7 +121,7 @@ class StoreItem {
     aItemName.href = "javascript:void(0);";
     aItemName.setAttribute(
       "onclick",
-      "theStore.loadStoreItemDetails(" + this.id + ")"
+      "theStore.loadStoreItemArticleDetails(" + this.id + ")"
     );
     // aItemName.textContent = this.name;
     // Creates figure tag for the Item
@@ -231,5 +231,136 @@ class StoreItem {
     // Tags relationship
     figureReviewStar.appendChild(imgReviewStar);
     documentElement.appendChild(figureReviewStar);
+  }
+
+  /**
+   * Method that dynamically creates a article element contaning detailed info about a store item
+   * @returns {HTMLUListElement} A DOM div element containing detailed information of the store item
+   */
+  getStoreItemDetailsGrid() {
+    // Creates the article card
+    let articleStoreItem = document.createElement("article");
+    articleStoreItem.classList.add("store-item-article-details");
+    articleStoreItem.classList.add(this.id);
+    articleStoreItem.classList.add("article-back");
+    articleStoreItem.id = this.id;
+    /**********
+     * ITEM   *
+     * HEADER *
+     **********/
+    // Creates a div header for item card
+    let divItemHeader = document.createElement("div");
+    divItemHeader.classList.add("store-item-article-header");
+    articleStoreItem.appendChild(divItemHeader);
+    // Creates a link to the item
+    let aItemName = document.createElement("a");
+    aItemName.href = "javascript:void(0);";
+    aItemName.setAttribute(
+      "onclick",
+      "theStore.loadStoreItemArticle(" + this.id + ")"
+    );
+    divItemHeader.appendChild(aItemName);
+    // aItemName.textContent = this.name;
+    // Creates figure tag for the Item
+    let figureItem = document.createElement("figure");
+    figureItem.classList.add("store-item-figure");
+    aItemName.appendChild(figureItem);
+    // Creates img Tag for the item
+    let imgItem = document.createElement("img");
+    imgItem.classList.add("store-item-img");
+    imgItem.src = this.imageURL;
+    imgItem.alt = this.name;
+    figureItem.appendChild(imgItem);
+
+    // Creates a link to the item
+    let aSwitch = document.createElement("a");
+    aSwitch.href = "javascript:void(0);";
+    aSwitch.setAttribute(
+      "onclick",
+      "theStore.loadStoreItemArticle(" + this.id + ")"
+    );
+    articleStoreItem.appendChild(aSwitch);
+    // Creates figure tag for the flip icon
+    let figureSwitch = document.createElement("figure");
+    figureSwitch.classList.add("switch-figure");
+    aSwitch.appendChild(figureSwitch);
+    // Creates img Tag for the item
+    let imgISwitch = document.createElement("img");
+    imgISwitch.classList.add("switch-img");
+    imgISwitch.src = "./images/switch-icon.png";
+    imgISwitch.alt = "Switch Icon";
+    figureSwitch.appendChild(imgISwitch);
+
+    /********
+     * ITEM *
+     * BODY *
+     ********/
+    // Creates a div body to the item card
+    let divItemBody = document.createElement("div");
+    divItemBody.classList.add("store-item-article-body");
+    articleStoreItem.appendChild(divItemBody);
+    // Creates a div for the name
+    let divItemName = document.createElement("div");
+    divItemName.classList.add("store-item-details");
+    divItemBody.appendChild(divItemName);
+    let strongTag = document.createElement("strong");
+    strongTag.textContent = "Product Name:";
+    divItemName.appendChild(strongTag);
+    let pTag = document.createElement("p");
+    pTag.textContent = this.name;
+    divItemName.appendChild(pTag);
+    // Creates a div for the price
+    let divItemPrice = document.createElement("div");
+    divItemPrice.classList.add("store-item-details");
+    divItemBody.appendChild(divItemPrice);
+    strongTag = document.createElement("strong");
+    strongTag.textContent = "Price:";
+    divItemPrice.appendChild(strongTag);
+    pTag = document.createElement("p");
+    pTag.textContent = new Intl.NumberFormat("en-CA", {
+      style: "currency",
+      currency: theStore.currencies[currentCurrencyIndex].name,
+    }).format(this.price * theStore.currencies[currentCurrencyIndex].rate);
+    divItemPrice.appendChild(pTag);
+    // Now loop through all additional information
+    for (const key in this.details) {
+      let divElement = document.createElement("div");
+      divElement.classList.add("store-item-details");
+      divItemBody.appendChild(divElement);
+      strongTag = document.createElement("strong");
+      strongTag.textContent = key + ":";
+      divElement.appendChild(strongTag);
+      pTag = document.createElement("p");
+      pTag.textContent = this.details[key];
+      divElement.appendChild(pTag);
+    }
+    // Display the current price taking in consideration the current selected currenty
+    // Creates a div for cart
+    let divAddCart = document.createElement("div");
+    divAddCart.classList.add("store-item-add-to-cart");
+    articleStoreItem.appendChild(divAddCart); // <div "ItemBody"> <div "AddCart">
+    // Creates a link to the cart
+    let aAddCart = document.createElement("a");
+    aAddCart.href = "./cart.html?add=" + this.id;
+    aAddCart.target = "_self";
+    divAddCart.appendChild(aAddCart); // <div "AddCart"> <a "AddCart">
+    // Creates figure tag for the Cart
+    let figureCart = document.createElement("figure");
+    figureCart.classList.add("store-item-cart-figure");
+    aAddCart.appendChild(figureCart); // <a "AddCart"> <figure "Cart">
+    //figureCart.textContent = "Add to the Cart";
+    // Creates img Tag for the Cart
+    let imgCart = document.createElement("img");
+    imgCart.classList.add("store-item-cart-image");
+    imgCart.src = "./images/cart-plus-icon-white.png";
+    imgCart.alt = "Add to the Cart";
+    figureCart.appendChild(imgCart); // <figure "Cart"> <img "Cart">
+    // Create div for cart text
+    let divAddCartText = document.createElement("div");
+    divAddCartText.classList.add("store-item-add-to-cart-text");
+    divAddCartText.textContent = "Add to the Cart";
+    aAddCart.appendChild(divAddCartText); // <a "AddCart"> <div "AddCartText">
+
+    return articleStoreItem;
   }
 }

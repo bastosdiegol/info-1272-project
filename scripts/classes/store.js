@@ -275,16 +275,42 @@ class Store {
   }
 
   /**
-   * Method that changes a store item article and display additional information.
+   * Method that changes a store item article and display its INITIAL information.
    * @param {Number} storeItemId Store Item Id.
    */
-  loadStoreItemDetails(storeItemId) {
-    // Gets the Store Item Article
-    let article = document.getElementById(storeItemId);
-    // Clear the article
-    while (article.firstChild) {
-      article.removeChild(article.lastChild);
+  loadStoreItemArticle(storeItemId) {
+    // Gets the store item
+    let storeItem = this.getStoreItem(storeItemId);
+    // Checks if it was found
+    if (storeItem != null) {
+      // Gets the Store Item Article
+      let article = document.getElementById(storeItemId);
+      // Clears the current article
+      while (article.firstChild) {
+        article.removeChild(article.lastChild);
+      }
+      // Replaces it with the Details article
+      article.replaceWith(storeItem.getStoreItemGrid());
     }
-    // TODO: Create a method on StoreItem getDetailsArticle and call it here
+  }
+
+  /**
+   * Method that changes a store item article and display ADDITIONAL information.
+   * @param {Number} storeItemId Store Item Id.
+   */
+  loadStoreItemArticleDetails(storeItemId) {
+    // Gets the store item
+    let storeItem = this.getStoreItem(storeItemId);
+    // Checks if it was found
+    if (storeItem != null) {
+      // Gets the Store Item Article
+      let article = document.getElementById(storeItemId);
+      // Clears the current article
+      while (article.firstChild) {
+        article.removeChild(article.lastChild);
+      }
+      // Replaces it with the Details article
+      article.replaceWith(storeItem.getStoreItemDetailsGrid());
+    }
   }
 }

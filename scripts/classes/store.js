@@ -251,6 +251,17 @@ class Store {
     currenciesLabel.htmlFor = "currency-select";
     currenciesLabel.textContent = "Currency:";
     currenciesDiv.appendChild(currenciesLabel);
+    // Creates figure tag for the Item
+    let figureFlag = document.createElement("figure");
+    figureFlag.classList.add("flag-figure");
+    // Creates img Tag for the item
+    let imgFlag = document.createElement("img");
+    imgFlag.id = "currency-flag-img";
+    imgFlag.classList.add("flag-img");
+    imgFlag.src = this.#currencies[currentCurrencyIndex].flag;
+    imgFlag.alt = this.#currencies[currentCurrencyIndex].name;
+    figureFlag.appendChild(imgFlag);
+    currenciesDiv.appendChild(figureFlag);
     // Creates the select element
     let currenciesSelect = document.createElement("select");
     currenciesSelect.title = "Currency Select";
@@ -298,6 +309,9 @@ class Store {
         currentCurrencyIndex = i;
         // Set the value on the session
         localStorage.setItem("currentCurrencyIndex", i);
+        // Get the flag img
+        let flagImg = document.getElementById("currency-flag-img");
+        flagImg.src = this.#currencies[currentCurrencyIndex].flag;
         // Clean the Store Item Section
         let sectionElement = document.getElementById("store-items-section");
         // Remove all Section element children

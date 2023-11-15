@@ -144,14 +144,15 @@ class StoreItem {
     let divItemPrice = document.createElement("div");
     divItemPrice.classList.add("store-item-price");
     // Display the current price taking in consideration the current selected currenty
+    let currency = theStore.getCurrency(currentCurrencyIndex);
     divItemPrice.textContent =
       // "Price: " +
       // theStore.currencies[currentCurrencyIndex].symbol +
       // (this.price * theStore.currencies[currentCurrencyIndex].rate).toFixed(2);
       new Intl.NumberFormat("en-CA", {
         style: "currency",
-        currency: theStore.currencies[currentCurrencyIndex].name,
-      }).format(this.price * theStore.currencies[currentCurrencyIndex].rate);
+        currency: currency.name,
+      }).format(this.price * currency.rate);
     // Creates a div for cart
     let divAddCart = document.createElement("div");
     divAddCart.classList.add("store-item-add-to-cart");
@@ -317,10 +318,11 @@ class StoreItem {
     strongTag.textContent = "Price:";
     divItemPrice.appendChild(strongTag);
     pTag = document.createElement("p");
+    let currency = theStore.getCurrency(currentCurrencyIndex);
     pTag.textContent = new Intl.NumberFormat("en-CA", {
       style: "currency",
-      currency: theStore.currencies[currentCurrencyIndex].name,
-    }).format(this.price * theStore.currencies[currentCurrencyIndex].rate);
+      currency: currency.name,
+    }).format(this.price * currency.rate);
     divItemPrice.appendChild(pTag);
     // Now loop through all additional information
     for (const key in this.details) {

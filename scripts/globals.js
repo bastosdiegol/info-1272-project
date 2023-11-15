@@ -14,6 +14,4 @@ var theStore = JSON.parse(sessionStorage.getItem("theStore"));
 
 // Variables to store current used currency and symbol
 /** @type {Number} Variables to store current used currency ID */
-var currentCurrencyIndex = Number(
-  sessionStorage.getItem("currentCurrencyIndex")
-);
+var currentCurrencyIndex = Number(localStorage.getItem("currentCurrencyIndex"));

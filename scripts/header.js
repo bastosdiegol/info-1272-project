@@ -10,7 +10,7 @@ if (titleElements.length > 0) {
   // Gets the first <title> element
   const titleElement = titleElements[0];
   // Sets the title
-  titleElement.textContent = theStore.name + " - " + theStore.slogan;
+  titleElement.textContent = theStore.getStoreNameAndSlogan();
 }
 
 // Gets <header> element
@@ -25,11 +25,10 @@ if (headerElements.length > 0) {
   headerWrapper.classList.add("header-wrapper");
 
   // Creates a link tag
-  // TODO: Change the link to JS Function instead.
   let homeElementLink = document.createElement("a");
   homeElementLink.classList.add("home-link");
-  homeElementLink.href = "./index.html";
-  homeElementLink.target = "_self";
+  homeElementLink.setAttribute("onclick", "theStore.loadStoreItems()");
+  homeElementLink.href = "#";
 
   // Creates figure Tag
   let figureElementLogo = document.createElement("figure");
@@ -38,20 +37,20 @@ if (headerElements.length > 0) {
   // Creates img Tag
   let imgElementLogo = document.createElement("img");
   imgElementLogo.classList.add("logo-img");
-  imgElementLogo.src = "./images/" + theStore.logo;
-  imgElementLogo.alt = theStore.name;
+  imgElementLogo.src = "./images/" + theStore.getStoreLogo();
+  imgElementLogo.alt = theStore.getStoreName();
 
   // Creates em Tag
   let h1ElementStoreName = document.createElement("h1");
   h1ElementStoreName.classList.add("store-name-h1");
-  h1ElementStoreName.textContent = theStore.name;
+  h1ElementStoreName.textContent = theStore.getStoreName();
 
   // Creates H2 Tag for slogan
   let h2ElementStoreSlogan = document.createElement("h2");
   // Check if its needed and set values
-  if (theStore.slogan != null) {
+  if (theStore.getStoreSlogan() != "") {
     h2ElementStoreSlogan.classList.add("store-slogan");
-    h2ElementStoreSlogan.textContent = theStore.slogan;
+    h2ElementStoreSlogan.textContent = theStore.getStoreSlogan();
   }
 
   // Creates p Tag
@@ -81,7 +80,7 @@ if (headerElements.length > 0) {
   homeElementLink.appendChild(figureElementLogo); // Adds figure to the link
   figureElementLogo.appendChild(imgElementLogo); // Adds img to figure
   homeElementLink.appendChild(h1ElementStoreName); // Adds Store Name
-  if (theStore.slogan != null)
+  if (theStore.getStoreSlogan() != "")
     homeElementLink.appendChild(h2ElementStoreSlogan); // Adds Slogan if needed
 
   headerWrapper.appendChild(homeElementLink); // Adds the Home link to the wrapper

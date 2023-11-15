@@ -10,13 +10,13 @@ let socials = [
 // Now we instanciate theStore
 theStore = new Store(
   "Lenz",
-  "An Online Store for Photographers",
   "123 Street",
   "A1B 2C3",
   "(555) 444-6666",
   "email@company.ca",
   "logo-no-background-2.png",
-  socials
+  socials,
+  "An Online Store for Photographers"
 );
 // Sets theStore into the session
 sessionStorage.setItem("theStore", JSON.stringify(theStore));
@@ -43,7 +43,7 @@ let aStoreItem = new StoreItem(
   "./images/products/nikon-d750.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 2
 aStoreItem = new StoreItem(
   2,
@@ -64,7 +64,7 @@ aStoreItem = new StoreItem(
   "./images/products/polaroid-onestep2.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 3
 aStoreItem = new StoreItem(
   3,
@@ -85,7 +85,7 @@ aStoreItem = new StoreItem(
   "./images/products/polaroid-pronto600.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 4
 aStoreItem = new StoreItem(
   4,
@@ -107,7 +107,7 @@ aStoreItem = new StoreItem(
   "./images/products/canon-eos-t3i.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 5
 aStoreItem = new StoreItem(
   5,
@@ -129,7 +129,7 @@ aStoreItem = new StoreItem(
   "./images/products/lumix-gh5.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 6
 aStoreItem = new StoreItem(
   6,
@@ -150,7 +150,7 @@ aStoreItem = new StoreItem(
   "./images/products/canon-ae1.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 7
 aStoreItem = new StoreItem(
   7,
@@ -171,7 +171,7 @@ aStoreItem = new StoreItem(
   "./images/products/canon-at1.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 8
 aStoreItem = new StoreItem(
   8,
@@ -193,7 +193,7 @@ aStoreItem = new StoreItem(
   "./images/products/nikon-d7200.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 9
 aStoreItem = new StoreItem(
   9,
@@ -214,7 +214,7 @@ aStoreItem = new StoreItem(
   "./images/products/nikon-f2a.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 10
 aStoreItem = new StoreItem(
   10,
@@ -236,7 +236,7 @@ aStoreItem = new StoreItem(
   "./images/products/canon-eos-80d.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 11
 aStoreItem = new StoreItem(
   11,
@@ -252,7 +252,7 @@ aStoreItem = new StoreItem(
   "./images/products/minolta-md-85mm.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 12
 aStoreItem = new StoreItem(
   12,
@@ -268,7 +268,7 @@ aStoreItem = new StoreItem(
   "./images/products/canon-ef-135.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 13
 aStoreItem = new StoreItem(
   13,
@@ -284,7 +284,7 @@ aStoreItem = new StoreItem(
   "./images/products/ronin-dji-rs3pro.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 14
 aStoreItem = new StoreItem(
   14,
@@ -300,7 +300,7 @@ aStoreItem = new StoreItem(
   "./images/products/lowepro-flipside-500ii.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 15
 aStoreItem = new StoreItem(
   15,
@@ -316,7 +316,7 @@ aStoreItem = new StoreItem(
   "./images/products/ronin-dji-2pro.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 16
 aStoreItem = new StoreItem(
   16,
@@ -332,7 +332,7 @@ aStoreItem = new StoreItem(
   "./images/products/vinta-type-ii.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 17
 aStoreItem = new StoreItem(
   17,
@@ -348,7 +348,7 @@ aStoreItem = new StoreItem(
   "./images/products/sony-fe-70-200.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 18
 aStoreItem = new StoreItem(
   18,
@@ -364,7 +364,7 @@ aStoreItem = new StoreItem(
   "./images/products/sony-fe-24-70.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 19
 aStoreItem = new StoreItem(
   19,
@@ -380,7 +380,7 @@ aStoreItem = new StoreItem(
   "./images/products/sony-fe-24-105.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 // 20
 aStoreItem = new StoreItem(
   20,
@@ -396,7 +396,7 @@ aStoreItem = new StoreItem(
   "./images/products/sony-fe-35.png",
   true
 );
-theStore.storeItems.push(aStoreItem);
+theStore.addStoreItem(aStoreItem);
 
 // Define Store Categories
 theStore.defineCategories();
@@ -408,13 +408,13 @@ var aNewCurrency = new Currency(
   "$",
   "./images/flags/canada-flag-icon-16.png"
 );
-let currencyCount = theStore.currencies.push(aNewCurrency);
+let currencyCount = theStore.addCurrency(aNewCurrency);
 // Checks if there's a default currency already
-let currencyIndex = sessionStorage.getItem("currentCurrencyIndex");
+let currencyIndex = localStorage.getItem("currentCurrencyIndex");
 // If not, adds Canada to the session as default currency
 if (currencyIndex == null) {
   currentCurrencyIndex = currencyCount - 1;
-  sessionStorage.setItem("currentCurrencyIndex", currentCurrencyIndex);
+  localStorage.setItem("currentCurrencyIndex", currentCurrencyIndex);
 }
 
 aNewCurrency = new Currency(
@@ -423,7 +423,7 @@ aNewCurrency = new Currency(
   "U$",
   "./images/flags/united-states-of-america-flag-icon-16.png"
 );
-theStore.currencies.push(aNewCurrency);
+theStore.addCurrency(aNewCurrency);
 
 aNewCurrency = new Currency(
   "BRL",
@@ -431,7 +431,7 @@ aNewCurrency = new Currency(
   "R$",
   "./images/flags/brazil-flag-icon-16.png"
 );
-theStore.currencies.push(aNewCurrency);
+theStore.addCurrency(aNewCurrency);
 
 aNewCurrency = new Currency(
   "EUR",
@@ -439,4 +439,4 @@ aNewCurrency = new Currency(
   "€",
   "./images/flags/europe-flag-icon-16.png"
 );
-theStore.currencies.push(aNewCurrency);
+theStore.addCurrency(aNewCurrency);

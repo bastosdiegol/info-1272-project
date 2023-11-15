@@ -3,11 +3,22 @@
  * @class
  */
 class Store {
+  /* Private Properties */
+  #name;
+  #address;
+  #postal;
+  #phone;
+  #email;
+  #logo;
+  #socials;
+  #slogan;
+  #categories;
+  #storeItems;
+  #currencies;
   /**
    * Default Constructor for Store Class
    * @constructor
    * @param {String} name Store Name.
-   * @param {String} slogan Store Slogan - Sub-title.
    * @param {String} address Store Physical Address.
    * @param {String} postal Store Postal Code.
    * @param {String} phone Store Phone Number.
@@ -16,34 +27,115 @@ class Store {
    * @param {Object[]} socials Object Array containing the Store Socials.
    * @param {String} socials.name Social Media Name.
    * @param {String} socials.url Store Social Media URL.
-   * @param {Array<string>} Store Categories.
-   * @param {StoreItem[]} storeItems Object Array containing all store items.
-   * @param {Currency[]} currencies Object Array containing all currencies used.
+   * @param {String} slogan (Optional) Store Slogan - Sub-title.
+   * @param {Array<string>} Store (Optional) Categories.
+   * @param {StoreItem[]} storeItems (Optional) Object Array containing all store items.
+   * @param {Currency[]} currencies (Optional) Object Array containing all currencies used.
    */
   constructor(
     name,
-    slogan = null,
     address,
     postal,
     phone,
     email,
     logo,
     socials,
+    slogan = "",
     categories = [],
     storeItems = [],
     currencies = []
   ) {
-    this.name = name;
-    this.slogan = slogan;
-    this.address = address;
-    this.postal = postal;
-    this.phone = phone;
-    this.email = email;
-    this.logo = logo;
-    this.socials = socials;
-    this.categories = categories;
-    this.storeItems = storeItems;
-    this.currencies = currencies;
+    this.#name = name;
+    this.#slogan = slogan;
+    this.#address = address;
+    this.#postal = postal;
+    this.#phone = phone;
+    this.#email = email;
+    this.#logo = logo;
+    this.#socials = socials;
+    this.#categories = categories;
+    this.#storeItems = storeItems;
+    this.#currencies = currencies;
+  }
+
+  /**
+   * Getters and Setters
+   */
+  /**
+   * Adds a StoreItem to the Store.
+   * @param {StoreItem} storeItem StoreItem to be added.
+   * @returns {number} The storeItem array new length.
+   */
+  addStoreItem(storeItem) {
+    return this.#storeItems.push(storeItem);
+  }
+
+  /**
+   * Adds a Currency to the Store.
+   * @param {Currency} currency Currency to be added.
+   * @returns {number} The currency array new length.
+   */
+  addCurrency(currency) {
+    return this.#currencies.push(currency);
+  }
+
+  /**
+   * Getter: Store Name
+   * @returns {String} Store Name
+   */
+  getStoreName() {
+    return this.#name;
+  }
+
+  /**
+   * Getter: Store Slogan
+   * @returns {String} Store Slogan
+   */
+  getStoreSlogan() {
+    return this.#slogan;
+  }
+
+  /**
+   * Getter: Store Name + Slogan
+   * @returns {String} String with Name and Slogan concatenated
+   */
+  getStoreNameAndSlogan() {
+    return this.#name + " - " + this.#slogan;
+  }
+
+  /**
+   * Getter: Store Logo
+   * @returns {String} Path to Store Logo File
+   */
+  getStoreLogo() {
+    return this.#logo;
+  }
+
+  /**
+   * Method that finds a store item and return it
+   * @param {Number} storeItemId A storeItem id
+   * @returns {StoreItem} A storeItem object or null if not found
+   */
+  getStoreItem(storeItemId) {
+    for (let i = 0; i < this.#storeItems.length; i++) {
+      if (this.#storeItems[i].id === storeItemId) {
+        return this.#storeItems[i];
+      }
+    }
+    return null;
+  }
+
+  /**
+   * Method that finds a store item and return it
+   * @param {Number} currencyIndex A Currency array index
+   * @returns {Currency} A Currency object or null if not found
+   */
+  getCurrency(currencyIndex) {
+    if (this.#currencies.length > currencyIndex) {
+      return this.#currencies[currencyIndex];
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -52,13 +144,13 @@ class Store {
    */
   defineCategories() {
     // Clears the array
-    this.categories = [];
+    this.#categories = [];
     // Loop for each existing storeItem
-    for (let i = 0; i < this.storeItems.length; i++) {
+    for (let i = 0; i < this.#storeItems.length; i++) {
       // Checks if the current item category already exists in categories array
-      if (!this.categories.includes(this.storeItems[i].category)) {
+      if (!this.#categories.includes(this.#storeItems[i].category)) {
         // If not push it to the array
-        this.categories.push(this.storeItems[i].category);
+        this.#categories.push(this.#storeItems[i].category);
       }
     }
   }
@@ -73,7 +165,7 @@ class Store {
     let ulElementCategories = document.createElement("ul");
     ulElementCategories.classList.add("nav-list-ul");
     // Loop to dynamically create nav bar with categories
-    for (let i = 0; i < this.categories.length; i++) {
+    for (let i = 0; i < this.#categories.length; i++) {
       // Checks if the first category
       if (i == 0) {
         // If first, then adds Home category
@@ -103,7 +195,7 @@ class Store {
       aCategory.setAttribute("onclick", "theStore.loadStoreItems(" + i + ")");
       // aCategory.href = "./category.html?id=" + i;
       // aCategory.target = "_self";
-      aCategory.textContent = this.categories[i];
+      aCategory.textContent = this.#categories[i];
       liElementCategory.appendChild(aCategory);
     }
     return ulElementCategories;
@@ -122,9 +214,9 @@ class Store {
     sectionElementStoreItemGrid.classList.add("store-items-section");
 
     // Loop to dynamically insert store items into grid div
-    for (let i = 0; i < this.storeItems.length; i++) {
+    for (let i = 0; i < this.#storeItems.length; i++) {
       // Temp variable to handle the item
-      let theItem = this.storeItems[i];
+      let theItem = this.#storeItems[i];
       // Checks if the grid is request for frontpage
       if (category == null) {
         // Checks if the item should be displayed at frontpage
@@ -135,27 +227,13 @@ class Store {
       } else {
         // Category Items request
         // Checks if the item category matches the category requested
-        if (theItem.category == this.categories[category]) {
+        if (theItem.category == this.#categories[category]) {
           // Gets the current item card information
           sectionElementStoreItemGrid.appendChild(theItem.getStoreItemGrid());
         }
       }
     }
     return sectionElementStoreItemGrid;
-  }
-
-  /**
-   * Method that finds a store item and return it
-   * @param {Number} storeItemId A storeItem id
-   * @returns {StoreItem} A storeItem object or null if not found
-   */
-  getStoreItem(storeItemId) {
-    for (let i = 0; i < this.storeItems.length; i++) {
-      if (this.storeItems[i].id == storeItemId) {
-        return this.storeItems[i];
-      }
-    }
-    return null;
   }
 
   /**
@@ -187,15 +265,15 @@ class Store {
     );
     currenciesDiv.appendChild(currenciesSelect);
     // Iterate through all currencies
-    for (let i = 0; i < this.currencies.length; i++) {
+    for (let i = 0; i < this.#currencies.length; i++) {
       // Creates each option
       let currencyOption = document.createElement("option");
       currencyOption.classList.add("currency-option");
       currencyOption.classList.add(
-        "currency-option-" + this.currencies[i].name
+        "currency-option-" + this.#currencies[i].name
       );
-      currencyOption.value = this.currencies[i].name;
-      currencyOption.text = this.currencies[i].name;
+      currencyOption.value = this.#currencies[i].name;
+      currencyOption.text = this.#currencies[i].name;
       if (currentCurrencyIndex == i) {
         currencyOption.selected = true;
       }
@@ -211,15 +289,15 @@ class Store {
    * @param {String} currency Name of the selected currency.
    */
   setNewDefaultCurrency(currency) {
-    console.log("setNewDefaultCurrency(" + currency + ")");
+    // console.log("setNewDefaultCurrency(" + currency + ")");
     // Iterate through all the currencies
-    for (let i = 0; i < this.currencies.length; i++) {
+    for (let i = 0; i < this.#currencies.length; i++) {
       // Checks if the currency is matching
-      if (this.currencies[i].name === currency) {
+      if (this.#currencies[i].name === currency) {
         // Update the currency index
         currentCurrencyIndex = i;
         // Set the value on the session
-        sessionStorage.setItem("currentCurrencyIndex", i);
+        localStorage.setItem("currentCurrencyIndex", i);
         // Clean the Store Item Section
         let sectionElement = document.getElementById("store-items-section");
         // Remove all Section element children
@@ -262,12 +340,12 @@ class Store {
       if (category != null) {
         // Updates the title - With Category
         titleElement.textContent =
-          this.name + " - " + this.categories[category];
+          this.#name + " - " + this.#categories[category];
         // Updates the page description
-        pageDescription.textContent = this.categories[category] + ":";
+        pageDescription.textContent = this.#categories[category] + ":";
       } else {
         // Updates the title
-        titleElement.textContent = this.name + " - " + this.slogan;
+        titleElement.textContent = this.#name + " - " + this.#slogan;
         // Updates the page description
         pageDescription.textContent = "Store Items:";
       }
@@ -312,5 +390,37 @@ class Store {
       // Replaces it with the Details article
       article.replaceWith(storeItem.getStoreItemDetailsGrid());
     }
+  }
+
+  /**
+   * Method that dynamically creates a div element with all socials available.
+   * @method
+   * @returns {HTMLUListElement} DOM Div element containing all socials links.
+   */
+  getStoreSocialsDivElement() {
+    // Creates div Tag for each Socials
+    let divElementSocials = document.createElement("div");
+    divElementSocials.classList.add("socials-div");
+    // Loop to dynamically create each social network link
+    for (const KEY in this.#socials) {
+      const SOCIAL = this.#socials[KEY];
+      // Creates hyperlink Tag
+      let aFooterSocial = document.createElement("a");
+      aFooterSocial.href = SOCIAL.url;
+      aFooterSocial.target = "_blank";
+      // Creates figure Tag
+      let figureFooterSocial = document.createElement("figure");
+      figureFooterSocial.id = "figureFooter" + SOCIAL.name;
+      // Creates img Tag
+      let imgFooterSocial = document.createElement("img");
+      imgFooterSocial.id = "imgFooter" + SOCIAL.name;
+      imgFooterSocial.src = "./images/socials/" + SOCIAL.name + ".png";
+      imgFooterSocial.alt = "Company " + SOCIAL.name;
+      // Tags Relations
+      figureFooterSocial.appendChild(imgFooterSocial); // Appends img to figure
+      aFooterSocial.appendChild(figureFooterSocial); // Appends figure to a
+      divElementSocials.appendChild(aFooterSocial); // Appends a to div
+    }
+    return divElementSocials;
   }
 }

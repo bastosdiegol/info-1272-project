@@ -18,8 +18,6 @@ theStore = new Store(
   socials,
   "An Online Store for Photographers"
 );
-// Sets theStore into the session
-sessionStorage.setItem("theStore", JSON.stringify(theStore));
 
 // Create Store items
 // 1
@@ -440,3 +438,13 @@ aNewCurrency = new Currency(
   "./images/flags/europe-flag-icon-16.png"
 );
 theStore.addCurrency(aNewCurrency);
+
+/** Shopping Cart */
+let shoppingCartChecker = JSON.parse(sessionStorage.getItem("shoppingCart"));
+if (shoppingCartChecker == null) {
+  shoppingCartChecker = new ShoppingCart();
+  sessionStorage.setItem("shoppingCart", JSON.stringify(shoppingCartChecker));
+}
+
+// Sets theStore into the session
+sessionStorage.setItem("theStore", JSON.stringify(theStore));

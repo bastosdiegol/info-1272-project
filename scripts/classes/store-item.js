@@ -158,8 +158,11 @@ class StoreItem {
     divAddCart.classList.add("store-item-add-to-cart");
     // Creates a link to the cart
     let aAddCart = document.createElement("a");
-    aAddCart.href = "./cart.html?add=" + this.id;
-    aAddCart.target = "_self";
+    aAddCart.href = "javascript:void(0);";
+    aAddCart.setAttribute(
+      "onclick",
+      "shoppingCart.addItem( theStore.getStoreItem(" + this.id + ") )"
+    );
     // Creates figure tag for the Cart
     let figureCart = document.createElement("figure");
     figureCart.classList.add("store-item-cart-figure");
@@ -343,8 +346,11 @@ class StoreItem {
     articleStoreItem.appendChild(divAddCart); // <div "ItemBody"> <div "AddCart">
     // Creates a link to the cart
     let aAddCart = document.createElement("a");
-    aAddCart.href = "./cart.html?add=" + this.id;
-    aAddCart.target = "_self";
+    aAddCart.href = "javascript:void(0);";
+    aAddCart.setAttribute(
+      "onclick",
+      "shoppingCart.addItem( theStore.getStoreItem(" + this.id + ") )"
+    );
     divAddCart.appendChild(aAddCart); // <div "AddCart"> <a "AddCart">
     // Creates figure tag for the Cart
     let figureCart = document.createElement("figure");

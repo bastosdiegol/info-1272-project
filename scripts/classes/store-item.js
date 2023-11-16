@@ -161,7 +161,9 @@ class StoreItem {
     aAddCart.href = "javascript:void(0);";
     aAddCart.setAttribute(
       "onclick",
-      "shoppingCart.addItem( theStore.getStoreItem(" + this.id + ") )"
+      "shoppingCart.incrementDecrementItemQuantity( theStore.getStoreItem(" +
+        this.id +
+        ") )"
     );
     // Creates figure tag for the Cart
     let figureCart = document.createElement("figure");
@@ -349,7 +351,9 @@ class StoreItem {
     aAddCart.href = "javascript:void(0);";
     aAddCart.setAttribute(
       "onclick",
-      "shoppingCart.addItem( theStore.getStoreItem(" + this.id + ") )"
+      "shoppingCart.incrementDecrementItemQuantity( theStore.getStoreItem(" +
+        this.id +
+        ") )"
     );
     divAddCart.appendChild(aAddCart); // <div "AddCart"> <a "AddCart">
     // Creates figure tag for the Cart

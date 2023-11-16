@@ -1,5 +1,17 @@
 /* Queries for Phones */
 @media only screen and (max-width: 37.5rem) {
+  .header-wrapper {
+    flex-direction: column;
+  }
+
+  .header-right-wrapper {
+    margin: 5px auto;
+  }
+
+  .currency-select-div {
+    margin-top: 5px;
+  }
+
   /* Nav Bar Container */
   .nav-list-ul {
     flex-direction: column;

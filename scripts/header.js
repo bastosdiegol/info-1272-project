@@ -53,7 +53,10 @@ if (headerElements.length > 0) {
     h2ElementStoreSlogan.textContent = theStore.getStoreSlogan();
   }
 
-  // Creates p Tag
+  let headerRightWrapper = document.createElement("div");
+  headerRightWrapper.classList.add("header-right-wrapper");
+
+  // Creates em Tag
   let emElementDateTime = document.createElement("em");
   emElementDateTime.classList.add("date-time-em");
   // Creates a Date object
@@ -73,6 +76,22 @@ if (headerElements.length > 0) {
     dateTimeOptions
   );
 
+  // Creates a link tag
+  let cartLinnk = document.createElement("a");
+  cartLinnk.classList.add("cart-link");
+  cartLinnk.setAttribute("onclick", "shoppingCart.displayShoppingCart()");
+  cartLinnk.href = "#";
+
+  // Creates figure Tag
+  let cartIconFigure = document.createElement("figure");
+  cartIconFigure.classList.add("cart-figure");
+
+  // Creates img Tag
+  let cartIconImg = document.createElement("img");
+  cartIconImg.classList.add("cart-img");
+  cartIconImg.src = "./images/shopping-cart-icon-blue.png";
+  cartIconImg.alt = "Shopping Cart";
+
   // Creates <nav> element
   let navElement = document.createElement("nav");
 
@@ -84,8 +103,15 @@ if (headerElements.length > 0) {
     homeElementLink.appendChild(h2ElementStoreSlogan); // Adds Slogan if needed
 
   headerWrapper.appendChild(homeElementLink); // Adds the Home link to the wrapper
-  headerWrapper.appendChild(emElementDateTime); // Adds em to the wrapper
-  headerWrapper.appendChild(theStore.getCurrenciesSelect()); // Adds currency select to the header
+  headerWrapper.appendChild(headerRightWrapper); // Adds the right wrapper to the header wrapper
+
+  headerRightWrapper.appendChild(emElementDateTime); // Adds em to the wrapper
+  let currencyDiv = theStore.getCurrenciesSelect();
+  cartLinnk.appendChild(cartIconFigure);
+  cartIconFigure.appendChild(cartIconImg);
+  currencyDiv.appendChild(cartLinnk);
+  headerRightWrapper.appendChild(currencyDiv); // Adds currency select to the header
+
   headerElement.appendChild(headerWrapper); // Adds the wrapper to header
 
   navElement.appendChild(theStore.getNavBarDivElement()); // Adds the Categories list to the nav

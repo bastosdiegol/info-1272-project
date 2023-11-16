@@ -3,6 +3,20 @@
 // | (_ | / _ \ '_ \/ _` | | | (__/ _ \ ' \(_-<  _/ _` | ' \  _(_-<
 //  \___|_\___/_.__/\__,_|_|  \___\___/_||_/__/\__\__,_|_||_\__/__/
 
+// Constant that defines the page context used to reference who called a method
+const PAGE_CONTEXT = Object.freeze({
+  HOME: 0,
+  SHOPPING_CART: 1,
+});
+
+// Constant that defines the type of arithimetic operation
+// that is going to be applied on a shopping cart item quantity
+const CART_QUANTITY_OPERATION = Object.freeze({
+  INCREMENT: 0,
+  DECREMENT: 1,
+  CHANGE: 2,
+});
+
 //   ___ _     _          _  __   __        _      _    _
 //  / __| |___| |__  __ _| | \ \ / /_ _ _ _(_)__ _| |__| |___ ___
 // | (_ | / _ \ '_ \/ _` | |  \ V / _` | '_| / _` | '_ \ / -_|_-<

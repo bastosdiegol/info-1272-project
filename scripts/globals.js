@@ -7,6 +7,7 @@
 const PAGE_CONTEXT = Object.freeze({
   HOME: 0,
   SHOPPING_CART: 1,
+  REVIEW: 2,
 });
 
 // Constant that defines the type of arithmetic operation
@@ -37,3 +38,7 @@ var currentCurrencyIndex = Number(localStorage.getItem("currentCurrencyIndex"));
 var shoppingCart = new ShoppingCart();
 // TODO: Fix sessionStorage for ShoppingCart class
 // var shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"));
+
+// Variable to store main section context
+/** @type {PAGE_CONTEXT} Shopping Cart Variable */
+var currentPageContext = PAGE_CONTEXT.HOME;

@@ -219,6 +219,8 @@ class ShoppingCart {
    * @method
    */
   displayShoppingCart() {
+    // Sets current Page Context
+    currentPageContext = PAGE_CONTEXT.SHOPPING_CART;
     // Gets the Store Item Section
     let section = document.getElementById("store-items-section");
     // Clear the section

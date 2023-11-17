@@ -320,14 +320,8 @@ class Store {
         // Get the flag img
         let flagImg = document.getElementById("currency-flag-img");
         flagImg.src = this.#currencies[currentCurrencyIndex].flag;
-        // Clean the Store Item Section
-        let sectionElement = document.getElementById("store-items-section");
-        // Remove all Section element children
-        while (sectionElement.firstChild) {
-          sectionElement.removeChild(sectionElement.lastChild);
-        }
-        // Updates the store items section with new currencies
-        sectionElement.replaceWith(this.getStoreItemsGridDivElement());
+        // Load current context
+        this.loadMainSectionContext();
       }
     }
     return null;
@@ -337,9 +331,11 @@ class Store {
    * Method that prepares the page for a new set of Store Items.
    * Updates the page title and page description and replace the main section with a new one
    * @method
-   * @param {Number} category Category Id or null for Home Page.
+   * @param {Number=} category Category Id or null for Home Page.
    */
   loadStoreItems(category = null) {
+    // Sets current page context
+    currentPageContext = PAGE_CONTEXT.HOME;
     // Gets the Store Item Section
     let section = document.getElementById("store-items-section");
     // Clear the section
@@ -460,5 +456,22 @@ class Store {
       style: "currency",
       currency: currency.name,
     }).format(value * currency.rate);
+  }
+
+  /**
+   * Method that loads the correct main section context.
+   */
+  loadMainSectionContext() {
+    switch (currentPageContext) {
+      case PAGE_CONTEXT.HOME:
+        this.loadStoreItems();
+        break;
+      case PAGE_CONTEXT.SHOPPING_CART:
+        shoppingCart.displayShoppingCart();
+      case PAGE_CONTEXT.REVIEW:
+        break;
+      default:
+        break;
+    }
   }
 }

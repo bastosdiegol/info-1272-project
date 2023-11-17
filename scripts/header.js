@@ -86,6 +86,11 @@ if (headerElements.length > 0) {
   let cartIconFigure = document.createElement("figure");
   cartIconFigure.classList.add("cart-figure");
 
+  let cartNotification = document.createElement("p");
+  cartNotification.id = "cart-notification";
+  cartNotification.classList.add("cart-notification");
+  cartNotification.textContent = 0;
+
   // Creates img Tag
   let cartIconImg = document.createElement("img");
   cartIconImg.classList.add("cart-img");
@@ -108,6 +113,7 @@ if (headerElements.length > 0) {
   headerRightWrapper.appendChild(emElementDateTime); // Adds em to the wrapper
   let currencyDiv = theStore.getCurrenciesSelect();
   cartLinnk.appendChild(cartIconFigure);
+  cartIconFigure.appendChild(cartNotification);
   cartIconFigure.appendChild(cartIconImg);
   currencyDiv.appendChild(cartLinnk);
   headerRightWrapper.appendChild(currencyDiv); // Adds currency select to the header

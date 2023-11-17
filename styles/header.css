@@ -114,6 +114,7 @@ nav a {
 .cart-figure {
   margin: 0;
   align-self: center;
+  position: relative;
 }
 
 .cart-img {
@@ -122,4 +123,20 @@ nav a {
 
 .cart-link {
   vertical-align: bottom;
+}
+
+.cart-notification {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: none;
+  align-items: center;
+  justify-content: space-evenly;
+  color: white;
+  background-color: rgb(30, 187, 215);
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  font-size: 1.2rem;
+  font-weight: bold;
 }

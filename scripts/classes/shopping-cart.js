@@ -209,7 +209,8 @@ class ShoppingCart {
       // Error Handling
       alert("Store Item not found.");
     }
-
+    // Updates the cart notification div
+    this.updateNotification();
     return true;
   }
 
@@ -444,10 +445,6 @@ class ShoppingCart {
    * @returns {Number} ShoppingCart subtotal.
    */
   calculateCartSubTotal() {
-    // Verifies if the shoppingCart has any item
-    if (this.itemsMap.length == 0) {
-      return 0;
-    }
     let subtotal = 0;
     // Iterate through all shoppingCartItems
     for (let i = 0; i < this.itemsMap.length; i++) {
@@ -463,17 +460,41 @@ class ShoppingCart {
    * @returns {Number} ShoppingCart subtotal.
    */
   calculateShippingCost() {
-    // Verifies if the shoppingCart has any item
-    if (this.itemsMap.length == 0) {
-      return 0;
-    }
-    let subtotal = 0;
+    let shippingCost = 0;
     // Iterate through all shoppingCartItems
     for (let i = 0; i < this.itemsMap.length; i++) {
-      subtotal +=
+      shippingCost +=
         this.itemsMap[i].storeItem.costOfShipping *
         this.itemsMap[i].quantityOnHand;
     }
-    return subtotal;
+    return shippingCost;
+  }
+
+  /**
+   * Method that iterate through all shopping cart items and calculates how many items are in the cart.
+   * @method
+   * @returns {Number} ShoppingCart sum of units.
+   */
+  getTotalItemCount() {
+    let countTotal = 0;
+    // Iterate through all shoppingCartItems
+    for (let i = 0; i < this.itemsMap.length; i++) {
+      countTotal += this.itemsMap[i].quantityOnHand;
+    }
+    return countTotal;
+  }
+
+  /**
+   * Method that updates the Cart Notification Div.
+   */
+  updateNotification() {
+    let totalUnits = this.getTotalItemCount();
+    let notificationDiv = document.getElementById("cart-notification");
+    if (totalUnits == 0) {
+      notificationDiv.style.display = "none";
+    } else {
+      notificationDiv.style.display = "flex";
+      notificationDiv.textContent = totalUnits;
+    }
   }
 }

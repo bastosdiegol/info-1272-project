@@ -6,38 +6,10 @@ class ShoppingCart {
   /**
    * ShoppingCart Object Constructor.
    * @constructor
-   * @param {ShoppingCartItem[]} itemsMap (Optional) Array of Store Items
+   * @param {Map<StoreItem, number>} itemsMap (Optional) Map of Store Items and quantityOnHand
    */
-  constructor(itemsMap = []) {
-    this.itemsMap = itemsMap;
-  }
-
-  /**
-   * Method that checks if a Store Item exists in the Shopping Cart.
-   * @method
-   * @param {StoreItem} storeItem Store Item object to be searched.
-   * @returns {ShoppingCartItem} ShoppingCartItem object if found
-   */
-  findItem(storeItem) {
-    for (let i = 0; i < this.itemsMap.length; i++) {
-      if (this.itemsMap[i].storeItem === storeItem) {
-        return this.itemsMap[i];
-      }
-    }
-    return null;
-  }
-
-  /**
-   * Method that finds a Store Item and remove it from the Shopping Cart.
-   * @method
-   * @param {StoreItem} storeItem Store Item object to be searched.
-   */
-  removeItem(storeItem) {
-    for (let i = 0; i < this.itemsMap.length; i++) {
-      if (this.itemsMap[i].storeItem === storeItem) {
-        this.itemsMap.splice(i, 1);
-      }
-    }
+  constructor(itemsMap = new Map()) {
+    this.shoppingCartItems = itemsMap;
   }
 
   /**
@@ -58,13 +30,13 @@ class ShoppingCart {
     // Gets the StoreItem
     let storeItem = theStore.getStoreItem(storeItemId);
     // Gets the ShoppingCartItem
-    let shoppingCartItem = this.findItem(storeItem);
+    let quantityOnHand = this.shoppingCartItems.get(storeItem);
     // Validate the storeItem object
     if (storeItem) {
-      // Validades the shoppingCartItem object
-      // Only INCREMENT is allowed for an inexistent shoppingCartItem object
+      // Validades the shopping cart item
+      // Only INCREMENT is allowed for an inexistent product on the cart
       if (
-        shoppingCartItem == null &&
+        quantityOnHand === undefined &&
         operation != CART_QUANTITY_OPERATION.INCREMENT
       ) {
         // Error Handling
@@ -80,13 +52,10 @@ class ShoppingCart {
          */
         case CART_QUANTITY_OPERATION.INCREMENT:
           // Verify existence of the StoreItem in the ShoppingCart
-          if (shoppingCartItem != null) {
+          if (quantityOnHand !== undefined) {
             // StoreItem EXISTS
             // Checks if quantity on hands + 1 is higher the max per customer
-            if (
-              storeItem.maxPerCustomer <
-              shoppingCartItem.quantityOnHand + 1
-            ) {
+            if (storeItem.maxPerCustomer < quantityOnHand + 1) {
               alert(
                 "Could not add another unit to the cart.\nExceeded maximum quantity allowed per customer."
               );
@@ -95,14 +64,14 @@ class ShoppingCart {
               // Decrement the stock the quantity
               storeItem.stockQuantity--;
               // Increment the quantity on hands
-              shoppingCartItem.quantityOnHand++;
+              quantityOnHand++;
             }
           } else {
             // StoreItem DOES NOT EXISTS
             // Decrement the stock the quantity
             storeItem.stockQuantity--;
-            // Creates the ShoppingCartItem object and sets the quantity on hands to 1
-            this.itemsMap.push(new ShoppingCartItem(storeItem, 1));
+            // Sets the quantity on hands to 1
+            quantityOnHand = 1;
           }
           break;
         /**
@@ -110,17 +79,17 @@ class ShoppingCart {
          */
         case CART_QUANTITY_OPERATION.DECREMENT:
           // Verifies if it is the last item on hand
-          if (shoppingCartItem.quantityOnHand == 1) {
+          if (quantityOnHand === 1) {
             // Increment the stock quantity
             storeItem.stockQuantity++;
-            // Remove the ShoppingCartItem from the map
-            this.removeItem(storeItem);
+            // Sets quantity on hand to zero
+            quantityOnHand = 0;
           } else {
             // IT IS NOT the last item on hand
             // Increment the stock quantity
             storeItem.stockQuantity++;
             // Decrement the quantity of itens on hand
-            shoppingCartItem.quantityOnHand--;
+            quantityOnHand--;
           }
           break;
         /**
@@ -138,9 +107,9 @@ class ShoppingCart {
           // (Quantity == 0) Removal of the the ShoppingCartItem
           if (newQuantity == 0) {
             // Reverts the stock quantity
-            storeItem.stockQuantity += shoppingCartItem.quantityOnHand;
-            // Removes Item from the shopping cart
-            this.removeItem(storeItem);
+            storeItem.stockQuantity += quantityOnHand;
+            // Sets quantity on hand to zero
+            quantityOnHand = 0;
           } else {
             // Update to a chosen number
             // Validades if the nweQuantity is higher than max allowed per customer
@@ -150,35 +119,33 @@ class ShoppingCart {
               );
               // Removes from the stock the remaining quantity
               storeItem.stockQuantity -=
-                storeItem.maxPerCustomer - shoppingCartItem.quantityOnHand;
+                storeItem.maxPerCustomer - quantityOnHand;
               // Sets the maximum allowed quantity
-              shoppingCartItem.quantityOnHand = storeItem.maxPerCustomer;
+              quantityOnHand = storeItem.maxPerCustomer;
             } else {
               // nweQuantity is lower than max allowed per customer
 
               // Validades if NEWQUANTITY is HIGHER than current quantity ONHAND
-              if (newQuantity > shoppingCartItem.quantityOnHand) {
+              if (newQuantity > quantityOnHand) {
                 // Removes from the stock the remaining quantity
-                storeItem.stockQuantity -=
-                  newQuantity - shoppingCartItem.quantityOnHand;
+                storeItem.stockQuantity -= newQuantity - quantityOnHand;
                 // Sets the new quantity on hand
-                shoppingCartItem.quantityOnHand = newQuantity;
+                quantityOnHand = newQuantity;
               } else {
                 // NEWQUANTITY is LOWER than current quantity ONHAND
 
                 // Checks if newQuantity is HIGHER than ZERO
                 if (newQuantity > 0) {
                   // Adds the quantity difference back to the stock
-                  storeItem.stockQuantity +=
-                    shoppingCartItem.quantityOnHand - newQuantity;
+                  storeItem.stockQuantity += quantityOnHand - newQuantity;
                   // Sets the newQuantity
-                  shoppingCartItem.quantityOnHand = newQuantity;
+                  quantityOnHand = newQuantity;
                 } else {
                   // newQuantity is LOWER than ZERO
                   // Adds the quantity onHand back to the stock
-                  storeItem.stockQuantity += shoppingCartItem.quantityOnHand;
-                  // Remove Item from the shopping cart
-                  this.removeItem(storeItem);
+                  storeItem.stockQuantity += quantityOnHand;
+                  // Sets quantity on hand to zero
+                  quantityOnHand = 0;
                 }
               }
             }
@@ -188,7 +155,13 @@ class ShoppingCart {
           break;
       }
 
-      // Saves the cart
+      // Saves the cart based on quantity on hands
+      if (quantityOnHand > 0) {
+        this.shoppingCartItems.set(storeItem, quantityOnHand);
+      } else {
+        // Removes the item from the cart
+        this.shoppingCartItems.delete(storeItem);
+      }
       // TODO: Fix the session storage
       // sessionStorage.setItem("shoppingCart", JSON.stringify(this));
 
@@ -248,15 +221,14 @@ class ShoppingCart {
     let productsDiv = document.createElement("div");
     productsDiv.classList.add("cart-products-wrapper");
     section.appendChild(productsDiv);
-    if (this.itemsMap.length == 0) {
+    if (this.shoppingCartItems.size == 0) {
       let emptyP = document.createElement("p");
       emptyP.classList.add("cart-summary-empty");
       emptyP.textContent = "Your cart is empty.";
       productsDiv.appendChild(emptyP);
     } else {
       // Iterate through all items
-      for (let i = 0; i < this.itemsMap.length; i++) {
-        let currentItem = this.itemsMap[i];
+      for (let [storeItem, quantityOnHand] of this.shoppingCartItems) {
         // Product Wrapper Div
         let productWrapperDiv = document.createElement("div");
         productWrapperDiv.classList.add("cart-product-wrapper");
@@ -273,8 +245,8 @@ class ShoppingCart {
           // Creates img Tag for the item
           let imgItem = document.createElement("img");
           imgItem.classList.add("cart-product-img");
-          imgItem.src = currentItem.storeItem.imageURL;
-          imgItem.alt = currentItem.storeItem.name;
+          imgItem.src = storeItem.imageURL;
+          imgItem.alt = storeItem.name;
           figureItem.appendChild(imgItem);
         }
         {
@@ -283,7 +255,7 @@ class ShoppingCart {
           productNameDiv.classList.add("cart-product-name");
           productWrapperDiv.appendChild(productNameDiv);
           let productNameP = document.createElement("p");
-          productNameP.textContent = currentItem.storeItem.name;
+          productNameP.textContent = storeItem.name;
           productNameDiv.appendChild(productNameP);
         }
         {
@@ -292,31 +264,31 @@ class ShoppingCart {
           productQuantityDiv.classList.add("cart-product-quantity");
           productWrapperDiv.appendChild(productQuantityDiv);
           // [ < ] Creates a link to the cart
-          let lessThenLink = document.createElement("a");
-          lessThenLink.href = "javascript:void(0);";
-          lessThenLink.setAttribute(
+          let decrementLink = document.createElement("a");
+          decrementLink.href = "javascript:void(0);";
+          decrementLink.setAttribute(
             "onclick",
             "shoppingCart.updateShoppingCartItemQuantity( " +
-              currentItem.storeItem.id +
+              storeItem.id +
               "," +
               CART_QUANTITY_OPERATION.DECREMENT +
               "," +
               PAGE_CONTEXT.SHOPPING_CART +
               ")"
           );
-          productQuantityDiv.appendChild(lessThenLink);
+          productQuantityDiv.appendChild(decrementLink);
           // Creates the Less Then Symbol
-          let lessThanP = document.createElement("p");
-          lessThanP.textContent = "-";
-          lessThenLink.appendChild(lessThanP);
+          let decrementP = document.createElement("p");
+          decrementP.textContent = "-";
+          decrementLink.appendChild(decrementP);
 
           let quantityInput = document.createElement("input");
           quantityInput.classList.add("cart-product-quantity-input");
-          quantityInput.value = currentItem.quantityOnHand;
+          quantityInput.value = quantityOnHand;
           quantityInput.setAttribute(
             "onchange",
             "shoppingCart.updateShoppingCartItemQuantity( " +
-              currentItem.storeItem.id +
+              storeItem.id +
               "," +
               CART_QUANTITY_OPERATION.CHANGE +
               "," +
@@ -327,23 +299,23 @@ class ShoppingCart {
           productQuantityDiv.appendChild(quantityInput);
 
           // [ > ] Creates a link to the cart
-          let greaterThanLink = document.createElement("a");
-          greaterThanLink.href = "javascript:void(0);";
-          greaterThanLink.setAttribute(
+          let incrementLink = document.createElement("a");
+          incrementLink.href = "javascript:void(0);";
+          incrementLink.setAttribute(
             "onclick",
             "shoppingCart.updateShoppingCartItemQuantity( " +
-              currentItem.storeItem.id +
+              storeItem.id +
               "," +
               CART_QUANTITY_OPERATION.INCREMENT +
               "," +
               PAGE_CONTEXT.SHOPPING_CART +
               ")"
           );
-          productQuantityDiv.appendChild(greaterThanLink);
+          productQuantityDiv.appendChild(incrementLink);
           // Creates the Greater Then Symbol
-          let greaterThanP = document.createElement("p");
-          greaterThanP.textContent = "+";
-          greaterThanLink.appendChild(greaterThanP);
+          let incrementP = document.createElement("p");
+          incrementP.textContent = "+";
+          incrementLink.appendChild(incrementP);
         }
         {
           // Creates a div for the price
@@ -352,7 +324,7 @@ class ShoppingCart {
           productWrapperDiv.appendChild(productPriceDiv);
           let productPriceP = document.createElement("p");
           productPriceP.textContent = Store.convertToSelectedCurrency(
-            currentItem.storeItem.price
+            storeItem.price
           );
           productPriceDiv.appendChild(productPriceP);
         }
@@ -449,9 +421,8 @@ class ShoppingCart {
   calculateCartSubTotal() {
     let subtotal = 0;
     // Iterate through all shoppingCartItems
-    for (let i = 0; i < this.itemsMap.length; i++) {
-      subtotal +=
-        this.itemsMap[i].storeItem.price * this.itemsMap[i].quantityOnHand;
+    for (let [storeItem, quantityOnHand] of this.shoppingCartItems) {
+      subtotal += storeItem.price * quantityOnHand;
     }
     return subtotal;
   }
@@ -464,10 +435,8 @@ class ShoppingCart {
   calculateShippingCost() {
     let shippingCost = 0;
     // Iterate through all shoppingCartItems
-    for (let i = 0; i < this.itemsMap.length; i++) {
-      shippingCost +=
-        this.itemsMap[i].storeItem.costOfShipping *
-        this.itemsMap[i].quantityOnHand;
+    for (let [storeItem, quantityOnHand] of this.shoppingCartItems) {
+      shippingCost += storeItem.costOfShipping * quantityOnHand;
     }
     return shippingCost;
   }
@@ -478,12 +447,12 @@ class ShoppingCart {
    * @returns {Number} ShoppingCart sum of units.
    */
   getTotalItemCount() {
-    let countTotal = 0;
+    let itemsTotal = 0;
     // Iterate through all shoppingCartItems
-    for (let i = 0; i < this.itemsMap.length; i++) {
-      countTotal += this.itemsMap[i].quantityOnHand;
+    for (let [storeItem, quantityOnHand] of this.shoppingCartItems) {
+      itemsTotal += quantityOnHand;
     }
-    return countTotal;
+    return itemsTotal;
   }
 
   /**

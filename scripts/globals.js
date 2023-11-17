@@ -9,7 +9,7 @@ const PAGE_CONTEXT = Object.freeze({
   SHOPPING_CART: 1,
 });
 
-// Constant that defines the type of arithimetic operation
+// Constant that defines the type of arithmetic operation
 // that is going to be applied on a shopping cart item quantity
 const CART_QUANTITY_OPERATION = Object.freeze({
   INCREMENT: 0,

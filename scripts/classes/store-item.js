@@ -49,6 +49,7 @@ class StoreItem {
 
   /**
    * Method that dynamically creates a div element contaning all info about a store item
+   * @method
    * @returns {HTMLUListElement} A DOM div element containing all information of the store item
    */
   getStoreItemGrid() {
@@ -145,14 +146,7 @@ class StoreItem {
     divItemPrice.classList.add("store-item-price");
     // Display the current price taking in consideration the current selected currenty
     let currency = theStore.getCurrency(currentCurrencyIndex);
-    divItemPrice.textContent =
-      // "Price: " +
-      // theStore.currencies[currentCurrencyIndex].symbol +
-      // (this.price * theStore.currencies[currentCurrencyIndex].rate).toFixed(2);
-      new Intl.NumberFormat("en-CA", {
-        style: "currency",
-        currency: currency.name,
-      }).format(this.price * currency.rate);
+    divItemPrice.textContent = Store.convertToSelectedCurrency(this.price);
     // Creates a div for cart
     let divAddCart = document.createElement("div");
     divAddCart.classList.add("store-item-add-to-cart");
@@ -212,6 +206,7 @@ class StoreItem {
 
   /**
    * Method that creates a start review image on a document element
+   * @method
    * @param {HTMLUListElement} documentElement a document element which will contain the image
    * @param {String} starType a type of star (filled, half or empty)
    */
@@ -245,6 +240,7 @@ class StoreItem {
 
   /**
    * Method that dynamically creates a article element contaning detailed info about a store item
+   * @method
    * @returns {HTMLUListElement} A DOM div element containing detailed information of the store item
    */
   getStoreItemDetailsGrid() {
@@ -328,10 +324,7 @@ class StoreItem {
     divItemPrice.appendChild(strongTag);
     pTag = document.createElement("p");
     let currency = theStore.getCurrency(currentCurrencyIndex);
-    pTag.textContent = new Intl.NumberFormat("en-CA", {
-      style: "currency",
-      currency: currency.name,
-    }).format(this.price * currency.rate);
+    pTag.textContent = Store.convertToSelectedCurrency(this.price);
     divItemPrice.appendChild(pTag);
     // Now loop through all additional information
     for (const key in this.details) {

@@ -24,7 +24,10 @@
 
   .store-items-section {
     margin: 0;
+    align-items: center;
     justify-content: space-evenly;
+    flex-direction: column;
+    gap: 10px;
   }
 
   h1 {
@@ -64,5 +67,20 @@
   .store-item-article-details strong,
   .store-item-article-details p {
     font-size: 1.8rem;
+  }
+
+  .cart-products-wrapper,
+  .cart-summary-wrapper {
+    width: 90%;
+    flex-direction: column;
+  }
+
+  .cart-product-wrapper {
+    flex-direction: column;
+  }
+
+  .cart-summary-wrapper {
+    margin: unset;
+    align-self: unset;
   }
 }

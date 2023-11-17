@@ -14,6 +14,7 @@ class ShoppingCart {
 
   /**
    * Method that checks if a Store Item exists in the Shopping Cart.
+   * @method
    * @param {StoreItem} storeItem Store Item object to be searched.
    * @returns {ShoppingCartItem} ShoppingCartItem object if found
    */
@@ -28,6 +29,7 @@ class ShoppingCart {
 
   /**
    * Method that finds a Store Item and remove it from the Shopping Cart.
+   * @method
    * @param {StoreItem} storeItem Store Item object to be searched.
    */
   removeItem(storeItem) {
@@ -40,6 +42,7 @@ class ShoppingCart {
 
   /**
    * Method that updates the quantity of a StoreItem hold on the shopping cart.
+   * @method
    * @param {number} storeItemId StoreItem id.
    * @param {CART_QUANTITY_OPERATION} operation Type of operation to be applied to the quantity.
    * @param {PAGE_CONTEXT} pageContext Page context of the method caller.
@@ -85,7 +88,7 @@ class ShoppingCart {
               shoppingCartItem.quantityOnHand + 1
             ) {
               alert(
-                "Could not add to the cart.\nExceeded maximum quantity allowed per customer."
+                "Could not add another unit to the cart.\nExceeded maximum quantity allowed per customer."
               );
               return false;
             } else {
@@ -212,6 +215,7 @@ class ShoppingCart {
 
   /**
    * Method that displays the Shopping Cart.
+   * @method
    */
   displayShoppingCart() {
     // Gets the Store Item Section
@@ -241,101 +245,235 @@ class ShoppingCart {
     let productsDiv = document.createElement("div");
     productsDiv.classList.add("cart-products-wrapper");
     section.appendChild(productsDiv);
+    if (this.itemsMap.length == 0) {
+      let emptyP = document.createElement("p");
+      emptyP.classList.add("cart-summary-empty");
+      emptyP.textContent = "Your cart is empty.";
+      productsDiv.appendChild(emptyP);
+    } else {
+      // Iterate through all items
+      for (let i = 0; i < this.itemsMap.length; i++) {
+        let currentItem = this.itemsMap[i];
+        // Product Wrapper Div
+        let productWrapperDiv = document.createElement("div");
+        productWrapperDiv.classList.add("cart-product-wrapper");
+        productsDiv.appendChild(productWrapperDiv);
+        {
+          // Product Image Div
+          let productImageDiv = document.createElement("div");
+          productImageDiv.classList.add("cart-product-image-wrapper");
+          productWrapperDiv.appendChild(productImageDiv);
+          // Creates figure tag for the Item
+          let figureItem = document.createElement("figure");
+          figureItem.classList.add("cart-product-figure");
+          productImageDiv.appendChild(figureItem);
+          // Creates img Tag for the item
+          let imgItem = document.createElement("img");
+          imgItem.classList.add("cart-product-img");
+          imgItem.src = currentItem.storeItem.imageURL;
+          imgItem.alt = currentItem.storeItem.name;
+          figureItem.appendChild(imgItem);
+        }
+        {
+          // Creates a div for the name
+          let productNameDiv = document.createElement("div");
+          productNameDiv.classList.add("cart-product-name");
+          productWrapperDiv.appendChild(productNameDiv);
+          let productNameP = document.createElement("p");
+          productNameP.textContent = currentItem.storeItem.name;
+          productNameDiv.appendChild(productNameP);
+        }
+        {
+          // Creates a div for the quantity
+          let productQuantityDiv = document.createElement("div");
+          productQuantityDiv.classList.add("cart-product-quantity");
+          productWrapperDiv.appendChild(productQuantityDiv);
+          // [ < ] Creates a link to the cart
+          let lessThenLink = document.createElement("a");
+          lessThenLink.href = "javascript:void(0);";
+          lessThenLink.setAttribute(
+            "onclick",
+            "shoppingCart.updateShoppingCartItemQuantity( " +
+              currentItem.storeItem.id +
+              "," +
+              CART_QUANTITY_OPERATION.DECREMENT +
+              "," +
+              PAGE_CONTEXT.SHOPPING_CART +
+              ")"
+          );
+          productQuantityDiv.appendChild(lessThenLink);
+          // Creates the Less Then Symbol
+          let lessThanP = document.createElement("p");
+          lessThanP.textContent = "-";
+          lessThenLink.appendChild(lessThanP);
+
+          let quantityInput = document.createElement("input");
+          quantityInput.classList.add("cart-product-quantity-input");
+          quantityInput.value = currentItem.quantityOnHand;
+          quantityInput.setAttribute(
+            "onchange",
+            "shoppingCart.updateShoppingCartItemQuantity( " +
+              currentItem.storeItem.id +
+              "," +
+              CART_QUANTITY_OPERATION.CHANGE +
+              "," +
+              PAGE_CONTEXT.SHOPPING_CART +
+              "," +
+              "this.value )"
+          );
+          productQuantityDiv.appendChild(quantityInput);
+
+          // [ > ] Creates a link to the cart
+          let greaterThanLink = document.createElement("a");
+          greaterThanLink.href = "javascript:void(0);";
+          greaterThanLink.setAttribute(
+            "onclick",
+            "shoppingCart.updateShoppingCartItemQuantity( " +
+              currentItem.storeItem.id +
+              "," +
+              CART_QUANTITY_OPERATION.INCREMENT +
+              "," +
+              PAGE_CONTEXT.SHOPPING_CART +
+              ")"
+          );
+          productQuantityDiv.appendChild(greaterThanLink);
+          // Creates the Greater Then Symbol
+          let greaterThanP = document.createElement("p");
+          greaterThanP.textContent = "+";
+          greaterThanLink.appendChild(greaterThanP);
+        }
+        {
+          // Creates a div for the price
+          let productPriceDiv = document.createElement("div");
+          productPriceDiv.classList.add("cart-product-price");
+          productWrapperDiv.appendChild(productPriceDiv);
+          let productPriceP = document.createElement("p");
+          productPriceP.textContent = Store.convertToSelectedCurrency(
+            currentItem.storeItem.price
+          );
+          productPriceDiv.appendChild(productPriceP);
+        }
+      }
+    }
+
     // Order Summary Div
     let summaryDiv = document.createElement("div");
     summaryDiv.classList.add("cart-summary-wrapper");
     section.append(summaryDiv);
-    // Iterate through all items
-    for (let i = 0; i < this.itemsMap.length; i++) {
-      let currentItem = this.itemsMap[i];
-      // Product Wrapper Div
-      let productWrapperDiv = document.createElement("div");
-      productWrapperDiv.classList.add("cart-product-wrapper");
-      productsDiv.appendChild(productWrapperDiv);
-      {
-        // Product Image Div
-        let productImageDiv = document.createElement("div");
-        productImageDiv.classList.add("cart-product-image-wrapper");
-        productWrapperDiv.appendChild(productImageDiv);
-        // Creates figure tag for the Item
-        let figureItem = document.createElement("figure");
-        figureItem.classList.add("cart-product-figure");
-        productImageDiv.appendChild(figureItem);
-        // Creates img Tag for the item
-        let imgItem = document.createElement("img");
-        imgItem.classList.add("cart-product-img");
-        imgItem.src = currentItem.storeItem.imageURL;
-        imgItem.alt = currentItem.storeItem.name;
-        figureItem.appendChild(imgItem);
-      }
-      {
-        // Creates a div for the name
-        let productNameDiv = document.createElement("div");
-        productNameDiv.classList.add("cart-product-name");
-        productWrapperDiv.appendChild(productNameDiv);
-        let productNameP = document.createElement("p");
-        productNameP.textContent = currentItem.storeItem.name;
-        productNameDiv.appendChild(productNameP);
-      }
-      {
-        // Creates a div for the quantity
-        let productQuantityDiv = document.createElement("div");
-        productQuantityDiv.classList.add("cart-product-quantity");
-        productWrapperDiv.appendChild(productQuantityDiv);
-        // [ < ] Creates a link to the cart
-        let lessThenLink = document.createElement("a");
-        lessThenLink.href = "javascript:void(0);";
-        lessThenLink.setAttribute(
-          "onclick",
-          "shoppingCart.updateShoppingCartItemQuantity( " +
-            currentItem.storeItem.id +
-            "," +
-            CART_QUANTITY_OPERATION.DECREMENT +
-            "," +
-            PAGE_CONTEXT.SHOPPING_CART +
-            ")"
-        );
-        productQuantityDiv.appendChild(lessThenLink);
-        // Creates the Less Then Symbol
-        let lessThanP = document.createElement("p");
-        lessThanP.textContent = "<";
-        lessThenLink.appendChild(lessThanP);
+    let orderSummaryP = document.createElement("p");
+    orderSummaryP.classList.add("cart-summary-p");
+    orderSummaryP.textContent = "Order Summary:";
+    summaryDiv.appendChild(orderSummaryP);
+    // Cart Subtotal
+    let cartSubtotalDiv = document.createElement("div");
+    cartSubtotalDiv.classList.add("cart-summary-cart-subtotal-wrapper");
+    summaryDiv.append(cartSubtotalDiv);
+    let cartSubtotalLabel = document.createElement("p");
+    cartSubtotalLabel.classList.add("cart-summary-label");
+    cartSubtotalLabel.textContent = "Cart Subtotal:";
+    cartSubtotalDiv.appendChild(cartSubtotalLabel);
+    let cartSubtotalValue = document.createElement("p");
+    cartSubtotalValue.classList.add("cart-summary-value");
+    // Calculates the CartSubtotal
+    let cartSubtotal = this.calculateCartSubTotal();
+    cartSubtotalValue.textContent =
+      Store.convertToSelectedCurrency(cartSubtotal);
+    cartSubtotalDiv.appendChild(cartSubtotalValue);
+    // Shipping Cost
+    let shippingCostDiv = document.createElement("div");
+    shippingCostDiv.classList.add("cart-summary-shipping-wrapper");
+    summaryDiv.append(shippingCostDiv);
+    let shippingCostLabel = document.createElement("p");
+    shippingCostLabel.classList.add("cart-summary-label");
+    shippingCostLabel.textContent = "Shipping Cost:";
+    shippingCostDiv.appendChild(shippingCostLabel);
+    let shippingCostValue = document.createElement("p");
+    shippingCostValue.classList.add("cart-summary-value");
+    // Calculates the Shipping Cost
+    let shippingCost = this.calculateShippingCost();
+    shippingCostValue.textContent =
+      Store.convertToSelectedCurrency(shippingCost);
+    shippingCostDiv.appendChild(shippingCostValue);
+    // Subtotal
+    let subtotalDiv = document.createElement("div");
+    subtotalDiv.classList.add("cart-summary-subtotal-wrapper");
+    summaryDiv.append(subtotalDiv);
+    let subtotalLabel = document.createElement("p");
+    subtotalLabel.classList.add("cart-summary-label");
+    subtotalLabel.textContent = "Subtotal:";
+    subtotalDiv.appendChild(subtotalLabel);
+    let subtotalValue = document.createElement("p");
+    subtotalValue.classList.add("cart-summary-value");
+    // Calculates the Subtotal
+    let subtotal = cartSubtotal + shippingCost;
+    subtotalValue.textContent = Store.convertToSelectedCurrency(subtotal);
+    subtotalDiv.appendChild(subtotalValue);
+    // Tax
+    let taxDiv = document.createElement("div");
+    taxDiv.classList.add("cart-summary-tax-wrapper");
+    summaryDiv.append(taxDiv);
+    let taxLabel = document.createElement("p");
+    taxLabel.classList.add("cart-summary-label");
+    taxLabel.textContent = "Tax:";
+    taxDiv.appendChild(taxLabel);
+    let taxValue = document.createElement("p");
+    taxValue.classList.add("cart-summary-value");
+    // Calculates the Tax
+    let tax = subtotal * 0.13;
+    taxValue.textContent = Store.convertToSelectedCurrency(tax);
+    taxDiv.appendChild(taxValue);
+    // Total
+    let totalDiv = document.createElement("div");
+    totalDiv.classList.add("cart-summary-total-wrapper");
+    summaryDiv.append(totalDiv);
+    let totalLabel = document.createElement("p");
+    totalLabel.classList.add("cart-summary-label");
+    totalLabel.textContent = "Total:";
+    totalDiv.appendChild(totalLabel);
+    let totalValue = document.createElement("p");
+    totalValue.classList.add("cart-summary-value");
+    // Calculates the Subtotal
+    let total = subtotal + tax;
+    totalValue.textContent = Store.convertToSelectedCurrency(total);
+    totalDiv.appendChild(totalValue);
+  }
 
-        let quantityInput = document.createElement("input");
-        quantityInput.classList.add("cart-product-quantity-input");
-        quantityInput.value = currentItem.quantityOnHand;
-        quantityInput.setAttribute(
-          "onchange",
-          "shoppingCart.updateShoppingCartItemQuantity( " +
-            currentItem.storeItem.id +
-            "," +
-            CART_QUANTITY_OPERATION.CHANGE +
-            "," +
-            PAGE_CONTEXT.SHOPPING_CART +
-            "," +
-            "this.value )"
-        );
-        productQuantityDiv.appendChild(quantityInput);
-
-        // [ > ] Creates a link to the cart
-        let greaterThanLink = document.createElement("a");
-        greaterThanLink.href = "javascript:void(0);";
-        greaterThanLink.setAttribute(
-          "onclick",
-          "shoppingCart.updateShoppingCartItemQuantity( " +
-            currentItem.storeItem.id +
-            "," +
-            CART_QUANTITY_OPERATION.INCREMENT +
-            "," +
-            PAGE_CONTEXT.SHOPPING_CART +
-            ")"
-        );
-        productQuantityDiv.appendChild(greaterThanLink);
-        // Creates the Greater Then Symbol
-        let greaterThanP = document.createElement("p");
-        greaterThanP.textContent = ">";
-        greaterThanLink.appendChild(greaterThanP);
-      }
+  /**
+   * Method that iterate through all shopping cart items and calculate the shipping total.
+   * @method
+   * @returns {Number} ShoppingCart subtotal.
+   */
+  calculateCartSubTotal() {
+    // Verifies if the shoppingCart has any item
+    if (this.itemsMap.length == 0) {
+      return 0;
     }
+    let subtotal = 0;
+    // Iterate through all shoppingCartItems
+    for (let i = 0; i < this.itemsMap.length; i++) {
+      subtotal +=
+        this.itemsMap[i].storeItem.price * this.itemsMap[i].quantityOnHand;
+    }
+    return subtotal;
+  }
+
+  /**
+   * Method that iterate through all shopping cart items and calculate the shipping total.
+   * @method
+   * @returns {Number} ShoppingCart subtotal.
+   */
+  calculateShippingCost() {
+    // Verifies if the shoppingCart has any item
+    if (this.itemsMap.length == 0) {
+      return 0;
+    }
+    let subtotal = 0;
+    // Iterate through all shoppingCartItems
+    for (let i = 0; i < this.itemsMap.length; i++) {
+      subtotal +=
+        this.itemsMap[i].storeItem.costOfShipping *
+        this.itemsMap[i].quantityOnHand;
+    }
+    return subtotal;
   }
 }

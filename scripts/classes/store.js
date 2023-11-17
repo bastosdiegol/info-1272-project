@@ -63,6 +63,7 @@ class Store {
    */
   /**
    * Adds a StoreItem to the Store.
+   * @method
    * @param {StoreItem} storeItem StoreItem to be added.
    * @returns {number} The storeItem array new length.
    */
@@ -72,6 +73,7 @@ class Store {
 
   /**
    * Adds a Currency to the Store.
+   * @method
    * @param {Currency} currency Currency to be added.
    * @returns {number} The currency array new length.
    */
@@ -81,6 +83,7 @@ class Store {
 
   /**
    * Getter: Store Name
+   * @method
    * @returns {String} Store Name
    */
   getStoreName() {
@@ -89,6 +92,7 @@ class Store {
 
   /**
    * Getter: Store Slogan
+   * @method
    * @returns {String} Store Slogan
    */
   getStoreSlogan() {
@@ -97,6 +101,7 @@ class Store {
 
   /**
    * Getter: Store Name + Slogan
+   * @method
    * @returns {String} String with Name and Slogan concatenated
    */
   getStoreNameAndSlogan() {
@@ -105,6 +110,7 @@ class Store {
 
   /**
    * Getter: Store Logo
+   * @method
    * @returns {String} Path to Store Logo File
    */
   getStoreLogo() {
@@ -113,6 +119,7 @@ class Store {
 
   /**
    * Method that finds a store item and return it
+   * @method
    * @param {Number} storeItemId A storeItem id
    * @returns {StoreItem} A storeItem object or null if not found
    */
@@ -127,6 +134,7 @@ class Store {
 
   /**
    * Method that finds a store item and return it
+   * @method
    * @param {Number} currencyIndex A Currency array index
    * @returns {Currency} A Currency object or null if not found
    */
@@ -368,6 +376,7 @@ class Store {
 
   /**
    * Method that changes a store item article and display its INITIAL information.
+   * @method
    * @param {Number} storeItemId Store Item Id.
    */
   loadStoreItemArticle(storeItemId) {
@@ -388,6 +397,7 @@ class Store {
 
   /**
    * Method that changes a store item article and display ADDITIONAL information.
+   * @method
    * @param {Number} storeItemId Store Item Id.
    */
   loadStoreItemArticleDetails(storeItemId) {
@@ -436,5 +446,19 @@ class Store {
       divElementSocials.appendChild(aFooterSocial); // Appends a to div
     }
     return divElementSocials;
+  }
+
+  /**
+   * Static Method that receives a Number and convert it to the current selected currency.
+   * @static @method
+   * @param {number} value Value to be converted.
+   * @returns {String} Value in the corresponding selected currency.
+   */
+  static convertToSelectedCurrency(value) {
+    let currency = theStore.getCurrency(currentCurrencyIndex);
+    return new Intl.NumberFormat("en-CA", {
+      style: "currency",
+      currency: currency.name,
+    }).format(value * currency.rate);
   }
 }

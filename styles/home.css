@@ -52,10 +52,11 @@
   font-size: 1.4rem;
 }
 
-/* Store Item Review Div Wrapper */
-.item-review-wrapper {
+.store-item-review-link {
   display: flex;
   align-items: baseline;
+  text-decoration: none;
+  color: gray;
 }
 
 /* Item Review Stars */

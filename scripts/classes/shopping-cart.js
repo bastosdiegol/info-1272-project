@@ -233,101 +233,97 @@ class ShoppingCart {
         let productWrapperDiv = document.createElement("div");
         productWrapperDiv.classList.add("cart-product-wrapper");
         productsDiv.appendChild(productWrapperDiv);
-        {
-          // Product Image Div
-          let productImageDiv = document.createElement("div");
-          productImageDiv.classList.add("cart-product-image-wrapper");
-          productWrapperDiv.appendChild(productImageDiv);
-          // Creates figure tag for the Item
-          let figureItem = document.createElement("figure");
-          figureItem.classList.add("cart-product-figure");
-          productImageDiv.appendChild(figureItem);
-          // Creates img Tag for the item
-          let imgItem = document.createElement("img");
-          imgItem.classList.add("cart-product-img");
-          imgItem.src = storeItem.imageURL;
-          imgItem.alt = storeItem.name;
-          figureItem.appendChild(imgItem);
-        }
-        {
-          // Creates a div for the name
-          let productNameDiv = document.createElement("div");
-          productNameDiv.classList.add("cart-product-name");
-          productWrapperDiv.appendChild(productNameDiv);
-          let productNameP = document.createElement("p");
-          productNameP.textContent = storeItem.name;
-          productNameDiv.appendChild(productNameP);
-        }
-        {
-          // Creates a div for the quantity
-          let productQuantityDiv = document.createElement("div");
-          productQuantityDiv.classList.add("cart-product-quantity");
-          productWrapperDiv.appendChild(productQuantityDiv);
-          // [ < ] Creates a link to the cart
-          let decrementLink = document.createElement("a");
-          decrementLink.href = "javascript:void(0);";
-          decrementLink.setAttribute(
-            "onclick",
-            "shoppingCart.updateShoppingCartItemQuantity( " +
-              storeItem.id +
-              "," +
-              CART_QUANTITY_OPERATION.DECREMENT +
-              "," +
-              PAGE_CONTEXT.SHOPPING_CART +
-              ")"
-          );
-          productQuantityDiv.appendChild(decrementLink);
-          // Creates the Less Then Symbol
-          let decrementP = document.createElement("p");
-          decrementP.textContent = "-";
-          decrementLink.appendChild(decrementP);
 
-          let quantityInput = document.createElement("input");
-          quantityInput.classList.add("cart-product-quantity-input");
-          quantityInput.value = quantityOnHand;
-          quantityInput.setAttribute(
-            "onchange",
-            "shoppingCart.updateShoppingCartItemQuantity( " +
-              storeItem.id +
-              "," +
-              CART_QUANTITY_OPERATION.CHANGE +
-              "," +
-              PAGE_CONTEXT.SHOPPING_CART +
-              "," +
-              "this.value )"
-          );
-          productQuantityDiv.appendChild(quantityInput);
+        // Product Image Div
+        let productImageDiv = document.createElement("div");
+        productImageDiv.classList.add("cart-product-image-wrapper");
+        productWrapperDiv.appendChild(productImageDiv);
+        // Creates figure tag for the Item
+        let figureItem = document.createElement("figure");
+        figureItem.classList.add("cart-product-figure");
+        productImageDiv.appendChild(figureItem);
+        // Creates img Tag for the item
+        let imgItem = document.createElement("img");
+        imgItem.classList.add("cart-product-img");
+        imgItem.src = storeItem.imageURL;
+        imgItem.alt = storeItem.name;
+        figureItem.appendChild(imgItem);
 
-          // [ > ] Creates a link to the cart
-          let incrementLink = document.createElement("a");
-          incrementLink.href = "javascript:void(0);";
-          incrementLink.setAttribute(
-            "onclick",
-            "shoppingCart.updateShoppingCartItemQuantity( " +
-              storeItem.id +
-              "," +
-              CART_QUANTITY_OPERATION.INCREMENT +
-              "," +
-              PAGE_CONTEXT.SHOPPING_CART +
-              ")"
-          );
-          productQuantityDiv.appendChild(incrementLink);
-          // Creates the Greater Then Symbol
-          let incrementP = document.createElement("p");
-          incrementP.textContent = "+";
-          incrementLink.appendChild(incrementP);
-        }
-        {
-          // Creates a div for the price
-          let productPriceDiv = document.createElement("div");
-          productPriceDiv.classList.add("cart-product-price");
-          productWrapperDiv.appendChild(productPriceDiv);
-          let productPriceP = document.createElement("p");
-          productPriceP.textContent = Store.convertToSelectedCurrency(
-            storeItem.price
-          );
-          productPriceDiv.appendChild(productPriceP);
-        }
+        // Creates a div for the name
+        let productNameDiv = document.createElement("div");
+        productNameDiv.classList.add("cart-product-name");
+        productWrapperDiv.appendChild(productNameDiv);
+        let productNameP = document.createElement("p");
+        productNameP.textContent = storeItem.name;
+        productNameDiv.appendChild(productNameP);
+
+        // Creates a div for the quantity
+        let productQuantityDiv = document.createElement("div");
+        productQuantityDiv.classList.add("cart-product-quantity");
+        productWrapperDiv.appendChild(productQuantityDiv);
+        // [ < ] Creates a link to the cart
+        let decrementLink = document.createElement("a");
+        decrementLink.href = "javascript:void(0);";
+        decrementLink.setAttribute(
+          "onclick",
+          "shoppingCart.updateShoppingCartItemQuantity( " +
+            storeItem.id +
+            "," +
+            CART_QUANTITY_OPERATION.DECREMENT +
+            "," +
+            PAGE_CONTEXT.SHOPPING_CART +
+            ")"
+        );
+        productQuantityDiv.appendChild(decrementLink);
+        // Creates the Less Then Symbol
+        let decrementP = document.createElement("p");
+        decrementP.textContent = "-";
+        decrementLink.appendChild(decrementP);
+
+        let quantityInput = document.createElement("input");
+        quantityInput.classList.add("cart-product-quantity-input");
+        quantityInput.value = quantityOnHand;
+        quantityInput.setAttribute(
+          "onchange",
+          "shoppingCart.updateShoppingCartItemQuantity( " +
+            storeItem.id +
+            "," +
+            CART_QUANTITY_OPERATION.CHANGE +
+            "," +
+            PAGE_CONTEXT.SHOPPING_CART +
+            "," +
+            "this.value )"
+        );
+        productQuantityDiv.appendChild(quantityInput);
+
+        // [ > ] Creates a link to the cart
+        let incrementLink = document.createElement("a");
+        incrementLink.href = "javascript:void(0);";
+        incrementLink.setAttribute(
+          "onclick",
+          "shoppingCart.updateShoppingCartItemQuantity( " +
+            storeItem.id +
+            "," +
+            CART_QUANTITY_OPERATION.INCREMENT +
+            "," +
+            PAGE_CONTEXT.SHOPPING_CART +
+            ")"
+        );
+        productQuantityDiv.appendChild(incrementLink);
+        // Creates the Greater Then Symbol
+        let incrementP = document.createElement("p");
+        incrementP.textContent = "+";
+        incrementLink.appendChild(incrementP);
+
+        // Creates a div for the price
+        let productPriceDiv = document.createElement("div");
+        productPriceDiv.classList.add("cart-product-price");
+        productWrapperDiv.appendChild(productPriceDiv);
+        let productPriceP = document.createElement("p");
+        productPriceP.textContent = Store.convertToSelectedCurrency(
+          storeItem.price
+        );
+        productPriceDiv.appendChild(productPriceP);
       }
     }
 

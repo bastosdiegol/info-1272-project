@@ -210,41 +210,6 @@ class Store {
   }
 
   /**
-   * Method that dynamically creates a div element contaning all necessary store items that should appear at specified page
-   * @method
-   * @param {Number} category ID for a specified story category, empty (or null) for frontpage
-   * @returns {HTMLUListElement} A DOM Section Element containing a grid of store items
-   */
-  getStoreItemsGridDivElement(category = null) {
-    // Creates div Tag
-    let sectionElementStoreItemGrid = document.createElement("section");
-    sectionElementStoreItemGrid.id = "store-items-section";
-    sectionElementStoreItemGrid.classList.add("store-items-section");
-
-    // Loop to dynamically insert store items into grid div
-    for (let i = 0; i < this.#storeItems.length; i++) {
-      // Temp variable to handle the item
-      let theItem = this.#storeItems[i];
-      // Checks if the grid is request for frontpage
-      if (category == null) {
-        // Checks if the item should be displayed at frontpage
-        if (theItem.frontpageDisplay) {
-          // Gets the current item card information
-          sectionElementStoreItemGrid.appendChild(theItem.getStoreItemGrid());
-        }
-      } else {
-        // Category Items request
-        // Checks if the item category matches the category requested
-        if (theItem.category == this.#categories[category]) {
-          // Gets the current item card information
-          sectionElementStoreItemGrid.appendChild(theItem.getStoreItemGrid());
-        }
-      }
-    }
-    return sectionElementStoreItemGrid;
-  }
-
-  /**
    * Method that dynamically creates a select option with all currencies available.
    * @method
    * @returns {HTMLUListElement} DOM Div element containing the Select Input element.
@@ -342,8 +307,26 @@ class Store {
     while (section.firstChild) {
       section.removeChild(section.lastChild);
     }
-    // Appends the new section
-    section.replaceWith(this.getStoreItemsGridDivElement(category));
+    // Loop to dynamically insert store items into grid div
+    for (let i = 0; i < this.#storeItems.length; i++) {
+      // Temp variable to handle the item
+      let theItem = this.#storeItems[i];
+      // Checks if the grid is request for frontpage
+      if (category == null) {
+        // Checks if the item should be displayed at frontpage
+        if (theItem.frontpageDisplay) {
+          // Gets the current item card information
+          section.appendChild(theItem.getStoreItemGrid());
+        }
+      } else {
+        // Category Items request
+        // Checks if the item category matches the category requested
+        if (theItem.category == this.#categories[category]) {
+          // Gets the current item card information
+          section.appendChild(theItem.getStoreItemGrid());
+        }
+      }
+    }
 
     // Now to Update the Store Title and Page Description
     // Gets <title> element
@@ -459,7 +442,25 @@ class Store {
   }
 
   /**
-   * Method that loads the correct main section context.
+   * Static Method that receives a weight and convert it to a specified unit.
+   * @static @method
+   * @param {number} value weight number.
+   * @param {String} unit String which represents the weight unit to be converted.
+   * @returns {String} Value of the weight converted.
+   */
+  static convertWeight(weight, unit) {
+    const options = {
+      style: "unit",
+      unit: unit,
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    };
+    return new Intl.NumberFormat("en-CA", options).format(weight);
+  }
+
+  /**
+   * Method that loads the correct main section context accordingly with the current page context.
+   * @method
    */
   loadMainSectionContext() {
     switch (currentPageContext) {
@@ -469,9 +470,74 @@ class Store {
       case PAGE_CONTEXT.SHOPPING_CART:
         shoppingCart.displayShoppingCart();
       case PAGE_CONTEXT.REVIEW:
+        this.displayReviews();
         break;
       default:
         break;
     }
+  }
+
+  /**
+   * Display all reviews from a specified StoreItem.
+   * @method
+   * @param {number} storeItemId Store Item ID which reviews should be loaded.
+   */
+  displayReviews(storeItemId) {
+    // Sets current Page Context
+    currentPageContext = PAGE_CONTEXT.REVIEW;
+    // Gets the Store Item Section
+    let section = document.getElementById("store-items-section");
+    // Gets the Store Item
+    let storeItem = this.getStoreItem(storeItemId);
+    // Clear the section
+    while (section.firstChild) {
+      section.removeChild(section.lastChild);
+    }
+
+    // Now to Update the Store Title and Page Description
+    // Gets <title> element
+    let titleElements = document.getElementsByTagName("title");
+    // Gets the page Description
+    let pageDescription = document.getElementById("page-content-desc");
+    // Checks if any <title> elements were found
+    if (titleElements.length > 0) {
+      // Gets the first <title> element
+      let titleElement = titleElements[0];
+      // Updates the title - With Category
+      titleElement.textContent =
+        theStore.getStoreName() + " - " + storeItem.name + " Reviews";
+      // Updates the page description
+      pageDescription.textContent = "Customer Reviews:";
+    }
+
+    // Load the Item Details
+    // Product Wrapper Div
+    let productWrapperDiv = document.createElement("div");
+    productWrapperDiv.classList.add("product-wrapper");
+    section.appendChild(productWrapperDiv);
+    // Product Image Div
+    let productImageDiv = document.createElement("div");
+    productImageDiv.classList.add("product-image-wrapper");
+    productWrapperDiv.appendChild(productImageDiv);
+    // Creates figure tag for the Item
+    let figureItem = document.createElement("figure");
+    figureItem.classList.add("product-figure");
+    productImageDiv.appendChild(figureItem);
+    // Creates img Tag for the item
+    let imgItem = document.createElement("img");
+    imgItem.classList.add("cart-product-img");
+    imgItem.src = storeItem.imageURL;
+    imgItem.alt = storeItem.name;
+    figureItem.appendChild(imgItem);
+    // Creates a div for the name
+    let productNameDiv = document.createElement("div");
+    productNameDiv.classList.add("product-name");
+    productWrapperDiv.appendChild(productNameDiv);
+    let productNameP = document.createElement("p");
+    productNameP.textContent = storeItem.name;
+    productNameDiv.appendChild(productNameP);
+
+    // Loop to dynamically insert store items into grid div
+    for (let i = 0; i < storeItem.reviews.length; i++) {}
   }
 }

@@ -15,6 +15,11 @@ if (MAIN_ELEMENTS.length > 0) {
   pPageContentDesc.classList.add("page-content-desc");
   pPageContentDesc.textContent = "Store Items:";
   MAIN_ELEMENT.appendChild(pPageContentDesc);
+  // Adds main section to the page content
+  let section = document.createElement("section");
+  section.id = "store-items-section";
+  section.classList.add("store-items-section");
+  MAIN_ELEMENT.appendChild(section);
   // Calls the store method to return the section with items
-  MAIN_ELEMENT.appendChild(theStore.getStoreItemsGridDivElement());
+  MAIN_ELEMENT.appendChild(theStore.loadStoreItems());
 }

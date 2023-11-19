@@ -13,7 +13,7 @@ class StoreItem {
    * @param {Number} maxPerCustomer StoreItem Maximum Quantity permited to sell to a user.
    * @param {String} category StoreItem Category.
    * @param {Number} costOfShipping StoreItem Shipping Cost.
-   * @param {Object[]} reviews Array of Review Objects.
+   * @param {Review[]} reviews Array of Review Objects.
    * @param {Number} reviewScore Current review average score.
    * @param {Object} details StoreItem object containing additional details.
    * @param {String} imageURL StoreItem image URL.
@@ -82,6 +82,14 @@ class StoreItem {
     // Creates a div wrapper for reviews
     let divIemReviewWrapper = document.createElement("div");
     divIemReviewWrapper.classList.add("item-review-wrapper");
+    // Adds a link to the item review
+    let reviewLink = document.createElement("a");
+    reviewLink.classList.add("store-item-review-link");
+    reviewLink.href = "#";
+    reviewLink.setAttribute(
+      "onclick",
+      "theStore.displayReviews(" + this.id + ")"
+    );
     // Creates a div to contain the reviews stars
     let divItemReviewsStars = document.createElement("div");
     divItemReviewsStars.classList.add("store-item-review-stars");
@@ -186,8 +194,9 @@ class StoreItem {
     emItemStock.appendChild(divItemStockQuantity); //                                <em "ItemStock"> <div "ItemStockQuantity">
     emItemStock.appendChild(divItemMaxPerCustomer); //                               <em "ItemStock"> <div "ItemMaxPerCustomer">
     divItemHeader.appendChild(divIemReviewWrapper); //    <div "ItemHeader"> <div "ItemReviewWrapper">
-    divIemReviewWrapper.appendChild(divItemReviewsStars); //                 <div "ItemReviewWrapper"> <div "ItemReviewsStars">
-    divIemReviewWrapper.appendChild(divItemReviewsQuantity); //              <div "ItemReviewWrapper"> <div "temReviewsQuantity">
+    divIemReviewWrapper.appendChild(reviewLink); //                 <div "ItemReviewWrapper"> <a "reviewLink">
+    reviewLink.appendChild(divItemReviewsStars); //                                          <a "reviewLink"> <div "ItemReviewsStars">
+    reviewLink.appendChild(divItemReviewsQuantity); //                                       <a "reviewLink"> <div "temReviewsQuantity">
     // Body
     divItemBody.appendChild(aItemName); //    <div "ItemBody"> <a "ItemName">
     aItemName.appendChild(figureItem); //                      <a "ItemName"> <figure "Item">
@@ -335,7 +344,21 @@ class StoreItem {
       strongTag.textContent = key + ":";
       divElement.appendChild(strongTag);
       pTag = document.createElement("p");
-      pTag.textContent = this.details[key];
+      // Weight Conversion
+      if (key === "Weight") {
+        // If the weight is higher than 1000grams display in kilograms
+        if (this.details[key] > 999) {
+          pTag.textContent = Store.convertWeight(
+            this.details[key] / 1000,
+            "kilogram"
+          );
+        } else {
+          // Else display in grams
+          pTag.textContent = Store.convertWeight(this.details[key], "gram");
+        }
+      } else {
+        pTag.textContent = this.details[key];
+      }
       divElement.appendChild(pTag);
     }
     // Display the current price taking in consideration the current selected currenty

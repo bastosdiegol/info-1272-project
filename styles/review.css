@@ -1,0 +1,7 @@
+.product-wrapper {
+  display: flex;
+  background-color: white;
+  gap: 15px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+}

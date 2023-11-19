@@ -293,8 +293,37 @@ class Store {
   }
 
   /**
-   * Method that prepares the page for a new set of Store Items.
-   * Updates the page title and page description and replace the main section with a new one
+   * Method that sets a string as a new page title.
+   * @method
+   * @param {String} newTitle New Store Title.
+   */
+  setWebsiteTitle(newTitle) {
+    // Gets <title> element
+    let titleElements = document.getElementsByTagName("title");
+    // Checks if any <title> elements were found
+    if (titleElements.length > 0) {
+      // Gets the first <title> element
+      let titleElement = titleElements[0];
+      // Updates the title - With Category
+      titleElement.textContent = newTitle;
+    }
+  }
+
+  /**
+   * Method that sets a string as a new page description.
+   * @method
+   * @param {String} newDescription New Page Description.
+   */
+  setPageDescription(newDescription) {
+    // Gets the page Description and Updates its textContent
+    document.getElementById("page-content-desc").textContent = newDescription;
+  }
+
+  /**
+   * Method that load all store items.
+   * If no category is passed by parameter will display all items
+   *    But If a item has frontpageDisplay variable set as false it won't show
+   * If a category is passed by parameter only items that belongs to that category are going to be loaded
    * @method
    * @param {Number=} category Category Id or null for Home Page.
    */
@@ -329,27 +358,17 @@ class Store {
     }
 
     // Now to Update the Store Title and Page Description
-    // Gets <title> element
-    let titleElements = document.getElementsByTagName("title");
-    // Gets the page Description
-    let pageDescription = document.getElementById("page-content-desc");
-    // Checks if any <title> elements were found
-    if (titleElements.length > 0) {
-      // Gets the first <title> element
-      let titleElement = titleElements[0];
-      // Checks if its Home Page of Category Page
-      if (category != null) {
-        // Updates the title - With Category
-        titleElement.textContent =
-          this.#name + " - " + this.#categories[category];
-        // Updates the page description
-        pageDescription.textContent = this.#categories[category] + ":";
-      } else {
-        // Updates the title
-        titleElement.textContent = this.#name + " - " + this.#slogan;
-        // Updates the page description
-        pageDescription.textContent = "Store Items:";
-      }
+    // Checks if its Home Page of Category Page
+    if (category != null) {
+      // Updates the title - With Category
+      this.setWebsiteTitle(this.#name + " - " + this.#categories[category]);
+      // Updates the page description
+      this.setPageDescription(this.#categories[category] + ":");
+    } else {
+      // Updates the title
+      this.setWebsiteTitle(this.#name + " - " + this.#slogan);
+      // Updates the page description
+      this.setPageDescription("Store Items:");
     }
   }
 
@@ -495,20 +514,10 @@ class Store {
     }
 
     // Now to Update the Store Title and Page Description
-    // Gets <title> element
-    let titleElements = document.getElementsByTagName("title");
-    // Gets the page Description
-    let pageDescription = document.getElementById("page-content-desc");
-    // Checks if any <title> elements were found
-    if (titleElements.length > 0) {
-      // Gets the first <title> element
-      let titleElement = titleElements[0];
-      // Updates the title - With Category
-      titleElement.textContent =
-        theStore.getStoreName() + " - " + storeItem.name + " Reviews";
-      // Updates the page description
-      pageDescription.textContent = "Customer Reviews:";
-    }
+    this.setWebsiteTitle(
+      theStore.getStoreName() + " - " + storeItem.name + " Reviews"
+    );
+    this.setPageDescription("Customer Reviews:");
 
     // Load the Item Details
     // Product Wrapper Div

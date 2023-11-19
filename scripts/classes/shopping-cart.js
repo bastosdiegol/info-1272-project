@@ -201,20 +201,8 @@ class ShoppingCart {
       section.removeChild(section.lastChild);
     }
     // Now to Update the Store Title and Page Description
-    // Gets <title> element
-    let titleElements = document.getElementsByTagName("title");
-    // Gets the page Description
-    let pageDescription = document.getElementById("page-content-desc");
-    // Checks if any <title> elements were found
-    if (titleElements.length > 0) {
-      // Gets the first <title> element
-      let titleElement = titleElements[0];
-      // Updates the title - With Category
-      titleElement.textContent =
-        theStore.getStoreName() + " - " + "Shopping Cart";
-      // Updates the page description
-      pageDescription.textContent = "Your Cart:";
-    }
+    theStore.setWebsiteTitle(theStore.getStoreName() + " - " + "Shopping Cart");
+    theStore.setPageDescription("Your Cart:");
 
     // Creates the Shopping Cart Section
     // Products List Div

@@ -42,3 +42,7 @@ var shoppingCart = new ShoppingCart();
 // Variable to store main section context
 /** @type {PAGE_CONTEXT} Shopping Cart Variable */
 var currentPageContext = PAGE_CONTEXT.HOME;
+
+// Last Visited Product - Used for PAGE_CONTEXT.REVIEW
+/** @type {number} Product ID */
+var lastVisitedProduct = null;

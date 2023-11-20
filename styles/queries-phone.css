@@ -83,4 +83,14 @@
     margin: unset;
     align-self: unset;
   }
+
+  .product-wrapper,
+  .reviews-wrapper {
+    width: 90%;
+  }
+
+  .reviews-wrapper {
+    margin: unset;
+    align-self: unset;
+  }
 }

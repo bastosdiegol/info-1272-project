@@ -490,8 +490,9 @@ class Store {
         break;
       case PAGE_CONTEXT.SHOPPING_CART:
         shoppingCart.displayShoppingCart();
+        break;
       case PAGE_CONTEXT.REVIEW:
-        this.displayReviews();
+        this.displayReviews(lastVisitedProduct);
         break;
       default:
         break;
@@ -506,6 +507,8 @@ class Store {
   displayReviews(storeItemId) {
     // Sets current Page Context
     currentPageContext = PAGE_CONTEXT.REVIEW;
+    // Sets last visited product
+    lastVisitedProduct = storeItemId;
     // Gets the Store Item Section
     let section = document.getElementById("store-items-section");
     // Gets the Store Item

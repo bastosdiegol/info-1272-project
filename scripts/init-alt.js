@@ -26,7 +26,7 @@ let aStoreItem = new StoreItem(
   "Nikon D750",
   1779.95,
   9,
-  1,
+  2,
   "Nikon",
   5.99,
   [
@@ -74,7 +74,7 @@ aStoreItem = new StoreItem(
   "Polaroid One Step 2",
   266.32,
   11,
-  2,
+  3,
   "Polaroid",
   5.99,
   [
@@ -106,7 +106,7 @@ aStoreItem = new StoreItem(
   "Polaroid Pronto 600",
   56.42,
   15,
-  3,
+  4,
   "Polaroid",
   5.99,
   [
@@ -138,7 +138,7 @@ aStoreItem = new StoreItem(
   "Canon EOS Rebel T3i",
   402.55,
   14,
-  2,
+  3,
   "Canon",
   5.99,
   [new Review(5, "Great Product", "Amazing product")],
@@ -160,7 +160,7 @@ aStoreItem = new StoreItem(
   "Lumix GH5",
   1173.94,
   10,
-  1,
+  2,
   "Lumix",
   5.99,
   [
@@ -188,7 +188,7 @@ aStoreItem = new StoreItem(
   "Canon AE-1",
   328,
   16,
-  2,
+  3,
   "Canon",
   5.99,
   [],

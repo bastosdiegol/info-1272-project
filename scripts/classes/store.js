@@ -599,7 +599,7 @@ class Store {
       reviewsWrapper.appendChild(noReviewsDescription);
     } else {
       // Loop to dynamically insert store items into grid div
-      for (let i = 0; i < storeItem.reviews.length; i++) {
+      for (let i = storeItem.reviews.length - 1; i >= 0; i--) {
         // Creates a div for the review
         let reviewWrapper = document.createElement("div");
         reviewWrapper.classList.add("review-wrapper");
@@ -632,6 +632,9 @@ class Store {
         reviewWrapper.appendChild(reviewDescription);
       }
     }
+
+    // Appends the review form submission
+    section.appendChild(this.createReviewForm());
   }
 
   /**
@@ -653,5 +656,100 @@ class Store {
       percentageMap.set(i, (starCount[i] * 100) / storeItem.reviews.length);
     }
     return percentageMap;
+  }
+
+  /**
+   * Method that creates a form for .
+   * @method
+   * @returns {HTMLUListElement} DOM Div element containing the Select Input element.
+   */
+  createReviewForm() {
+    // Creates the form
+    let formDiv = document.createElement("div");
+    formDiv.id = "review-form";
+    formDiv.classList.add("review-form");
+    // Creates the fildset
+    let fieldset = document.createElement("fieldset");
+    fieldset.classList.add("review-fieldset");
+    formDiv.appendChild(fieldset);
+    let legend = document.createElement("legend");
+    legend.textContent = "Submit a review:";
+    fieldset.appendChild(legend);
+    // Creates the review score
+    let scoreLabel = document.createElement("label");
+    scoreLabel.classList.add("review-score-label");
+    scoreLabel.htmlFor = "score";
+    scoreLabel.textContent = "Score:";
+    fieldset.appendChild(scoreLabel);
+    let scoreRange = document.createElement("input");
+    scoreRange.type = "range";
+    scoreRange.classList.add("review-score-input");
+    scoreRange.name = "score";
+    scoreRange.id = "score";
+    scoreRange.min = 1;
+    scoreRange.max = 5;
+    fieldset.appendChild(scoreRange);
+    // Creates the review headline input
+    let headlineLabel = document.createElement("label");
+    headlineLabel.classList.add("review-headline-label");
+    headlineLabel.htmlFor = "headline";
+    headlineLabel.textContent = "Headline:";
+    fieldset.appendChild(headlineLabel);
+    let headlineInput = document.createElement("input");
+    headlineInput.type = "text";
+    headlineInput.classList.add("review-headline-input");
+    headlineInput.name = "headline";
+    headlineInput.id = "headline";
+    headlineInput.placeholder = "Your title.";
+    fieldset.appendChild(headlineInput);
+    // Creates the review description textarea
+    let descriptionLabel = document.createElement("label");
+    descriptionLabel.classList.add("review-description-label");
+    descriptionLabel.htmlFor = "description";
+    descriptionLabel.textContent = "Description:";
+    fieldset.appendChild(descriptionLabel);
+    let descriptionTextArea = document.createElement("textarea");
+    descriptionTextArea.classList.add("review-description-textarea");
+    descriptionTextArea.name = "description";
+    descriptionTextArea.id = "description";
+    descriptionTextArea.placeholder = "Write your review here.";
+    descriptionTextArea.cols = 40;
+    descriptionTextArea.rows = 4;
+    fieldset.appendChild(descriptionTextArea);
+    // Creates the submit button
+    let submit = document.createElement("button");
+    submit.type = "submit";
+    submit.textContent = "Submit";
+    submit.addEventListener("click", function (event) {
+      theStore.createReview(
+        lastVisitedProduct,
+        scoreRange.value,
+        headlineInput.value,
+        descriptionTextArea.value
+      );
+    });
+    fieldset.appendChild(submit);
+
+    return formDiv;
+  }
+
+  /**
+   * Method that creates a new instance of a review and adds it to a StoreItem.
+   * @param {number} storeItemId StoreItem which will receive the review.
+   * @param {number} score Review rating.
+   * @param {String} headline Review title.
+   * @param {String} description Review text content.
+   */
+  createReview(storeItemId, score, headline, description) {
+    let storeItem = this.getStoreItem(storeItemId);
+    let newReview = new Review(Number(score), headline, description);
+    storeItem.reviews.push(newReview);
+    storeItem.updateReviewAverage();
+
+    document.getElementById("score").value = 5;
+    document.getElementById("headline").textContent = "";
+    document.getElementById("description").textContent = "";
+
+    this.displayReviews(storeItemId);
   }
 }

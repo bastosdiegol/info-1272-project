@@ -114,8 +114,6 @@ class StoreItem {
     // Creates a div to contain the reviews quantity
     let divItemReviewsQuantity = document.createElement("div");
     divItemReviewsQuantity.classList.add("store-item-reviews-quantity");
-    // TODO: Fix the quantity of reviews
-    // Quick conditional so I don't show (undefined)
     divItemReviewsQuantity.textContent =
       "(" + (this.reviews.length == undefined ? 0 : this.reviews.length) + ")";
     /********
@@ -398,5 +396,19 @@ class StoreItem {
     aAddCart.appendChild(divAddCartText); // <a "AddCart"> <div "AddCartText">
 
     return articleStoreItem;
+  }
+
+  /**
+   * Method that updates the StoreItem review average.
+   */
+  updateReviewAverage() {
+    let reviewCount = 0;
+    let totalScore = 0;
+    // Iterate through all reviews
+    for (let i = 0; i < this.reviews.length; i++) {
+      reviewCount++;
+      totalScore += this.reviews[i].rating;
+    }
+    this.reviewScore = totalScore / reviewCount;
   }
 }

@@ -21,5 +21,5 @@ if (MAIN_ELEMENTS.length > 0) {
   section.classList.add("store-items-section");
   MAIN_ELEMENT.appendChild(section);
   // Calls the store method to return the section with items
-  MAIN_ELEMENT.appendChild(theStore.loadStoreItems());
+  theStore.loadStoreItems();
 }

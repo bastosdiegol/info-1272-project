@@ -361,7 +361,9 @@ class Store {
     // Checks if its Home Page of Category Page
     if (category != null) {
       // Updates the title - With Category
-      this.setWebsiteTitle(this.#name + " - " + this.#categories[category]);
+      this.setWebsiteTitle(
+        this.#name + " - Category: " + this.#categories[category]
+      );
       // Updates the page description
       this.setPageDescription(this.#categories[category] + ":");
     } else {
@@ -519,6 +521,9 @@ class Store {
     );
     this.setPageDescription("Customer Reviews:");
 
+    // Validade if the item has a review
+    if (storeItem.reviews.length === 0) {
+    }
     // Load the Item Details
     // Product Wrapper Div
     let productWrapperDiv = document.createElement("div");
@@ -545,8 +550,105 @@ class Store {
     let productNameP = document.createElement("p");
     productNameP.textContent = storeItem.name;
     productNameDiv.appendChild(productNameP);
+    // Calculates Star Percentages
+    let percentageArray = this.calculateStarPercentage(storeItem);
+    for (let i = 5; i >= 1; i--) {
+      // Creates the Wrapper
+      let starReviewWrapper = document.createElement("div");
+      starReviewWrapper.classList.add("star-review-wapper");
+      productWrapperDiv.appendChild(starReviewWrapper);
+      // Creates the Star Description
+      let starDescription = document.createElement("p");
+      starDescription.classList.add("star-description");
+      if (i === 1) {
+        starDescription.textContent = i + " Star";
+      } else {
+        starDescription.textContent = i + " Stars";
+      }
+      starReviewWrapper.appendChild(starDescription);
+      // Creates the percentage progress
+      let starPercentageProgress = document.createElement("progress");
+      starPercentageProgress.classList.add("star-percentage-progress");
+      starPercentageProgress.max = 100;
+      starPercentageProgress.value = Number.isNaN(percentageArray.get(i))
+        ? 0
+        : percentageArray.get(i);
+      starReviewWrapper.appendChild(starPercentageProgress);
+      // Creates the percentage Description
+      let percentageDescription = document.createElement("p");
+      percentageDescription.classList.add("percentage-description");
+      percentageDescription.textContent =
+        (Number.isNaN(percentageArray.get(i))
+          ? 0
+          : percentageArray.get(i).toFixed(1)) + "%";
+      starReviewWrapper.appendChild(percentageDescription);
+    }
 
-    // Loop to dynamically insert store items into grid div
-    for (let i = 0; i < storeItem.reviews.length; i++) {}
+    // Creates a div for all reviews
+    let reviewsWrapper = document.createElement("div");
+    reviewsWrapper.classList.add("reviews-wrapper");
+    section.appendChild(reviewsWrapper);
+    if (storeItem.reviews.length == 0) {
+      // No reviews description
+      let noReviewsDescription = document.createElement("p");
+      noReviewsDescription.classList.add("no-reviews-description");
+      noReviewsDescription.textContent = "This product has no reviews.";
+      reviewsWrapper.appendChild(noReviewsDescription);
+    } else {
+      // Loop to dynamically insert store items into grid div
+      for (let i = 0; i < storeItem.reviews.length; i++) {
+        // Creates a div for the review
+        let reviewWrapper = document.createElement("div");
+        reviewWrapper.classList.add("review-wrapper");
+        reviewsWrapper.appendChild(reviewWrapper);
+        // Creates the review header
+        let reviewHeader = document.createElement("div");
+        reviewHeader.classList.add("review-header");
+        reviewWrapper.appendChild(reviewHeader);
+        // Creates the review rating
+        let reviewRating = document.createElement("div");
+        reviewRating.classList.add("review-rating");
+        reviewHeader.appendChild(reviewRating);
+        // Add Filled stars
+        for (let j = 0; j < storeItem.reviews[i].rating; j++) {
+          storeItem.addReviewStarImage(reviewRating, "filled");
+        }
+        // Add Blank stars
+        for (let j = 0; j < 5 - storeItem.reviews[i].rating; j++) {
+          storeItem.addReviewStarImage(reviewRating, "empty");
+        }
+        // Creates the review Title
+        let reviewTitle = document.createElement("p");
+        reviewTitle.classList.add("review-title");
+        reviewTitle.textContent = storeItem.reviews[i].headline;
+        reviewHeader.appendChild(reviewTitle);
+        // Creates the review description
+        let reviewDescription = document.createElement("p");
+        reviewDescription.classList.add("review-description");
+        reviewDescription.textContent = storeItem.reviews[i].description;
+        reviewWrapper.appendChild(reviewDescription);
+      }
+    }
+  }
+
+  /**
+   * Method that calculates the percentage for each review star.
+   * @param {StoreItem} storeItem StoreItem from which the percentages will be calculated.
+   * @returns {Map<number, number>} Array containing the percentagem for each star.
+   */
+  calculateStarPercentage(storeItem) {
+    // Array that will store how many different stars appear
+    let starCount = [0, 0, 0, 0, 0, 0];
+    // Final Map with percentages
+    let percentageMap = new Map();
+    // Loop through all reviews and increments the star count
+    for (let i = 0; i < storeItem.reviews.length; i++) {
+      starCount[storeItem.reviews[i].rating]++;
+    }
+    // Loop through starCount array and stores the percentages
+    for (let i = 1; i < starCount.length; i++) {
+      percentageMap.set(i, (starCount[i] * 100) / storeItem.reviews.length);
+    }
+    return percentageMap;
   }
 }

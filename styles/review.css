@@ -1,7 +1,94 @@
 .product-wrapper {
   display: flex;
+  flex-direction: column;
   background-color: white;
   gap: 15px;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
   padding: 10px;
+  width: 15%;
+}
+
+.product-name {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.product-name,
+.product-figure {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.star-review-wapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.star-percentage-progress {
+  width: 50px;
+  height: 15px;
+  flex: 1;
+}
+
+.star-description,
+.percentage-description {
+  font-size: 1.4rem;
+  width: 44px;
+}
+
+.reviews-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  margin-left: 15px;
+  gap: 10px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  width: 60%;
+}
+
+.review-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-top: 1px dotted gray;
+  padding: 10px;
+}
+
+.review-wrapper:first-child {
+  border-top: unset;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 10px;
+}
+
+.review-rating {
+  display: flex;
+  text-align-last: right;
+}
+
+/* Item Review Stars - img */
+.review-rating img {
+  width: 10px;
+}
+
+.review-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+.review-description {
+  font-size: 1.4rem;
+}
+
+.no-reviews-description {
+  font-size: 1.8rem;
+  font-style: italic;
 }

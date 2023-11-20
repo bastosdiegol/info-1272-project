@@ -29,8 +29,34 @@ let aStoreItem = new StoreItem(
   1,
   "Nikon",
   5.99,
-  [],
-  4.7,
+  [
+    new Review(
+      5,
+      "Lorem, ipsum dolor.",
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit."
+    ),
+    new Review(
+      5,
+      "Lorem, ipsum.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, quo."
+    ),
+    new Review(
+      3,
+      "Lorem, ipsum dolor.",
+      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sint."
+    ),
+    new Review(
+      4,
+      "Lorem.",
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit."
+    ),
+    new Review(
+      5,
+      "Lorem, ipsum dolor.",
+      "Lorem ipsum dolor, sit amet consectetur adipisicing."
+    ),
+  ],
+  4.6,
   {
     Brand: "Nikon",
     Year: 2014,
@@ -51,8 +77,19 @@ aStoreItem = new StoreItem(
   2,
   "Polaroid",
   5.99,
-  [],
-  2.1,
+  [
+    new Review(
+      3,
+      "Lorem, ipsum dolor.",
+      "Lorem ipsum dolor, sit amet consectetur adipisicing."
+    ),
+    new Review(
+      2,
+      "Lorem, ipsum.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus, quo."
+    ),
+  ],
+  2.5,
   {
     Brand: "Polaroid",
     Year: 2017,
@@ -72,8 +109,19 @@ aStoreItem = new StoreItem(
   3,
   "Polaroid",
   5.99,
-  [],
-  2.1,
+  [
+    new Review(
+      5,
+      "Lorem.",
+      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. A dignissimos dicta beatae vitae sed magni."
+    ),
+    new Review(
+      4,
+      "Lorem ipsum dolor sit.",
+      "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Veritatis, natus quo iure voluptates fugiat nesciunt dolorem doloribus eum id facere."
+    ),
+  ],
+  4.5,
   {
     Brand: "Polaroid",
     Year: 1981,
@@ -93,8 +141,8 @@ aStoreItem = new StoreItem(
   2,
   "Canon",
   5.99,
-  [],
-  2.1,
+  [new Review(5, "Great Product", "Amazing product")],
+  5,
   {
     Brand: "Canon",
     Year: 2011,
@@ -115,8 +163,14 @@ aStoreItem = new StoreItem(
   1,
   "Lumix",
   5.99,
-  [],
-  2.1,
+  [
+    new Review(
+      1,
+      "Lorem, ipsum dolor.",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam, placeat."
+    ),
+  ],
+  1,
   {
     Brand: "Lumix",
     Year: 2017,
@@ -138,7 +192,7 @@ aStoreItem = new StoreItem(
   "Canon",
   5.99,
   [],
-  2.1,
+  0,
   {
     Brand: "Canon",
     Year: 2014,
@@ -159,7 +213,7 @@ aStoreItem = new StoreItem(
   "Canon",
   5.99,
   [],
-  2.1,
+  0,
   {
     Brand: "Canon",
     Year: 1977,
@@ -180,7 +234,7 @@ aStoreItem = new StoreItem(
   "Nikon",
   5.99,
   [],
-  2.1,
+  0,
   {
     Brand: "Nikon",
     Year: 2015,
@@ -202,7 +256,7 @@ aStoreItem = new StoreItem(
   "Nikon",
   5.99,
   [],
-  2.1,
+  0,
   {
     Brand: "Nikon",
     Year: 1977,
@@ -223,7 +277,7 @@ aStoreItem = new StoreItem(
   "Canon",
   5.99,
   [],
-  2.1,
+  0,
   {
     Brand: "Canon",
     Year: 2016,
@@ -245,7 +299,7 @@ aStoreItem = new StoreItem(
   "Lenses",
   5.99,
   [],
-  2.1,
+  0,
   { Brand: "Minolta", Year: 1981, Colour: "Black", Weight: 285 },
   "./images/products/minolta-md-85mm.png",
   true
@@ -261,7 +315,7 @@ aStoreItem = new StoreItem(
   "Lenses",
   5.99,
   [],
-  2.1,
+  0,
   { Brand: "Canon", Year: 2010, Colour: "Black", Weight: 750 },
   "./images/products/canon-ef-135.png",
   true
@@ -277,7 +331,7 @@ aStoreItem = new StoreItem(
   "Accessories",
   5.99,
   [],
-  2.1,
+  0,
   { Brand: "Ronin", Year: 2022, Colour: "Black", Weight: 2000 },
   "./images/products/ronin-dji-rs3pro.png",
   true
@@ -293,7 +347,7 @@ aStoreItem = new StoreItem(
   "Accessories",
   5.99,
   [],
-  2.1,
+  0,
   { Brand: "Lowepro", Year: 2017, Colour: "Black and Gray", Weight: 2005 },
   "./images/products/lowepro-flipside-500ii.png",
   true
@@ -309,7 +363,7 @@ aStoreItem = new StoreItem(
   "Accessories",
   5.99,
   [],
-  2.1,
+  0,
   { Brand: "Ronin", Year: 2020, Colour: "Black", Weight: 1200 },
   "./images/products/ronin-dji-2pro.png",
   true
@@ -325,7 +379,7 @@ aStoreItem = new StoreItem(
   "Accessories",
   5.99,
   [],
-  2.1,
+  0,
   { Brand: "Vinta", Year: 2019, Colour: "Charcoal and Natural", Weight: 1400 },
   "./images/products/vinta-type-ii.png",
   true
@@ -341,7 +395,7 @@ aStoreItem = new StoreItem(
   "Lenses",
   5.99,
   [],
-  2.1,
+  0,
   { Brand: "Sony", Year: 2016, Colour: "Black and White", Weight: 2230 },
   "./images/products/sony-fe-70-200.png",
   true
@@ -357,7 +411,7 @@ aStoreItem = new StoreItem(
   "Lenses",
   5.99,
   [],
-  2.1,
+  0,
   { Brand: "Sony", Year: 2016, Colour: "Black", Weight: 1036 },
   "./images/products/sony-fe-24-70.png",
   true
@@ -373,7 +427,7 @@ aStoreItem = new StoreItem(
   "Lenses",
   5.99,
   [],
-  2.1,
+  0,
   { Brand: "Sony", Year: 2017, Colour: "Black", Weight: 662 },
   "./images/products/sony-fe-24-105.png",
   true
@@ -389,7 +443,7 @@ aStoreItem = new StoreItem(
   "Lenses",
   5.99,
   [],
-  2.1,
+  0,
   { Brand: "Sony", Year: 2019, Colour: "Black", Weight: 280 },
   "./images/products/sony-fe-35.png",
   true

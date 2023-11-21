@@ -99,16 +99,16 @@ class StoreItem {
     let countStars = 0; // Counter for how many start was created
     // For each Integer part creates a filled star
     for (countStars; countStars < integerPart; countStars++) {
-      this.addReviewStarImage(divItemReviewsStars, "filled");
+      getReviewStarImage(divItemReviewsStars, "filled");
     }
     // Adds a half-filled star if the fractional part is higher than 0.25
     if (fractionalPart >= 0.25 && fractionalPart < 1) {
-      this.addReviewStarImage(divItemReviewsStars, "half");
+      getReviewStarImage(divItemReviewsStars, "half");
       countStars++;
     }
     // Adds the remaining starts to reach 5 as empty
     while (countStars < 5) {
-      this.addReviewStarImage(divItemReviewsStars, "empty");
+      getReviewStarImage(divItemReviewsStars, "empty");
       countStars++;
     }
     // Creates a div to contain the reviews quantity
@@ -209,40 +209,6 @@ class StoreItem {
     aAddCart.appendChild(divAddCartText); //                                   <a "AddCart"> <div "AddCartText">
 
     return articleStoreItem;
-  }
-
-  /**
-   * Method that creates a start review image on a document element
-   * @method
-   * @param {HTMLUListElement} documentElement a document element which will contain the image
-   * @param {String} starType a type of star (filled, half or empty)
-   */
-  addReviewStarImage(documentElement, starType) {
-    // Creates figure Tag
-    let figureReviewStar = document.createElement("figure");
-    figureReviewStar.classList = "figureStar";
-    // Creates img Tag
-    let imgReviewStar = document.createElement("img");
-    imgReviewStar.classList = "imgReviewStar";
-    switch (starType) {
-      case "filled":
-        imgReviewStar.src = "./images/review/star-icon.png";
-        imgReviewStar.alt = "Review Filled Star";
-        break;
-      case "half":
-        imgReviewStar.src = "./images/review/star-half-yellow-icon.png";
-        imgReviewStar.alt = "Review Half-Filled Star";
-        break;
-      case "empty":
-        imgReviewStar.src = "./images/review/star-line-yellow-icon.png";
-        imgReviewStar.alt = "Review Empty Star";
-        break;
-      default:
-        break;
-    }
-    // Tags relationship
-    figureReviewStar.appendChild(imgReviewStar);
-    documentElement.appendChild(figureReviewStar);
   }
 
   /**

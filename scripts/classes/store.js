@@ -553,6 +553,35 @@ class Store {
     let productNameP = document.createElement("p");
     productNameP.textContent = storeItem.name;
     productNameDiv.appendChild(productNameP);
+    // Creates a div for the overall score
+    let productScoreDiv = document.createElement("div");
+    productScoreDiv.classList.add("product-score");
+    productWrapperDiv.appendChild(productScoreDiv);
+    // Creates a div to contain the reviews stars
+    let divItemReviewsStars = document.createElement("div");
+    divItemReviewsStars.classList.add("store-item-review-stars");
+    // Calculates how many stars should we display per reviewscore
+    let integerPart = Math.floor(storeItem.reviewScore); // Integer part = filled stars
+    let fractionalPart = storeItem.reviewScore - integerPart; // Fractional part = half filled star
+    let countStars = 0; // Counter for how many start was created
+    // For each Integer part creates a filled star
+    for (countStars; countStars < integerPart; countStars++) {
+      getReviewStarImage(divItemReviewsStars, "filled");
+    }
+    // Adds a half-filled star if the fractional part is higher than 0.25
+    if (fractionalPart >= 0.25 && fractionalPart < 1) {
+      getReviewStarImage(divItemReviewsStars, "half");
+      countStars++;
+    }
+    productScoreDiv.appendChild(divItemReviewsStars);
+    // Adds the remaining starts to reach 5 as empty
+    while (countStars < 5) {
+      getReviewStarImage(divItemReviewsStars, "empty");
+      countStars++;
+    }
+    let productScoreP = document.createElement("p");
+    productScoreP.textContent = storeItem.reviewScore.toFixed(1) + " out of 5";
+    productScoreDiv.appendChild(productScoreP);
     // Calculates Star Percentages
     let percentageArray = this.calculateStarPercentage(storeItem);
     for (let i = 5; i >= 1; i--) {
@@ -614,11 +643,11 @@ class Store {
         reviewHeader.appendChild(reviewRating);
         // Add Filled stars
         for (let j = 0; j < storeItem.reviews[i].rating; j++) {
-          storeItem.addReviewStarImage(reviewRating, "filled");
+          getReviewStarImage(reviewRating, "filled");
         }
         // Add Blank stars
         for (let j = 0; j < 5 - storeItem.reviews[i].rating; j++) {
-          storeItem.addReviewStarImage(reviewRating, "empty");
+          getReviewStarImage(reviewRating, "empty");
         }
         // Creates the review Title
         let reviewTitle = document.createElement("p");
@@ -681,14 +710,36 @@ class Store {
     scoreLabel.htmlFor = "score";
     scoreLabel.textContent = "Score:";
     fieldset.appendChild(scoreLabel);
-    let scoreRange = document.createElement("input");
-    scoreRange.type = "range";
-    scoreRange.classList.add("review-score-input");
-    scoreRange.name = "score";
-    scoreRange.id = "score";
-    scoreRange.min = 1;
-    scoreRange.max = 5;
-    fieldset.appendChild(scoreRange);
+    // Creates the starts for review score
+    let scoreStarsDiv = document.createElement("div");
+    scoreStarsDiv.classList.add("score-stars-form");
+    fieldset.appendChild(scoreStarsDiv);
+    let hiddenScore = document.createElement("input");
+    hiddenScore.id = "hidden-score-star";
+    hiddenScore.type = "hidden";
+    hiddenScore.value = 1;
+    fieldset.appendChild(hiddenScore);
+    for (let i = 1; i <= 5; i++) {
+      // Adds a link to set a review
+      let reviewScoreLink = document.createElement("a");
+      reviewScoreLink.classList.add("store-item-review-link");
+      reviewScoreLink.href = "#";
+      reviewScoreLink.setAttribute(
+        "onclick",
+        "theStore.setReviewScoreForm(" + i + ")"
+      );
+      let star;
+      if (i == 1) {
+        star = getReviewStarImage(reviewScoreLink, "filled");
+      } else {
+        star = getReviewStarImage(reviewScoreLink, "empty");
+      }
+      star.id = "star-" + i;
+      star.classList.add("star-" + i);
+      star.firstChild.classList.add("score-star-form");
+      scoreStarsDiv.appendChild(reviewScoreLink);
+    }
+
     // Creates the review headline input
     let headlineLabel = document.createElement("label");
     headlineLabel.classList.add("review-headline-label");
@@ -723,7 +774,7 @@ class Store {
     submit.addEventListener("click", function (event) {
       theStore.createReview(
         lastVisitedProduct,
-        scoreRange.value,
+        hiddenScore.value,
         headlineInput.value,
         descriptionTextArea.value
       );
@@ -746,10 +797,39 @@ class Store {
     storeItem.reviews.push(newReview);
     storeItem.updateReviewAverage();
 
-    document.getElementById("score").value = 5;
+    document.getElementById("hidden-score-star").value = 1;
     document.getElementById("headline").textContent = "";
     document.getElementById("description").textContent = "";
 
     this.displayReviews(storeItemId);
+  }
+
+  /**
+   * Function that changes the hidden score in form review.
+   * @param {number} score New Score.
+   */
+  setReviewScoreForm(score) {
+    let hiddenScore = document.getElementById("hidden-score-star");
+    // Iterate through all stars
+    for (let i = 1; i <= 5; i++) {
+      // Checks if its to be a Filled Star
+      if (i <= score) {
+        // Checks if its already filled then skip
+        if (hiddenScore.value > score) {
+          continue;
+        } else {
+          // Else change the image src
+          let currentStarImage = document.getElementById("star-" + i);
+          currentStarImage.firstChild.src = "./images/review/star-icon.png";
+        }
+      } else {
+        // It should be empty, then change its source
+        let currentStarImage = document.getElementById("star-" + i);
+        currentStarImage.firstChild.src =
+          "./images/review/star-line-yellow-icon.png";
+      }
+    }
+    // Finally updates the form hidden score
+    hiddenScore.value = score;
   }
 }

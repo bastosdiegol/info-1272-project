@@ -111,3 +111,31 @@
   font-size: 1.8rem;
   padding: 10px;
 }
+
+.product-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.product-score p {
+  font-size: 1.8rem;
+}
+
+.score-stars-form {
+  display: flex;
+  gap: 15px;
+}
+
+.store-item-review-link {
+  display: flex;
+}
+
+.figureStar .star-1 {
+  display: flex;
+}
+
+.score-star-form {
+  width: 25px;
+}

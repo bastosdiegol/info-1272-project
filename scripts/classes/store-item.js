@@ -152,7 +152,7 @@ class StoreItem {
     divItemPrice.classList.add("store-item-price");
     // Display the current price taking in consideration the current selected currenty
     let currency = theStore.getCurrency(currentCurrencyIndex);
-    divItemPrice.textContent = Store.convertToSelectedCurrency(this.price);
+    divItemPrice.textContent = convertToSelectedCurrency(this.price);
     // Creates a div for cart
     let divAddCart = document.createElement("div");
     divAddCart.classList.add("store-item-add-to-cart");
@@ -297,7 +297,7 @@ class StoreItem {
     divItemPrice.appendChild(strongTag);
     pTag = document.createElement("p");
     let currency = theStore.getCurrency(currentCurrencyIndex);
-    pTag.textContent = Store.convertToSelectedCurrency(this.price);
+    pTag.textContent = convertToSelectedCurrency(this.price);
     divItemPrice.appendChild(pTag);
     // Now loop through all additional information
     for (const key in this.details) {
@@ -312,13 +312,13 @@ class StoreItem {
       if (key === "Weight") {
         // If the weight is higher than 1000grams display in kilograms
         if (this.details[key] > 999) {
-          pTag.textContent = Store.convertWeight(
+          pTag.textContent = convertWeight(
             this.details[key] / 1000,
             "kilogram"
           );
         } else {
           // Else display in grams
-          pTag.textContent = Store.convertWeight(this.details[key], "gram");
+          pTag.textContent = convertWeight(this.details[key], "gram");
         }
       } else {
         pTag.textContent = this.details[key];

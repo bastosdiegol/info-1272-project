@@ -449,37 +449,6 @@ class Store {
   }
 
   /**
-   * Static Method that receives a Number and convert it to the current selected currency.
-   * @static @method
-   * @param {number} value Value to be converted.
-   * @returns {String} Value in the corresponding selected currency.
-   */
-  static convertToSelectedCurrency(value) {
-    let currency = theStore.getCurrency(currentCurrencyIndex);
-    return new Intl.NumberFormat("en-CA", {
-      style: "currency",
-      currency: currency.name,
-    }).format(value * currency.rate);
-  }
-
-  /**
-   * Static Method that receives a weight and convert it to a specified unit.
-   * @static @method
-   * @param {number} value weight number.
-   * @param {String} unit String which represents the weight unit to be converted.
-   * @returns {String} Value of the weight converted.
-   */
-  static convertWeight(weight, unit) {
-    const options = {
-      style: "unit",
-      unit: unit,
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    };
-    return new Intl.NumberFormat("en-CA", options).format(weight);
-  }
-
-  /**
    * Method that loads the correct main section context accordingly with the current page context.
    * @method
    */

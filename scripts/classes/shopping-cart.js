@@ -308,9 +308,7 @@ class ShoppingCart {
         productPriceDiv.classList.add("cart-product-price");
         productWrapperDiv.appendChild(productPriceDiv);
         let productPriceP = document.createElement("p");
-        productPriceP.textContent = Store.convertToSelectedCurrency(
-          storeItem.price
-        );
+        productPriceP.textContent = convertToSelectedCurrency(storeItem.price);
         productPriceDiv.appendChild(productPriceP);
       }
     }
@@ -335,8 +333,7 @@ class ShoppingCart {
     cartSubtotalValue.classList.add("cart-summary-value");
     // Calculates the CartSubtotal
     let cartSubtotal = this.calculateCartSubTotal();
-    cartSubtotalValue.textContent =
-      Store.convertToSelectedCurrency(cartSubtotal);
+    cartSubtotalValue.textContent = convertToSelectedCurrency(cartSubtotal);
     cartSubtotalDiv.appendChild(cartSubtotalValue);
     // Shipping Cost
     let shippingCostDiv = document.createElement("div");
@@ -350,8 +347,7 @@ class ShoppingCart {
     shippingCostValue.classList.add("cart-summary-value");
     // Calculates the Shipping Cost
     let shippingCost = this.calculateShippingCost();
-    shippingCostValue.textContent =
-      Store.convertToSelectedCurrency(shippingCost);
+    shippingCostValue.textContent = convertToSelectedCurrency(shippingCost);
     shippingCostDiv.appendChild(shippingCostValue);
     // Subtotal
     let subtotalDiv = document.createElement("div");
@@ -365,7 +361,7 @@ class ShoppingCart {
     subtotalValue.classList.add("cart-summary-value");
     // Calculates the Subtotal
     let subtotal = cartSubtotal + shippingCost;
-    subtotalValue.textContent = Store.convertToSelectedCurrency(subtotal);
+    subtotalValue.textContent = convertToSelectedCurrency(subtotal);
     subtotalDiv.appendChild(subtotalValue);
     // Tax
     let taxDiv = document.createElement("div");
@@ -379,7 +375,7 @@ class ShoppingCart {
     taxValue.classList.add("cart-summary-value");
     // Calculates the Tax
     let tax = subtotal * 0.13;
-    taxValue.textContent = Store.convertToSelectedCurrency(tax);
+    taxValue.textContent = convertToSelectedCurrency(tax);
     taxDiv.appendChild(taxValue);
     // Total
     let totalDiv = document.createElement("div");
@@ -393,7 +389,7 @@ class ShoppingCart {
     totalValue.classList.add("cart-summary-value");
     // Calculates the Subtotal
     let total = subtotal + tax;
-    totalValue.textContent = Store.convertToSelectedCurrency(total);
+    totalValue.textContent = convertToSelectedCurrency(total);
     totalDiv.appendChild(totalValue);
   }
 

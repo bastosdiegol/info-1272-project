@@ -472,8 +472,9 @@ class Store {
    * Display all reviews from a specified StoreItem.
    * @method
    * @param {number} storeItemId Store Item ID which reviews should be loaded.
+   * @param {number} scoreFilter Filter the reviews that are going to be displayed.
    */
-  displayReviews(storeItemId) {
+  displayReviews(storeItemId, scoreFilter = null) {
     // Sets current Page Context
     currentPageContext = PAGE_CONTEXT.REVIEW;
     // Sets last visited product
@@ -501,10 +502,19 @@ class Store {
     let productWrapperDiv = document.createElement("div");
     productWrapperDiv.classList.add("product-wrapper");
     section.appendChild(productWrapperDiv);
+    // Creates a link for product wrapper reviews
+    let productReviewsLink = document.createElement("a");
+    productReviewsLink.classList.add("star-review-filter-link");
+    productReviewsLink.href = "#";
+    productReviewsLink.setAttribute(
+      "onclick",
+      "theStore.displayReviews(" + storeItemId + ")"
+    );
+    productWrapperDiv.appendChild(productReviewsLink);
     // Product Image Div
     let productImageDiv = document.createElement("div");
     productImageDiv.classList.add("product-image-wrapper");
-    productWrapperDiv.appendChild(productImageDiv);
+    productReviewsLink.appendChild(productImageDiv);
     // Creates figure tag for the Item
     let figureItem = document.createElement("figure");
     figureItem.classList.add("product-figure");
@@ -518,34 +528,38 @@ class Store {
     // Creates a div for the name
     let productNameDiv = document.createElement("div");
     productNameDiv.classList.add("product-name");
-    productWrapperDiv.appendChild(productNameDiv);
+    productReviewsLink.appendChild(productNameDiv);
     let productNameP = document.createElement("p");
     productNameP.textContent = storeItem.name;
     productNameDiv.appendChild(productNameP);
     // Creates a div for the overall score
     let productScoreDiv = document.createElement("div");
     productScoreDiv.classList.add("product-score");
-    productWrapperDiv.appendChild(productScoreDiv);
+    productReviewsLink.appendChild(productScoreDiv);
     // Creates a div to contain the reviews stars
     let divItemReviewsStars = document.createElement("div");
-    divItemReviewsStars.classList.add("store-item-review-stars");
+    divItemReviewsStars.classList.add("review-stars");
     // Calculates how many stars should we display per reviewscore
     let integerPart = Math.floor(storeItem.reviewScore); // Integer part = filled stars
     let fractionalPart = storeItem.reviewScore - integerPart; // Fractional part = half filled star
     let countStars = 0; // Counter for how many start was created
     // For each Integer part creates a filled star
+    let theStar;
     for (countStars; countStars < integerPart; countStars++) {
-      getReviewStarImage(divItemReviewsStars, "filled");
+      theStar = getReviewStarImage(divItemReviewsStars, "filled");
+      theStar.firstChild.classList = "global-average-star-review";
     }
     // Adds a half-filled star if the fractional part is higher than 0.25
     if (fractionalPart >= 0.25 && fractionalPart < 1) {
-      getReviewStarImage(divItemReviewsStars, "half");
+      theStar = getReviewStarImage(divItemReviewsStars, "half");
+      theStar.firstChild.classList = "global-average-star-review";
       countStars++;
     }
     productScoreDiv.appendChild(divItemReviewsStars);
     // Adds the remaining starts to reach 5 as empty
     while (countStars < 5) {
-      getReviewStarImage(divItemReviewsStars, "empty");
+      theStar = getReviewStarImage(divItemReviewsStars, "empty");
+      theStar.firstChild.classList = "global-average-star-review";
       countStars++;
     }
     let productScoreP = document.createElement("p");
@@ -558,6 +572,15 @@ class Store {
       let starReviewWrapper = document.createElement("div");
       starReviewWrapper.classList.add("star-review-wapper");
       productWrapperDiv.appendChild(starReviewWrapper);
+      // Creates a link for star description
+      let reviewScoreLink = document.createElement("a");
+      reviewScoreLink.classList.add("star-review-filter-link");
+      reviewScoreLink.href = "#";
+      reviewScoreLink.setAttribute(
+        "onclick",
+        "theStore.displayReviews(" + storeItemId + ", " + i + ")"
+      );
+      starReviewWrapper.appendChild(reviewScoreLink);
       // Creates the Star Description
       let starDescription = document.createElement("p");
       starDescription.classList.add("star-description");
@@ -566,7 +589,7 @@ class Store {
       } else {
         starDescription.textContent = i + " Stars";
       }
-      starReviewWrapper.appendChild(starDescription);
+      reviewScoreLink.appendChild(starDescription);
       // Creates the percentage progress
       let starPercentageProgress = document.createElement("progress");
       starPercentageProgress.classList.add("star-percentage-progress");
@@ -598,36 +621,46 @@ class Store {
     } else {
       // Loop to dynamically insert store items into grid div
       for (let i = storeItem.reviews.length - 1; i >= 0; i--) {
-        // Creates a div for the review
-        let reviewWrapper = document.createElement("div");
-        reviewWrapper.classList.add("review-wrapper");
-        reviewsWrapper.appendChild(reviewWrapper);
-        // Creates the review header
-        let reviewHeader = document.createElement("div");
-        reviewHeader.classList.add("review-header");
-        reviewWrapper.appendChild(reviewHeader);
-        // Creates the review rating
-        let reviewRating = document.createElement("div");
-        reviewRating.classList.add("review-rating");
-        reviewHeader.appendChild(reviewRating);
-        // Add Filled stars
-        for (let j = 0; j < storeItem.reviews[i].rating; j++) {
-          getReviewStarImage(reviewRating, "filled");
+        if (scoreFilter == null || scoreFilter == storeItem.reviews[i].rating) {
+          // Creates a div for the review
+          let reviewWrapper = document.createElement("div");
+          reviewWrapper.classList.add("review-wrapper");
+          reviewsWrapper.appendChild(reviewWrapper);
+          // Creates the review header
+          let reviewHeader = document.createElement("div");
+          reviewHeader.classList.add("review-header");
+          reviewWrapper.appendChild(reviewHeader);
+          // Creates the review rating
+          let reviewRating = document.createElement("div");
+          reviewRating.classList.add("review-rating");
+          reviewHeader.appendChild(reviewRating);
+          // Add Filled stars
+          for (let j = 0; j < storeItem.reviews[i].rating; j++) {
+            getReviewStarImage(reviewRating, "filled");
+          }
+          // Add Blank stars
+          for (let j = 0; j < 5 - storeItem.reviews[i].rating; j++) {
+            getReviewStarImage(reviewRating, "empty");
+          }
+          // Creates the review Title
+          let reviewTitle = document.createElement("p");
+          reviewTitle.classList.add("review-title");
+          reviewTitle.textContent = storeItem.reviews[i].headline;
+          reviewHeader.appendChild(reviewTitle);
+          // Creates the review description
+          let reviewDescription = document.createElement("p");
+          reviewDescription.classList.add("review-description");
+          reviewDescription.textContent = storeItem.reviews[i].description;
+          reviewWrapper.appendChild(reviewDescription);
         }
-        // Add Blank stars
-        for (let j = 0; j < 5 - storeItem.reviews[i].rating; j++) {
-          getReviewStarImage(reviewRating, "empty");
-        }
-        // Creates the review Title
-        let reviewTitle = document.createElement("p");
-        reviewTitle.classList.add("review-title");
-        reviewTitle.textContent = storeItem.reviews[i].headline;
-        reviewHeader.appendChild(reviewTitle);
-        // Creates the review description
-        let reviewDescription = document.createElement("p");
-        reviewDescription.classList.add("review-description");
-        reviewDescription.textContent = storeItem.reviews[i].description;
-        reviewWrapper.appendChild(reviewDescription);
+      }
+      if (reviewsWrapper.children.length == 0) {
+        // No reviews description
+        let noReviewsDescription = document.createElement("p");
+        noReviewsDescription.classList.add("no-reviews-description");
+        noReviewsDescription.textContent =
+          "This product has no reviews with " + scoreFilter + " stars reviews.";
+        reviewsWrapper.appendChild(noReviewsDescription);
       }
     }
 

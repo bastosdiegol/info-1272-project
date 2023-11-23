@@ -87,10 +87,33 @@
   .product-wrapper,
   .reviews-wrapper {
     width: 90%;
+    align-self: unset;
   }
 
   .reviews-wrapper {
     margin: unset;
     align-self: unset;
+  }
+
+  .review-form {
+    width: 90%;
+    align-self: unset;
+    margin-left: unset;
+  }
+
+  .review-title,
+  .review-description,
+  legend,
+  label,
+  button,
+  .review-headline-input,
+  .review-description-textarea {
+    font-size: 1.8rem;
+  }
+
+  .review-headline-input,
+  .review-description-textarea {
+    width: 290px;
+    margin: 2px;
   }
 }

@@ -120,10 +120,11 @@
 }
 
 .product-score p {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
 }
 
-.score-stars-form {
+.score-stars-form,
+.global-average-star-review {
   display: flex;
   gap: 15px;
 }
@@ -138,4 +139,17 @@
 
 .score-star-form {
   width: 25px;
+}
+
+.review-stars {
+  display: flex;
+}
+
+.global-average-star-review {
+  width: 15px;
+}
+
+.star-review-filter-link {
+  text-decoration: none;
+  color: gray;
 }

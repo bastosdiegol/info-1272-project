@@ -28,6 +28,7 @@ class ShoppingCart {
     newQuantity = null
   ) {
     // Gets the StoreItem
+    /** @type {StoreItem} Variable that holds the current StoreItem Object */
     let storeItem = theStore.getStoreItem(storeItemId);
     // Gets the ShoppingCartItem
     let quantityOnHand = this.shoppingCartItems.get(storeItem);
@@ -55,21 +56,21 @@ class ShoppingCart {
           if (quantityOnHand !== undefined) {
             // StoreItem EXISTS
             // Checks if quantity on hands + 1 is higher the max per customer
-            if (storeItem.maxPerCustomer < quantityOnHand + 1) {
+            if (storeItem.getMaxPerCustomer() < quantityOnHand + 1) {
               alert(
                 "Could not add another unit to the cart.\nExceeded maximum quantity allowed per customer."
               );
               return false;
             } else {
               // Decrement the stock the quantity
-              storeItem.stockQuantity--;
+              storeItem.subOneStockQuantity();
               // Increment the quantity on hands
               quantityOnHand++;
             }
           } else {
             // StoreItem DOES NOT EXISTS
             // Decrement the stock the quantity
-            storeItem.stockQuantity--;
+            storeItem.subOneStockQuantity();
             // Sets the quantity on hands to 1
             quantityOnHand = 1;
           }
@@ -81,13 +82,13 @@ class ShoppingCart {
           // Verifies if it is the last item on hand
           if (quantityOnHand === 1) {
             // Increment the stock quantity
-            storeItem.stockQuantity++;
+            storeItem.addOneStockQuantity();
             // Sets quantity on hand to zero
             quantityOnHand = 0;
           } else {
             // IT IS NOT the last item on hand
             // Increment the stock quantity
-            storeItem.stockQuantity++;
+            storeItem.addOneStockQuantity();
             // Decrement the quantity of itens on hand
             quantityOnHand--;
           }
@@ -107,28 +108,34 @@ class ShoppingCart {
           // (Quantity == 0) Removal of the the ShoppingCartItem
           if (newQuantity == 0) {
             // Reverts the stock quantity
-            storeItem.stockQuantity += quantityOnHand;
+            storeItem.setStockQuantity(
+              storeItem.getStockQuantity() + quantityOnHand
+            );
             // Sets quantity on hand to zero
             quantityOnHand = 0;
           } else {
             // Update to a chosen number
             // Validades if the nweQuantity is higher than max allowed per customer
-            if (storeItem.maxPerCustomer < newQuantity) {
+            if (storeItem.getMaxPerCustomer() < newQuantity) {
               alert(
                 "Could not exceeded the maximum quantity allowed per customer.\nMaximum quantity set instead."
               );
               // Removes from the stock the remaining quantity
-              storeItem.stockQuantity -=
-                storeItem.maxPerCustomer - quantityOnHand;
+              let remainingQuantity =
+                storeItem.getStockQuantity() -
+                (storeItem.getMaxPerCustomer() - quantityOnHand);
+              storeItem.setStockQuantity(remainingQuantity);
               // Sets the maximum allowed quantity
-              quantityOnHand = storeItem.maxPerCustomer;
+              quantityOnHand = storeItem.getMaxPerCustomer();
             } else {
               // nweQuantity is lower than max allowed per customer
 
               // Validades if NEWQUANTITY is HIGHER than current quantity ONHAND
               if (newQuantity > quantityOnHand) {
                 // Removes from the stock the remaining quantity
-                storeItem.stockQuantity -= newQuantity - quantityOnHand;
+                let remainingQuantity =
+                  storeItem.getStockQuantity() - (newQuantity - quantityOnHand);
+                storeItem.setStockQuantity(remainingQuantity);
                 // Sets the new quantity on hand
                 quantityOnHand = newQuantity;
               } else {
@@ -137,7 +144,10 @@ class ShoppingCart {
                 // Checks if newQuantity is HIGHER than ZERO
                 if (newQuantity > 0) {
                   // Adds the quantity difference back to the stock
-                  storeItem.stockQuantity += quantityOnHand - newQuantity;
+                  let quantityDifference =
+                    storeItem.getStockQuantity() +
+                    (quantityOnHand - newQuantity);
+                  storeItem.setStockQuantity(quantityDifference);
                   // Sets the newQuantity
                   quantityOnHand = newQuantity;
                 } else {
@@ -168,7 +178,7 @@ class ShoppingCart {
       switch (pageContext) {
         // Updates Home Page StoreItem Grid Section
         case PAGE_CONTEXT.HOME:
-          theStore.loadStoreItemArticle(storeItem.id);
+          theStore.loadStoreItemArticle(storeItemId);
           break;
         // Updates Shopping Cart Grid Section
         case PAGE_CONTEXT.SHOPPING_CART:
@@ -232,8 +242,8 @@ class ShoppingCart {
         // Creates img Tag for the item
         let imgItem = document.createElement("img");
         imgItem.classList.add("cart-product-img");
-        imgItem.src = storeItem.imageURL;
-        imgItem.alt = storeItem.name;
+        imgItem.src = storeItem.getImageURL();
+        imgItem.alt = storeItem.getName();
         figureItem.appendChild(imgItem);
 
         // Creates a div for the name
@@ -241,7 +251,7 @@ class ShoppingCart {
         productNameDiv.classList.add("cart-product-name");
         productWrapperDiv.appendChild(productNameDiv);
         let productNameP = document.createElement("p");
-        productNameP.textContent = storeItem.name;
+        productNameP.textContent = storeItem.getName();
         productNameDiv.appendChild(productNameP);
 
         // Creates a div for the quantity
@@ -254,7 +264,7 @@ class ShoppingCart {
         decrementLink.setAttribute(
           "onclick",
           "shoppingCart.updateShoppingCartItemQuantity( " +
-            storeItem.id +
+            storeItem.getId() +
             "," +
             CART_QUANTITY_OPERATION.DECREMENT +
             "," +
@@ -273,7 +283,7 @@ class ShoppingCart {
         quantityInput.setAttribute(
           "onchange",
           "shoppingCart.updateShoppingCartItemQuantity( " +
-            storeItem.id +
+            storeItem.getId() +
             "," +
             CART_QUANTITY_OPERATION.CHANGE +
             "," +
@@ -289,7 +299,7 @@ class ShoppingCart {
         incrementLink.setAttribute(
           "onclick",
           "shoppingCart.updateShoppingCartItemQuantity( " +
-            storeItem.id +
+            storeItem.getId() +
             "," +
             CART_QUANTITY_OPERATION.INCREMENT +
             "," +
@@ -307,7 +317,9 @@ class ShoppingCart {
         productPriceDiv.classList.add("cart-product-price");
         productWrapperDiv.appendChild(productPriceDiv);
         let productPriceP = document.createElement("p");
-        productPriceP.textContent = convertToSelectedCurrency(storeItem.price);
+        productPriceP.textContent = convertToSelectedCurrency(
+          storeItem.getPrice()
+        );
         productPriceDiv.appendChild(productPriceP);
       }
     }
@@ -401,7 +413,7 @@ class ShoppingCart {
     let subtotal = 0;
     // Iterate through all shoppingCartItems
     for (let [storeItem, quantityOnHand] of this.shoppingCartItems) {
-      subtotal += storeItem.price * quantityOnHand;
+      subtotal += storeItem.getPrice() * quantityOnHand;
     }
     return subtotal;
   }
@@ -415,7 +427,7 @@ class ShoppingCart {
     let shippingCost = 0;
     // Iterate through all shoppingCartItems
     for (let [storeItem, quantityOnHand] of this.shoppingCartItems) {
-      shippingCost += storeItem.costOfShipping * quantityOnHand;
+      shippingCost += storeItem.getCostOfShipping() * quantityOnHand;
     }
     return shippingCost;
   }

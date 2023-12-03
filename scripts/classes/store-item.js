@@ -3,6 +3,19 @@
  * @class
  */
 class StoreItem {
+  /* Private Properties */
+  #id;
+  #name;
+  #price;
+  #stockQuantity;
+  #maxPerCustomer;
+  #category;
+  #costOfShipping;
+  #reviews;
+  #reviewScore;
+  #details;
+  #imageURL;
+  #frontpageDisplay;
   /**
    * StoreItem Default Constructor.
    * @constructor
@@ -33,18 +46,151 @@ class StoreItem {
     imageURL,
     frontpageDisplay
   ) {
-    this.id = id;
-    this.name = name;
-    this.price = price;
-    this.stockQuantity = stockQuantity;
-    this.maxPerCustomer = maxPerCustomer;
-    this.category = category;
-    this.costOfShipping = costOfShipping;
-    this.reviews = reviews;
-    this.reviewScore = reviewScore;
-    this.details = details;
-    this.imageURL = imageURL;
-    this.frontpageDisplay = frontpageDisplay;
+    this.#id = id;
+    this.#name = name;
+    this.#price = price;
+    this.#stockQuantity = stockQuantity;
+    this.#maxPerCustomer = maxPerCustomer;
+    this.#category = category;
+    this.#costOfShipping = costOfShipping;
+    this.#reviews = reviews;
+    this.#reviewScore = reviewScore;
+    this.#details = details;
+    this.#imageURL = imageURL;
+    this.#frontpageDisplay = frontpageDisplay;
+  }
+
+  /**
+   * Getters and Setters
+   */
+  /**
+   * Adds a Review to the StoreItem.
+   * @method
+   * @param {Review} review Review to be added.
+   * @returns {number} The reviews array new length.
+   */
+  addReview(review) {
+    return this.#reviews.push(review);
+  }
+  /**
+   * Getter: StoreItem Id
+   * @method
+   * @returns {Number} StoreItem Id
+   */
+  getId() {
+    return this.#id;
+  }
+  /**
+   * Getter: StoreItem Name
+   * @method
+   * @returns {String} StoreItem Name
+   */
+  getName() {
+    return this.#name;
+  }
+  /**
+   * Getter: StoreItem price
+   * @method
+   * @returns {Number} StoreItem price
+   */
+  getPrice() {
+    return this.#price;
+  }
+  /**
+   * Getter: StoreItem stockQuantity
+   * @method
+   * @returns {Number} StoreItem stockQuantity
+   */
+  getStockQuantity() {
+    return this.#stockQuantity;
+  }
+  /**
+   * Getter: StoreItem maxPerCustomer
+   * @method
+   * @returns {Number} StoreItem maxPerCustomer
+   */
+  getMaxPerCustomer() {
+    return this.#maxPerCustomer;
+  }
+  /**
+   * Getter: StoreItem Category
+   * @method
+   * @returns {String} StoreItem Category
+   */
+  getCategory() {
+    return this.#category;
+  }
+  /**
+   * Getter: StoreItem costOfShipping
+   * @method
+   * @returns {Number} StoreItem costOfShipping
+   */
+  getCostOfShipping() {
+    return this.#costOfShipping;
+  }
+  /**
+   * Getter: StoreItem review instance
+   * @method
+   * @param {Number} index Review Index
+   * @returns {Review} Review instance
+   */
+  getReview(index) {
+    return this.#reviews[index];
+  }
+  /**
+   * Getter: StoreItem reviewScore
+   * @method
+   * @returns {Number} reviewScore
+   */
+  getReviewScore() {
+    return this.#reviewScore;
+  }
+  /**
+   * Getter: StoreItem Reviews.length
+   * @method
+   * @returns {Number} Reviews.length
+   */
+  getReviewsQuantity() {
+    return this.#reviews.length;
+  }
+  /**
+   * Getter: StoreItem imageURL
+   * @method
+   * @returns {String} StoreItem imageURL
+   */
+  getImageURL() {
+    return this.#imageURL;
+  }
+  /**
+   * Getter: StoreItem frontpageDisplay
+   * @method
+   * @returns {boolean} StoreItem frontpageDisplay
+   */
+  isFrontpageDisplay() {
+    return this.#frontpageDisplay;
+  }
+
+  /**
+   * Increments stockQuantity property.
+   * @method
+   */
+  addOneStockQuantity() {
+    this.#stockQuantity++;
+  }
+  /**
+   * Decrements stockQuantity property.
+   * @method
+   */
+  subOneStockQuantity() {
+    this.#stockQuantity--;
+  }
+  /**
+   * Sets new value for stockQuantity property.
+   * @method
+   * @param {number} newValue Value to update the property
+   */
+  setStockQuantity(newValue) {
+    this.#stockQuantity = newValue;
   }
 
   /**
@@ -56,8 +202,8 @@ class StoreItem {
     // Creates the item div card
     let articleStoreItem = document.createElement("article");
     articleStoreItem.classList.add("store-item-article");
-    articleStoreItem.classList.add(this.id);
-    articleStoreItem.id = this.id;
+    articleStoreItem.classList.add(this.#id);
+    articleStoreItem.id = this.#id;
     /**********
      * ITEM   *
      * HEADER *
@@ -74,11 +220,11 @@ class StoreItem {
     // Creates a div to contain the item stock Quantity
     let divItemStockQuantity = document.createElement("div");
     divItemStockQuantity.classList.add("divItemStockQuantity");
-    divItemStockQuantity.textContent = "In Stock: " + this.stockQuantity;
+    divItemStockQuantity.textContent = "In Stock: " + this.#stockQuantity;
     // Creates a div to contain the item max purchase per customer
     let divItemMaxPerCustomer = document.createElement("div");
     divItemMaxPerCustomer.classList.add("divItemMaxPerCustomer");
-    divItemMaxPerCustomer.textContent = "Per customer: " + this.maxPerCustomer;
+    divItemMaxPerCustomer.textContent = "Per customer: " + this.#maxPerCustomer;
     // Creates a div wrapper for reviews
     let divIemReviewWrapper = document.createElement("div");
     divIemReviewWrapper.classList.add("item-review-wrapper");
@@ -88,14 +234,14 @@ class StoreItem {
     reviewLink.href = "#";
     reviewLink.setAttribute(
       "onclick",
-      "theStore.displayReviews(" + this.id + ")"
+      "theStore.displayReviews(" + this.#id + ")"
     );
     // Creates a div to contain the reviews stars
     let divItemReviewsStars = document.createElement("div");
     divItemReviewsStars.classList.add("store-item-review-stars");
     // Calculates how many stars should we display per reviewscore
-    let integerPart = Math.floor(this.reviewScore); // Integer part = filled stars
-    let fractionalPart = this.reviewScore - integerPart; // Fractional part = half filled star
+    let integerPart = Math.floor(this.#reviewScore); // Integer part = filled stars
+    let fractionalPart = this.#reviewScore - integerPart; // Fractional part = half filled star
     let countStars = 0; // Counter for how many start was created
     // For each Integer part creates a filled star
     for (countStars; countStars < integerPart; countStars++) {
@@ -115,7 +261,9 @@ class StoreItem {
     let divItemReviewsQuantity = document.createElement("div");
     divItemReviewsQuantity.classList.add("store-item-reviews-quantity");
     divItemReviewsQuantity.textContent =
-      "(" + (this.reviews.length == undefined ? 0 : this.reviews.length) + ")";
+      "(" +
+      (this.#reviews.length == undefined ? 0 : this.#reviews.length) +
+      ")";
     /********
      * ITEM *
      * BODY *
@@ -128,7 +276,7 @@ class StoreItem {
     aItemName.href = "javascript:void(0);";
     aItemName.setAttribute(
       "onclick",
-      "theStore.loadStoreItemArticleDetails(" + this.id + ")"
+      "theStore.loadStoreItemArticleDetails(" + this.#id + ")"
     );
     // aItemName.textContent = this.name;
     // Creates figure tag for the Item
@@ -137,12 +285,12 @@ class StoreItem {
     // Creates figure caption tag for the Item
     let figureCaptionItem = document.createElement("figcaption");
     figureCaptionItem.classList.add("store-item-figure-caption");
-    figureCaptionItem.textContent = this.name;
+    figureCaptionItem.textContent = this.#name;
     // Creates img Tag for the item
     let imgItem = document.createElement("img");
     imgItem.classList.add("store-item-img");
-    imgItem.src = this.imageURL;
-    imgItem.alt = this.name;
+    imgItem.src = this.#imageURL;
+    imgItem.alt = this.#name;
     // Creates em for +Details
     let emDetails = document.createElement("em");
     emDetails.classList.add("store-item-details");
@@ -152,7 +300,7 @@ class StoreItem {
     divItemPrice.classList.add("store-item-price");
     // Display the current price taking in consideration the current selected currenty
     let currency = theStore.getCurrency(currentCurrencyIndex);
-    divItemPrice.textContent = convertToSelectedCurrency(this.price);
+    divItemPrice.textContent = convertToSelectedCurrency(this.#price);
     // Creates a div for cart
     let divAddCart = document.createElement("div");
     divAddCart.classList.add("store-item-add-to-cart");
@@ -162,7 +310,7 @@ class StoreItem {
     aAddCart.setAttribute(
       "onclick",
       "shoppingCart.updateShoppingCartItemQuantity( " +
-        this.id +
+        this.#id +
         "," +
         CART_QUANTITY_OPERATION.INCREMENT +
         "," +
@@ -220,9 +368,9 @@ class StoreItem {
     // Creates the article card
     let articleStoreItem = document.createElement("article");
     articleStoreItem.classList.add("store-item-article-details");
-    articleStoreItem.classList.add(this.id);
+    articleStoreItem.classList.add(this.#id);
     articleStoreItem.classList.add("article-back");
-    articleStoreItem.id = this.id;
+    articleStoreItem.id = this.#id;
     /**********
      * ITEM   *
      * HEADER *
@@ -236,7 +384,7 @@ class StoreItem {
     aItemName.href = "javascript:void(0);";
     aItemName.setAttribute(
       "onclick",
-      "theStore.loadStoreItemArticle(" + this.id + ")"
+      "theStore.loadStoreItemArticle(" + this.#id + ")"
     );
     divItemHeader.appendChild(aItemName);
     // aItemName.textContent = this.name;
@@ -247,8 +395,8 @@ class StoreItem {
     // Creates img Tag for the item
     let imgItem = document.createElement("img");
     imgItem.classList.add("store-item-img");
-    imgItem.src = this.imageURL;
-    imgItem.alt = this.name;
+    imgItem.src = this.#imageURL;
+    imgItem.alt = this.#name;
     figureItem.appendChild(imgItem);
 
     // Creates a link to the item
@@ -256,7 +404,7 @@ class StoreItem {
     aSwitch.href = "javascript:void(0);";
     aSwitch.setAttribute(
       "onclick",
-      "theStore.loadStoreItemArticle(" + this.id + ")"
+      "theStore.loadStoreItemArticle(" + this.#id + ")"
     );
     articleStoreItem.appendChild(aSwitch);
     // Creates figure tag for the flip icon
@@ -286,7 +434,7 @@ class StoreItem {
     strongTag.textContent = "Product Name:";
     divItemName.appendChild(strongTag);
     let pTag = document.createElement("p");
-    pTag.textContent = this.name;
+    pTag.textContent = this.#name;
     divItemName.appendChild(pTag);
     // Creates a div for the price
     let divItemPrice = document.createElement("div");
@@ -297,10 +445,10 @@ class StoreItem {
     divItemPrice.appendChild(strongTag);
     pTag = document.createElement("p");
     let currency = theStore.getCurrency(currentCurrencyIndex);
-    pTag.textContent = convertToSelectedCurrency(this.price);
+    pTag.textContent = convertToSelectedCurrency(this.#price);
     divItemPrice.appendChild(pTag);
     // Now loop through all additional information
-    for (const key in this.details) {
+    for (const key in this.#details) {
       let divElement = document.createElement("div");
       divElement.classList.add("store-item-details");
       divItemBody.appendChild(divElement);
@@ -311,17 +459,17 @@ class StoreItem {
       // Weight Conversion
       if (key === "Weight") {
         // If the weight is higher than 1000grams display in kilograms
-        if (this.details[key] > 999) {
+        if (this.#details[key] > 999) {
           pTag.textContent = convertWeight(
-            this.details[key] / 1000,
+            this.#details[key] / 1000,
             "kilogram"
           );
         } else {
           // Else display in grams
-          pTag.textContent = convertWeight(this.details[key], "gram");
+          pTag.textContent = convertWeight(this.#details[key], "gram");
         }
       } else {
-        pTag.textContent = this.details[key];
+        pTag.textContent = this.#details[key];
       }
       divElement.appendChild(pTag);
     }
@@ -336,7 +484,7 @@ class StoreItem {
     aAddCart.setAttribute(
       "onclick",
       "shoppingCart.updateShoppingCartItemQuantity( " +
-        this.id +
+        this.#id +
         "," +
         CART_QUANTITY_OPERATION.INCREMENT +
         "," +
@@ -371,10 +519,10 @@ class StoreItem {
     let reviewCount = 0;
     let totalScore = 0;
     // Iterate through all reviews
-    for (let i = 0; i < this.reviews.length; i++) {
+    for (let i = 0; i < this.#reviews.length; i++) {
       reviewCount++;
-      totalScore += this.reviews[i].rating;
+      totalScore += this.#reviews[i].rating;
     }
-    this.reviewScore = totalScore / reviewCount;
+    this.#reviewScore = totalScore / reviewCount;
   }
 }

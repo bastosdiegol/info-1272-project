@@ -499,6 +499,3 @@ if (shoppingCartChecker == null) {
   shoppingCartChecker = new ShoppingCart();
   sessionStorage.setItem("shoppingCart", JSON.stringify(shoppingCartChecker));
 }
-
-// Sets theStore into the session
-sessionStorage.setItem("theStore", JSON.stringify(theStore));

@@ -125,7 +125,7 @@ class Store {
    */
   getStoreItem(storeItemId) {
     for (let i = 0; i < this.#storeItems.length; i++) {
-      if (this.#storeItems[i].id === storeItemId) {
+      if (this.#storeItems[i].getId() === storeItemId) {
         return this.#storeItems[i];
       }
     }
@@ -155,10 +155,11 @@ class Store {
     this.#categories = [];
     // Loop for each existing storeItem
     for (let i = 0; i < this.#storeItems.length; i++) {
+      let tempCategory = this.#storeItems[i].getCategory();
       // Checks if the current item category already exists in categories array
-      if (!this.#categories.includes(this.#storeItems[i].category)) {
+      if (!this.#categories.includes(tempCategory)) {
         // If not push it to the array
-        this.#categories.push(this.#storeItems[i].category);
+        this.#categories.push(tempCategory);
       }
     }
   }
@@ -343,14 +344,14 @@ class Store {
       // Checks if the grid is request for frontpage
       if (category == null) {
         // Checks if the item should be displayed at frontpage
-        if (theItem.frontpageDisplay) {
+        if (theItem.isFrontpageDisplay()) {
           // Gets the current item card information
           section.appendChild(theItem.getStoreItemGrid());
         }
       } else {
         // Category Items request
         // Checks if the item category matches the category requested
-        if (theItem.category == this.#categories[category]) {
+        if (theItem.getCategory() == this.#categories[category]) {
           // Gets the current item card information
           section.appendChild(theItem.getStoreItemGrid());
         }
@@ -490,13 +491,10 @@ class Store {
 
     // Now to Update the Store Title and Page Description
     this.setWebsiteTitle(
-      theStore.getStoreName() + " - " + storeItem.name + " Reviews"
+      theStore.getStoreName() + " - " + storeItem.getName() + " Reviews"
     );
     this.setPageDescription("Customer Reviews:");
 
-    // Validade if the item has a review
-    if (storeItem.reviews.length === 0) {
-    }
     // Load the Item Details
     // Product Wrapper Div
     let productWrapperDiv = document.createElement("div");
@@ -522,15 +520,15 @@ class Store {
     // Creates img Tag for the item
     let imgItem = document.createElement("img");
     imgItem.classList.add("cart-product-img");
-    imgItem.src = storeItem.imageURL;
-    imgItem.alt = storeItem.name;
+    imgItem.src = storeItem.getImageURL();
+    imgItem.alt = storeItem.getName();
     figureItem.appendChild(imgItem);
     // Creates a div for the name
     let productNameDiv = document.createElement("div");
     productNameDiv.classList.add("product-name");
     productReviewsLink.appendChild(productNameDiv);
     let productNameP = document.createElement("p");
-    productNameP.textContent = storeItem.name;
+    productNameP.textContent = storeItem.getName();
     productNameDiv.appendChild(productNameP);
     // Creates a div for the overall score
     let productScoreDiv = document.createElement("div");
@@ -540,8 +538,9 @@ class Store {
     let divItemReviewsStars = document.createElement("div");
     divItemReviewsStars.classList.add("review-stars");
     // Calculates how many stars should we display per reviewscore
-    let integerPart = Math.floor(storeItem.reviewScore); // Integer part = filled stars
-    let fractionalPart = storeItem.reviewScore - integerPart; // Fractional part = half filled star
+    let curReviewScore = storeItem.getReviewScore();
+    let integerPart = Math.floor(curReviewScore); // Integer part = filled stars
+    let fractionalPart = curReviewScore - integerPart; // Fractional part = half filled star
     let countStars = 0; // Counter for how many start was created
     // For each Integer part creates a filled star
     let theStar;
@@ -563,7 +562,7 @@ class Store {
       countStars++;
     }
     let productScoreP = document.createElement("p");
-    productScoreP.textContent = storeItem.reviewScore.toFixed(1) + " out of 5";
+    productScoreP.textContent = curReviewScore.toFixed(1) + " out of 5";
     productScoreDiv.appendChild(productScoreP);
     // Calculates Star Percentages
     let percentageArray = this.calculateStarPercentage(storeItem);
@@ -612,7 +611,9 @@ class Store {
     let reviewsWrapper = document.createElement("div");
     reviewsWrapper.classList.add("reviews-wrapper");
     section.appendChild(reviewsWrapper);
-    if (storeItem.reviews.length == 0) {
+    // Validade if the item has a review
+    let curReviewsQuantity = storeItem.getReviewsQuantity();
+    if (curReviewsQuantity == 0) {
       // No reviews description
       let noReviewsDescription = document.createElement("p");
       noReviewsDescription.classList.add("no-reviews-description");
@@ -620,8 +621,9 @@ class Store {
       reviewsWrapper.appendChild(noReviewsDescription);
     } else {
       // Loop to dynamically insert store items into grid div
-      for (let i = storeItem.reviews.length - 1; i >= 0; i--) {
-        if (scoreFilter == null || scoreFilter == storeItem.reviews[i].rating) {
+      for (let i = curReviewsQuantity - 1; i >= 0; i--) {
+        let curReview = storeItem.getReview(i);
+        if (scoreFilter == null || scoreFilter == curReview.rating) {
           // Creates a div for the review
           let reviewWrapper = document.createElement("div");
           reviewWrapper.classList.add("review-wrapper");
@@ -635,22 +637,22 @@ class Store {
           reviewRating.classList.add("review-rating");
           reviewHeader.appendChild(reviewRating);
           // Add Filled stars
-          for (let j = 0; j < storeItem.reviews[i].rating; j++) {
+          for (let j = 0; j < curReview.rating; j++) {
             getReviewStarImage(reviewRating, "filled");
           }
           // Add Blank stars
-          for (let j = 0; j < 5 - storeItem.reviews[i].rating; j++) {
+          for (let j = 0; j < 5 - curReview.rating; j++) {
             getReviewStarImage(reviewRating, "empty");
           }
           // Creates the review Title
           let reviewTitle = document.createElement("p");
           reviewTitle.classList.add("review-title");
-          reviewTitle.textContent = storeItem.reviews[i].headline;
+          reviewTitle.textContent = curReview.headline;
           reviewHeader.appendChild(reviewTitle);
           // Creates the review description
           let reviewDescription = document.createElement("p");
           reviewDescription.classList.add("review-description");
-          reviewDescription.textContent = storeItem.reviews[i].description;
+          reviewDescription.textContent = curReview.description;
           reviewWrapper.appendChild(reviewDescription);
         }
       }
@@ -679,12 +681,13 @@ class Store {
     // Final Map with percentages
     let percentageMap = new Map();
     // Loop through all reviews and increments the star count
-    for (let i = 0; i < storeItem.reviews.length; i++) {
-      starCount[storeItem.reviews[i].rating]++;
+    let curReviewsQuantity = storeItem.getReviewsQuantity();
+    for (let i = 0; i < curReviewsQuantity; i++) {
+      starCount[storeItem.getReview(i).rating]++;
     }
     // Loop through starCount array and stores the percentages
     for (let i = 1; i < starCount.length; i++) {
-      percentageMap.set(i, (starCount[i] * 100) / storeItem.reviews.length);
+      percentageMap.set(i, (starCount[i] * 100) / curReviewsQuantity);
     }
     return percentageMap;
   }
@@ -796,7 +799,7 @@ class Store {
   createReview(storeItemId, score, headline, description) {
     let storeItem = this.getStoreItem(storeItemId);
     let newReview = new Review(Number(score), headline, description);
-    storeItem.reviews.push(newReview);
+    storeItem.addReview(newReview);
     storeItem.updateReviewAverage();
 
     document.getElementById("hidden-score-star").value = 1;

@@ -142,10 +142,9 @@ class ShoppingCart {
                   quantityOnHand = newQuantity;
                 } else {
                   // newQuantity is LOWER than ZERO
-                  // Adds the quantity onHand back to the stock
-                  storeItem.stockQuantity += quantityOnHand;
-                  // Sets quantity on hand to zero
-                  quantityOnHand = 0;
+                  // Treats it as an error
+                  alert("Provided quantity is an invalid number.");
+                  break;
                 }
               }
             }

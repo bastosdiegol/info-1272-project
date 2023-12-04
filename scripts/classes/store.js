@@ -50,6 +50,7 @@ class Store {
 
   /**
    * Static Method that returns the singleton instance of Store class.
+   * @static @method
    * @returns {Store} The singleton instance.
    */
   static getInstance() {

@@ -3,14 +3,46 @@
  * @class
  */
 class ShoppingCart {
+  /**
+   * Singleton Instance
+   * @type {ShoppingCart} Static Property that holds the unique isntance of ShoppingCart Class
+   * @static
+   */
+  static #_shoppingCartInstance = null;
   /* Private Properties */
   #shoppingCartItems;
   /**
    * ShoppingCart Object Constructor.
    * @constructor
+   */
+  constructor() {
+    this.#shoppingCartItems = new Map();
+    if (ShoppingCart.#_shoppingCartInstance === null) {
+      ShoppingCart.#_shoppingCartInstance = this;
+      return this;
+    } else {
+      return ShoppingCart.#_shoppingCartInstance;
+    }
+  }
+
+  /**
+   * Static Method that returns the singleton instance of ShoppingCart Class.
+   * @static @method
+   * @returns {ShoppingCart} The singleton instance.
+   */
+  static getInstance() {
+    if (ShoppingCart.#_shoppingCartInstance === null) {
+      return new ShoppingCart();
+    } else {
+      return ShoppingCart.#_shoppingCartInstance;
+    }
+  }
+
+  /**
+   * Sets all data required for Store object.
    * @param {Map<StoreItem, number>} itemsMap (Optional) Map of Store Items and quantityOnHand
    */
-  constructor(itemsMap = new Map()) {
+  setData(itemsMap) {
     this.#shoppingCartItems = itemsMap;
   }
 
@@ -520,14 +552,14 @@ class ShoppingCart {
     // Validates the parameter
     if (json == null || json === "null") {
       // Received nothing, return empty instancce
-      return new ShoppingCart();
+      return ShoppingCart.getInstance();
     }
     // Parses the json received from parameter
     const PARSED_DATA = JSON.parse(json);
     // Checks if the shoppingCartItems that came from localStorage is empty
     if (Object.keys(PARSED_DATA.shoppingCartItems).length === 0) {
       // Just return a empty instance of ShoppingCart
-      return new ShoppingCart();
+      return ShoppingCart.getInstance();
     }
 
     // Creates the new map of shoppingCartItems that will be passed to the new Shopping Cart Instance
@@ -544,7 +576,8 @@ class ShoppingCart {
         .filter((entry) => entry !== null)
     );
     // Creates the new cart
-    let newCart = new ShoppingCart(ITEMS_MAP);
+    let newCart = ShoppingCart.getInstance();
+    newCart.setData(ITEMS_MAP);
     let itemsToRemove = [];
     // Change all storeItem stock values to match the cart
     for (let [storeItem, quantityOnHand] of newCart.#shoppingCartItems) {

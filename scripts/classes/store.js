@@ -417,6 +417,9 @@ class Store {
       // Updates the page description
       this.setPageDescription("Store Items:");
     }
+
+    /** Updates the Cart Notification */
+    shoppingCart.updateNotification();
   }
 
   /**

@@ -173,8 +173,8 @@ class ShoppingCart {
         // Removes the item from the cart
         this.#shoppingCartItems.delete(storeItem);
       }
-      // TODO: Fix the session storage
-      // sessionStorage.setItem("shoppingCart", JSON.stringify(this));
+      // Saves the cart to the localStorage
+      localStorage.setItem("shoppingCart", this.toJSON());
 
       // Defines which page context to update
       switch (pageContext) {
@@ -460,5 +460,57 @@ class ShoppingCart {
       notificationDiv.style.display = "flex";
       notificationDiv.textContent = totalUnits;
     }
+  }
+
+  /**
+   * Convert the ShoppingCart object to a JSON representation.
+   * @method
+   * @returns {string} JSON representation of the ShoppingCart.
+   */
+  toJSON() {
+    // Serialize the map of shoppingCartItems from map to an array of ID and quantity on hand
+    const SERIALIED_ITEMS = Array.from(this.#shoppingCartItems.entries()).map(
+      ([storeItem, quantityOnHand]) => ({
+        storeItemId: storeItem.getId(),
+        quantityOnHand,
+      })
+    );
+
+    return JSON.stringify({
+      shoppingCartItems: SERIALIED_ITEMS,
+    });
+  }
+
+  /**
+   * Creates a instance of ShoppingCart object from a JSON representation.
+   * @static
+   * @method
+   * @param {string} json - JSON string of the ShoppingCart.
+   * @returns {ShoppingCart} New instance of ShoppingCart object with data from JSON.
+   */
+  static fromJSON(json) {
+    // Validates the parameter
+    if (json == null || json === "null") {
+      // Received nothing, return empty instancce
+      return new ShoppingCart();
+    }
+    // Parses the json received from parameter
+    const PARSED_DATA = JSON.parse(json);
+    // Checks if the shoppingCartItems that came from localStorage is empty
+    if (Object.keys(PARSED_DATA.shoppingCartItems).length === 0) {
+      // Just return a empty instance of ShoppingCart
+      return new ShoppingCart();
+    }
+
+    // Creates the new map of shoppingCartItems that will be passed to the new Shopping Cart Instance
+    const ITEMS_MAP = new Map(
+      PARSED_DATA.shoppingCartItems.map(({ storeItemId, quantityOnHand }) => {
+        let storeItem = theStore.getStoreItem(storeItemId);
+        return [storeItem, quantityOnHand];
+      })
+    );
+
+    // Returns the new Instance of ShoppingCart with data from JSON
+    return new ShoppingCart(ITEMS_MAP);
   }
 }

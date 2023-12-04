@@ -25,9 +25,7 @@ const CART_QUANTITY_OPERATION = Object.freeze({
 
 // Gets the Store Information from the sessionStorage
 /** @type {Store} Global Variable that holds the Store Object */
-var theStore;
-// TODO: Fix sessionStorage for Store class with private properties
-// var theStore = JSON.parse(sessionStorage.getItem("theStore"));
+var theStore = null;
 
 // Variable to store current used currency and symbol
 /** @type {Number} Variable to store current used currency ID */
@@ -35,9 +33,7 @@ var currentCurrencyIndex = Number(localStorage.getItem("currentCurrencyIndex"));
 
 // Variable to store shopping cart
 /** @type {ShoppingCart} Shopping Cart Variable */
-var shoppingCart = new ShoppingCart();
-// TODO: Fix sessionStorage for ShoppingCart class
-// var shoppingCart = JSON.parse(sessionStorage.getItem("shoppingCart"));
+var shoppingCart = null;
 
 // Variable to store main section context
 /** @type {PAGE_CONTEXT} Shopping Cart Variable */

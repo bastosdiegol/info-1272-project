@@ -3,13 +3,15 @@
  * @class
  */
 class ShoppingCart {
+  /* Private Properties */
+  #shoppingCartItems;
   /**
    * ShoppingCart Object Constructor.
    * @constructor
    * @param {Map<StoreItem, number>} itemsMap (Optional) Map of Store Items and quantityOnHand
    */
   constructor(itemsMap = new Map()) {
-    this.shoppingCartItems = itemsMap;
+    this.#shoppingCartItems = itemsMap;
   }
 
   /**
@@ -31,7 +33,7 @@ class ShoppingCart {
     /** @type {StoreItem} Variable that holds the current StoreItem Object */
     let storeItem = theStore.getStoreItem(storeItemId);
     // Gets the ShoppingCartItem
-    let quantityOnHand = this.shoppingCartItems.get(storeItem);
+    let quantityOnHand = this.#shoppingCartItems.get(storeItem);
     // Validate the storeItem object
     if (storeItem) {
       // Validades the shopping cart item
@@ -166,10 +168,10 @@ class ShoppingCart {
 
       // Saves the cart based on quantity on hands
       if (quantityOnHand > 0) {
-        this.shoppingCartItems.set(storeItem, quantityOnHand);
+        this.#shoppingCartItems.set(storeItem, quantityOnHand);
       } else {
         // Removes the item from the cart
-        this.shoppingCartItems.delete(storeItem);
+        this.#shoppingCartItems.delete(storeItem);
       }
       // TODO: Fix the session storage
       // sessionStorage.setItem("shoppingCart", JSON.stringify(this));
@@ -218,14 +220,14 @@ class ShoppingCart {
     let productsDiv = document.createElement("div");
     productsDiv.classList.add("cart-products-wrapper");
     section.appendChild(productsDiv);
-    if (this.shoppingCartItems.size == 0) {
+    if (this.#shoppingCartItems.size == 0) {
       let emptyP = document.createElement("p");
       emptyP.classList.add("cart-summary-empty");
       emptyP.textContent = "Your cart is empty.";
       productsDiv.appendChild(emptyP);
     } else {
       // Iterate through all items
-      for (let [storeItem, quantityOnHand] of this.shoppingCartItems) {
+      for (let [storeItem, quantityOnHand] of this.#shoppingCartItems) {
         // Product Wrapper Div
         let productWrapperDiv = document.createElement("div");
         productWrapperDiv.classList.add("cart-product-wrapper");
@@ -412,7 +414,7 @@ class ShoppingCart {
   calculateCartSubTotal() {
     let subtotal = 0;
     // Iterate through all shoppingCartItems
-    for (let [storeItem, quantityOnHand] of this.shoppingCartItems) {
+    for (let [storeItem, quantityOnHand] of this.#shoppingCartItems) {
       subtotal += storeItem.getPrice() * quantityOnHand;
     }
     return subtotal;
@@ -426,7 +428,7 @@ class ShoppingCart {
   calculateShippingCost() {
     let shippingCost = 0;
     // Iterate through all shoppingCartItems
-    for (let [storeItem, quantityOnHand] of this.shoppingCartItems) {
+    for (let [storeItem, quantityOnHand] of this.#shoppingCartItems) {
       shippingCost += storeItem.getCostOfShipping() * quantityOnHand;
     }
     return shippingCost;
@@ -440,7 +442,7 @@ class ShoppingCart {
   getTotalItemCount() {
     let itemsTotal = 0;
     // Iterate through all shoppingCartItems
-    for (let [storeItem, quantityOnHand] of this.shoppingCartItems) {
+    for (let [storeItem, quantityOnHand] of this.#shoppingCartItems) {
       itemsTotal += quantityOnHand;
     }
     return itemsTotal;

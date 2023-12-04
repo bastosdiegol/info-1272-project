@@ -3,6 +3,12 @@
  * @class
  */
 class Store {
+  /**
+   * Singleton Instance
+   * @type {Store} Static Property that holds the unique isntance of Store Class
+   * @static
+   */
+  static #_storeInstance = null;
   /* Private Properties */
   #name;
   #address;
@@ -17,7 +23,48 @@ class Store {
   #currencies;
   /**
    * Default Constructor for Store Class
+   * Applying Singleton
+   * Since JavaScript don't allow private constructor
+   * I check if the object is already instantiated on the constructor
    * @constructor
+   */
+  constructor() {
+    this.#name = "";
+    this.#slogan = "";
+    this.#address = "";
+    this.#postal = "";
+    this.#phone = "";
+    this.#email = "";
+    this.#logo = "";
+    this.#socials = "";
+    this.#categories = [];
+    this.#storeItems = [];
+    this.#currencies = [];
+    if (Store.#_storeInstance === null) {
+      Store.#_storeInstance = this;
+      return this;
+    } else {
+      return Store.#_storeInstance;
+    }
+  }
+
+  /**
+   * Static Method that returns the singleton instance of Store class.
+   * @returns {Store} The singleton instance.
+   */
+  static getInstance() {
+    if (Store.#_storeInstance === null) {
+      return new Store();
+    } else {
+      return Store.#_storeInstance;
+    }
+  }
+
+  /**
+   * Getters and Setters
+   */
+  /**
+   * Sets all data required for Store object.
    * @param {String} name Store Name.
    * @param {String} address Store Physical Address.
    * @param {String} postal Store Postal Code.
@@ -32,7 +79,7 @@ class Store {
    * @param {StoreItem[]} storeItems (Optional) Object Array containing all store items.
    * @param {Currency[]} currencies (Optional) Object Array containing all currencies used.
    */
-  constructor(
+  setData(
     name,
     address,
     postal,
@@ -58,9 +105,6 @@ class Store {
     this.#currencies = currencies;
   }
 
-  /**
-   * Getters and Setters
-   */
   /**
    * Adds a StoreItem to the Store.
    * @method

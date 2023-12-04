@@ -7,8 +7,9 @@ let socials = [
   { name: "tiktok", url: "https://www.tiktok.com/@MyOnlineStore/" },
   // { name: "youtube", url: "https://www.youtube.com/MyOnlineStore/" },
 ];
-// Now we instanciate theStore
-theStore = new Store(
+// Now we get the instance of Store Class Singleton
+theStore = Store.getInstance();
+theStore.setData(
   "Lenz",
   "123 Street",
   "A1B 2C3",

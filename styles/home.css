@@ -264,7 +264,7 @@
 }
 
 .notification-message {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
 }
 
 .notification-close {
@@ -276,4 +276,8 @@
   border: unset;
   border-left: 1px dashed white;
   padding-left: 10px;
+}
+
+.notification-close:hover {
+  cursor: pointer;
 }

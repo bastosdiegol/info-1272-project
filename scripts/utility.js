@@ -74,35 +74,37 @@ function convertWeight(weight, unit) {
 function throwNotification(message, notificationType) {
   // Gets the Notifications Wrapper Div
   let notificationsWrapper = document.getElementById("notifications-wrapper");
-  // Creates the new notification wrapper
-  let newNotificationWrapper = document.createElement("div");
-  newNotificationWrapper.classList.add("notification");
-  // Switch for the type of notification
-  switch (notificationType) {
-    case NOTIFICATION_TYPE.SUCCESS:
-      newNotificationWrapper.classList.add("notification-success");
-      break;
-    case NOTIFICATION_TYPE.WARNING:
-      newNotificationWrapper.classList.add("notification-warning");
-      break;
-    case NOTIFICATION_TYPE.ERROR:
-      newNotificationWrapper.classList.add("notification-error");
-      break;
-    default:
-      console.log("Invalid Notification Type.");
-      return;
+  if (notificationsWrapper) {
+    // Creates the new notification wrapper
+    let newNotificationWrapper = document.createElement("div");
+    newNotificationWrapper.classList.add("notification");
+    // Switch for the type of notification
+    switch (notificationType) {
+      case NOTIFICATION_TYPE.SUCCESS:
+        newNotificationWrapper.classList.add("notification-success");
+        break;
+      case NOTIFICATION_TYPE.WARNING:
+        newNotificationWrapper.classList.add("notification-warning");
+        break;
+      case NOTIFICATION_TYPE.ERROR:
+        newNotificationWrapper.classList.add("notification-error");
+        break;
+      default:
+        console.log("Invalid Notification Type.");
+        return;
+    }
+    // Appends the wrapper to the notification div area
+    notificationsWrapper.appendChild(newNotificationWrapper);
+    // Creates the text element
+    let notificationMessage = document.createElement("p");
+    notificationMessage.classList.add("notification-message");
+    notificationMessage.textContent = message;
+    newNotificationWrapper.appendChild(notificationMessage);
+    // Creates the close button
+    let closeLink = document.createElement("a");
+    closeLink.classList.add("notification-close");
+    closeLink.textContent = "X";
+    closeLink.setAttribute("onclick", "this.parentElement.remove()");
+    newNotificationWrapper.appendChild(closeLink);
   }
-  // Appends the wrapper to the notification div area
-  notificationsWrapper.appendChild(newNotificationWrapper);
-  // Creates the text element
-  let notificationMessage = document.createElement("p");
-  notificationMessage.classList.add("notification-message");
-  notificationMessage.textContent = message;
-  newNotificationWrapper.appendChild(notificationMessage);
-  // Creates the close button
-  let closeLink = document.createElement("a");
-  closeLink.classList.add("notification-close");
-  closeLink.textContent = "X";
-  closeLink.setAttribute("onclick", "this.parentElement.remove()");
-  newNotificationWrapper.appendChild(closeLink);
 }

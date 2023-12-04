@@ -50,3 +50,7 @@ var currentPageContext = PAGE_CONTEXT.HOME;
 // Last Visited Product - Used for PAGE_CONTEXT.REVIEW
 /** @type {number} Product ID */
 var lastVisitedProduct = null;
+
+// Variable that holds information if the cart was changed after being loaded from JSON
+/** @type {boolean} Cart was changed */
+var isCartChangedFlag = false;

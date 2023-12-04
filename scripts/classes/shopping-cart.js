@@ -55,6 +55,15 @@ class ShoppingCart {
          * INCREMENT ++
          */
         case CART_QUANTITY_OPERATION.INCREMENT:
+          // Checks if there's stock
+          if (storeItem.getStockQuantity() === 0) {
+            // Out of stock product
+            throwNotification(
+              "Product is current unavailable.",
+              NOTIFICATION_TYPE.ERROR
+            );
+            break;
+          }
           // Verify existence of the StoreItem in the ShoppingCart
           if (quantityOnHand !== undefined) {
             // StoreItem EXISTS
@@ -183,7 +192,7 @@ class ShoppingCart {
       // Saves the cart based on quantity on hands
       if (quantityOnHand > 0) {
         this.#shoppingCartItems.set(storeItem, quantityOnHand);
-      } else {
+      } else if (quantityOnHand === 0) {
         // Removes the item from the cart
         this.#shoppingCartItems.delete(storeItem);
         // Throws notification
@@ -206,7 +215,7 @@ class ShoppingCart {
           this.displayShoppingCart();
           break;
         default:
-          break;
+          return;
       }
     } else {
       // Error Handling
@@ -523,13 +532,48 @@ class ShoppingCart {
 
     // Creates the new map of shoppingCartItems that will be passed to the new Shopping Cart Instance
     const ITEMS_MAP = new Map(
-      PARSED_DATA.shoppingCartItems.map(({ storeItemId, quantityOnHand }) => {
-        let storeItem = theStore.getStoreItem(storeItemId);
-        return [storeItem, quantityOnHand];
-      })
+      PARSED_DATA.shoppingCartItems
+        .map(({ storeItemId, quantityOnHand }) => {
+          let storeItem = theStore.getStoreItem(storeItemId);
+          if (storeItem === null) {
+            isCartChangedFlag = true;
+            return null;
+          }
+          return [storeItem, quantityOnHand];
+        })
+        .filter((entry) => entry !== null)
     );
-
+    // Creates the new cart
+    let newCart = new ShoppingCart(ITEMS_MAP);
+    let itemsToRemove = [];
+    // Change all storeItem stock values to match the cart
+    for (let [storeItem, quantityOnHand] of newCart.#shoppingCartItems) {
+      // Catches the current stock quantity
+      let curStockQuantity = storeItem.getStockQuantity();
+      if (curStockQuantity === 0) {
+        itemsToRemove.push(storeItem);
+      }
+      // If current stock quantity is lower than quantityOnHand
+      else if (curStockQuantity > quantityOnHand) {
+        // Reduces the Stock
+        storeItem.setStockQuantity(curStockQuantity - quantityOnHand);
+      } else {
+        // Updates the quantityOnHand
+        newCart.#shoppingCartItems.set(storeItem, curStockQuantity);
+        // Reduces the Stock
+        storeItem.setStockQuantity(curStockQuantity);
+        isCartChangedFlag = true;
+      }
+    }
+    // Checks if there are items to remove
+    if (itemsToRemove.length > 0) {
+      isCartChangedFlag = true;
+      // Removes from the cart all necessary products
+      itemsToRemove.forEach((element) => {
+        newCart.#shoppingCartItems.delete(element);
+      });
+    }
     // Returns the new Instance of ShoppingCart with data from JSON
-    return new ShoppingCart(ITEMS_MAP);
+    return newCart;
   }
 }

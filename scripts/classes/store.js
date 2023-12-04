@@ -420,6 +420,17 @@ class Store {
 
     /** Updates the Cart Notification */
     shoppingCart.updateNotification();
+
+    // Throws Notification if the user cart loaded from JSON was changed
+    if (isCartChangedFlag) {
+      throwNotification(
+        "Your cart was changed due to product unavailability.",
+        NOTIFICATION_TYPE.WARNING
+      );
+      isCartChangedFlag = false;
+      // Updates the card in the localStorage
+      localStorage.setItem("shoppingCart", shoppingCart.toJSON());
+    }
   }
 
   /**

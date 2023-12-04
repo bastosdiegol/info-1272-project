@@ -20,6 +20,11 @@ if (MAIN_ELEMENTS.length > 0) {
   section.id = "store-items-section";
   section.classList.add("store-items-section");
   MAIN_ELEMENT.appendChild(section);
+  // Adds the notification wrapper
+  let notificationsWrapper = document.createElement("div");
+  notificationsWrapper.id = "notifications-wrapper";
+  notificationsWrapper.classList.add("notifications-wrapper");
+  MAIN_ELEMENT.appendChild(notificationsWrapper);
   // Calls the store method to return the section with items
   theStore.loadStoreItems();
 }

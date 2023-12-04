@@ -43,8 +43,9 @@ class ShoppingCart {
         operation != CART_QUANTITY_OPERATION.INCREMENT
       ) {
         // Error Handling
-        alert(
-          "Quantity operation not allowed for an inexistent shopping cart product."
+        throwNotification(
+          "Invalid operation. Product is not in the cart.",
+          NOTIFICATION_TYPE.ERROR
         );
         return false;
       }
@@ -59,8 +60,9 @@ class ShoppingCart {
             // StoreItem EXISTS
             // Checks if quantity on hands + 1 is higher the max per customer
             if (storeItem.getMaxPerCustomer() < quantityOnHand + 1) {
-              alert(
-                "Could not add another unit to the cart.\nExceeded maximum quantity allowed per customer."
+              throwNotification(
+                "Max quantity allowed per customer exceeded.",
+                NOTIFICATION_TYPE.ERROR
               );
               return false;
             } else {
@@ -75,6 +77,11 @@ class ShoppingCart {
             storeItem.subOneStockQuantity();
             // Sets the quantity on hands to 1
             quantityOnHand = 1;
+            // Throws Notification
+            throwNotification(
+              "Product added to the cart.",
+              NOTIFICATION_TYPE.SUCCESS
+            );
           }
           break;
         /**
@@ -102,7 +109,10 @@ class ShoppingCart {
           // Verify if the new quantity is a number
           if (isNaN(newQuantity)) {
             // NaN Error Handling
-            alert("Provided quantity is not a number.");
+            throwNotification(
+              "Provided quantity is not a number.",
+              NOTIFICATION_TYPE.ERROR
+            );
             break;
           } else {
             newQuantity = Number(newQuantity);
@@ -119,8 +129,9 @@ class ShoppingCart {
             // Update to a chosen number
             // Validades if the nweQuantity is higher than max allowed per customer
             if (storeItem.getMaxPerCustomer() < newQuantity) {
-              alert(
-                "Could not exceeded the maximum quantity allowed per customer.\nMaximum quantity set instead."
+              throwNotification(
+                "Max quantity exceeded, max allowed set instead.",
+                NOTIFICATION_TYPE.WARNING
               );
               // Removes from the stock the remaining quantity
               let remainingQuantity =
@@ -155,7 +166,10 @@ class ShoppingCart {
                 } else {
                   // newQuantity is LOWER than ZERO
                   // Treats it as an error
-                  alert("Provided quantity is an invalid number.");
+                  throwNotification(
+                    "Provided quantity is an invalid number.",
+                    NOTIFICATION_TYPE.ERROR
+                  );
                   break;
                 }
               }
@@ -172,6 +186,11 @@ class ShoppingCart {
       } else {
         // Removes the item from the cart
         this.#shoppingCartItems.delete(storeItem);
+        // Throws notification
+        throwNotification(
+          "Product removed from the cart.",
+          NOTIFICATION_TYPE.WARNING
+        );
       }
       // Saves the cart to the localStorage
       localStorage.setItem("shoppingCart", this.toJSON());
@@ -191,7 +210,7 @@ class ShoppingCart {
       }
     } else {
       // Error Handling
-      alert("Store Item not found.");
+      throwNotification("Store Item not found.", NOTIFICATION_TYPE.ERROR);
     }
     // Updates the cart notification div
     this.updateNotification();

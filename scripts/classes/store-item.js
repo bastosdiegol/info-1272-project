@@ -196,7 +196,7 @@ class StoreItem {
   /**
    * Method that dynamically creates a div element contaning all info about a store item
    * @method
-   * @returns {HTMLUListElement} A DOM div element containing all information of the store item
+   * @returns {HTMLElement} A DOM div element containing all information of the store item
    */
   getStoreItemGrid() {
     // Creates the item div card
@@ -362,7 +362,7 @@ class StoreItem {
   /**
    * Method that dynamically creates a article element contaning detailed info about a store item
    * @method
-   * @returns {HTMLUListElement} A DOM div element containing detailed information of the store item
+   * @returns {HTMLElement} A DOM div element containing detailed information of the store item
    */
   getStoreItemDetailsGrid() {
     // Creates the article card

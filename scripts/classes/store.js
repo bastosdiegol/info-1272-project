@@ -211,7 +211,7 @@ class Store {
   /**
    * Method that dynamically creates a div element containing all necessary links for navigation
    * @method
-   * @returns {HTMLUListElement} A DOM ul Element containing all categories and its links
+   * @returns {HTMLElement} A DOM ul Element containing all categories and its links
    */
   getNavBarDivElement() {
     // Creates ul Tag
@@ -257,7 +257,7 @@ class Store {
   /**
    * Method that dynamically creates a select option with all currencies available.
    * @method
-   * @returns {HTMLUListElement} DOM Div element containing the Select Input element.
+   * @returns {HTMLElement} DOM Div element containing the Select Input element.
    */
   getCurrenciesSelect() {
     // Creates a div wrapper
@@ -467,7 +467,7 @@ class Store {
   /**
    * Method that dynamically creates a div element with all socials available.
    * @method
-   * @returns {HTMLUListElement} DOM Div element containing all socials links.
+   * @returns {HTMLElement} DOM Div element containing all socials links.
    */
   getStoreSocialsDivElement() {
     // Creates div Tag for each Socials
@@ -742,7 +742,7 @@ class Store {
   /**
    * Method that creates a form for .
    * @method
-   * @returns {HTMLUListElement} DOM Div element containing the Select Input element.
+   * @returns {HTMLElement} DOM Div element containing the Select Input element.
    */
   createReviewForm() {
     // Creates the form

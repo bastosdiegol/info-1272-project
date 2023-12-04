@@ -18,6 +18,14 @@ const CART_QUANTITY_OPERATION = Object.freeze({
   CHANGE: 2,
 });
 
+// Constant that defines the type of a notification
+// that is going to be used on throwNotification utility function
+const NOTIFICATION_TYPE = Object.freeze({
+  SUCCESS: 0,
+  WARNING: 1,
+  ERROR: 2,
+});
+
 //   ___ _     _          _  __   __        _      _    _
 //  / __| |___| |__  __ _| | \ \ / /_ _ _ _(_)__ _| |__| |___ ___
 // | (_ | / _ \ '_ \/ _` | |  \ V / _` | '_| / _` | '_ \ / -_|_-<

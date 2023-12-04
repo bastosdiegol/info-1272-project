@@ -1,9 +1,9 @@
 /**
- * Method that creates a start review image on a document element
+ * Function that creates a start review image on a document element
  * @function
- * @param {HTMLUListElement} documentElement a document element which will contain the image
+ * @param {HTMLElement} documentElement a document element which will contain the image
  * @param {String} starType a type of star (filled, half or empty)
- * @returns {HTMLUListElement} Returns the figure element that contains the star
+ * @returns {HTMLElement} Returns the figure element that contains the star
  */
 function getReviewStarImage(documentElement, starType) {
   // Creates figure Tag
@@ -36,8 +36,8 @@ function getReviewStarImage(documentElement, starType) {
 }
 
 /**
- * Static Method that receives a Number and convert it to the current selected currency.
- * @static @method
+ * Function that receives a Number and convert it to the current selected currency.
+ * @function
  * @param {number} value Value to be converted.
  * @returns {String} Value in the corresponding selected currency.
  */
@@ -50,8 +50,8 @@ function convertToSelectedCurrency(value) {
 }
 
 /**
- * Static Method that receives a weight and convert it to a specified unit.
- * @static @method
+ * Function that receives a weight and convert it to a specified unit.
+ * @function
  * @param {number} value weight number.
  * @param {String} unit String which represents the weight unit to be converted.
  * @returns {String} Value of the weight converted.
@@ -64,4 +64,45 @@ function convertWeight(weight, unit) {
     maximumFractionDigits: 2,
   };
   return new Intl.NumberFormat("en-CA", options).format(weight);
+}
+
+/**
+ * Function that throws a notification on the screen.
+ * @param {String} message - Message to be displayed.
+ * @param {NOTIFICATION_TYPE} notificationType - Type of notification to be displayed.
+ */
+function throwNotification(message, notificationType) {
+  // Gets the Notifications Wrapper Div
+  let notificationsWrapper = document.getElementById("notifications-wrapper");
+  // Creates the new notification wrapper
+  let newNotificationWrapper = document.createElement("div");
+  newNotificationWrapper.classList.add("notification");
+  // Switch for the type of notification
+  switch (notificationType) {
+    case NOTIFICATION_TYPE.SUCCESS:
+      newNotificationWrapper.classList.add("notification-success");
+      break;
+    case NOTIFICATION_TYPE.WARNING:
+      newNotificationWrapper.classList.add("notification-warning");
+      break;
+    case NOTIFICATION_TYPE.ERROR:
+      newNotificationWrapper.classList.add("notification-error");
+      break;
+    default:
+      console.log("Invalid Notification Type.");
+      return;
+  }
+  // Appends the wrapper to the notification div area
+  notificationsWrapper.appendChild(newNotificationWrapper);
+  // Creates the text element
+  let notificationMessage = document.createElement("p");
+  notificationMessage.classList.add("notification-message");
+  notificationMessage.textContent = message;
+  newNotificationWrapper.appendChild(notificationMessage);
+  // Creates the close button
+  let closeLink = document.createElement("a");
+  closeLink.classList.add("notification-close");
+  closeLink.textContent = "X";
+  closeLink.setAttribute("onclick", "this.parentElement.remove()");
+  newNotificationWrapper.appendChild(closeLink);
 }

@@ -249,17 +249,17 @@
 }
 
 .notification-success {
-  background-color: rgb(26, 135, 84, 0.9);
+  background-color: rgb(26, 135, 84, 0.95);
   border-radius: 6px;
 }
 
 .notification-warning {
-  background-color: rgb(255, 193, 5, 0.9);
+  background-color: rgb(255, 193, 5, 0.95);
   border-radius: 6px;
 }
 
 .notification-error {
-  background-color: rgb(219, 54, 70, 0.9);
+  background-color: rgb(219, 54, 70, 0.95);
   border-radius: 6px;
 }
 

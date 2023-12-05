@@ -856,8 +856,28 @@ class Store {
    * @param {String} description Review text content.
    */
   createReview(storeItemId, score, headline, description) {
+    if (isNaN(score)) {
+      throwNotification(
+        "Review not submited. Review score is not a number.",
+        NOTIFICATION_TYPE.ERROR
+      );
+      return;
+    } else if (score < 1 || score > 5) {
+      throwNotification(
+        "Review not submited. Invalid review score number.",
+        NOTIFICATION_TYPE.ERROR
+      );
+      return;
+    }
     let storeItem = this.getStoreItem(storeItemId);
     let newReview = new Review(Number(score), headline, description);
+    if (storeItem === null) {
+      throwNotification(
+        "Review could not be created. Product not found.",
+        NOTIFICATION_TYPE.ERROR
+      );
+      return;
+    }
     storeItem.addReview(newReview);
     storeItem.updateReviewAverage();
 

@@ -88,3 +88,10 @@ Following are listed the requirements that must be fullfiled for this project.</
     <li>Store Class Method (Single Article-Back): <em>./scripts/classes/store.js, ln 475</em></li>
     <li>StoreItem Class Method (Article-Back): <em>./scripts/classes/store-item.js, ln 367 to 513</em></li>
 </ul>
+
+<h3>Project Images References:</h3>
+<ul>
+    <li>Logo created using: <em>https://app.logo.com/</em></li>
+    <li>Icons are from: <em>https://uxwing.com/</em></li>
+    <li>Store Items pictures are from: <em>https://unsplash.com/</em></li>
+</ul>
